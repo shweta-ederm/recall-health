@@ -393,7 +393,7 @@ body{font-family:'Inter','Roboto',sans-serif;background:var(--bg);color:var(--t1
 @keyframes so{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(-18px)}}
 
 /* HEADER BANNER */
-.hdr{padding:24px 20px 20px;background:#FFFFFF;border-top:4px solid var(--orange);position:relative;overflow:hidden}
+.hdr{padding:24px 20px 20px;background:#FFFFFF;border-top:4px solid var(--orange);position:sticky;top:0;z-index:10;overflow:hidden;flex-shrink:0}
 .hdr::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(232,101,45,.06)}
 .hdr::after{content:'';position:absolute;bottom:-30px;left:-20px;width:120px;height:120px;border-radius:50%;background:rgba(27,111,235,.04)}
 .hdr-logo{display:flex;align-items:center;gap:8px;margin-bottom:18px;position:relative}
@@ -738,6 +738,15 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   <!-- CARDS GRID -->
   <div style="max-width:1100px;margin:0 auto;padding:40px 32px 60px">
 
+    <!-- HEADER WITH LOGO -->
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:48px;padding-bottom:24px;border-bottom:1px solid var(--border)">
+      <div style="width:32px;height:32px;background:var(--orange);border-radius:8px;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+      <div>
+        <div style="font-size:16px;font-weight:700;color:var(--t1)">Recall Health</div>
+        <div style="font-size:12px;color:var(--t3)">Interactive Prototype</div>
+      </div>
+    </div>
+
     <!-- STAFF SECTION -->
     <div style="margin-bottom:10px">
       <div style="font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:16px;display:flex;align-items:center;gap:10px">
@@ -863,7 +872,7 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
     </div>
 
     <!-- FOOTER -->
-    <div style="border-top:1px solid var(--border);margin-top:40px;padding-top:28px;display:flex;align-items:center;justify-content:space-between">
+    <div style="border-top:1px solid var(--border);margin-top:40px;padding-top:28px;display:flex;align-items:center;justify-content:flex-start">
       <div style="display:flex;align-items:center;gap:10px">
         <div style="width:28px;height:28px;background:var(--orange);border-radius:7px;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
         <div>
@@ -871,7 +880,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
           <div style="font-size:11px;color:var(--t3)">Interactive Prototype · Universal Dermatology Demo Data</div>
         </div>
       </div>
-      <div style="font-size:12px;color:var(--t3)">Built with AI · March 2026</div>
     </div>
   </div>
 </div><!-- /app-landing -->
@@ -2169,13 +2177,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   ═══════════════════════════════════ -->
   <div class="screen active" id="s0">
     <div class="hdr" style="padding-bottom:24px">
-
-      <div class="hdr-logo">
-        <div class="hdr-mark">
-          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-        </div>
-        <div><div class="hdr-brand">Recall Health</div><div class="hdr-sub">Powered by AI</div></div>
-      </div>
       <div class="hdr-title">You have an upcoming appointment</div>
       <div class="hdr-desc">Please take 3–5 minutes to complete your check-in before arriving. No app download required.</div>
       <div class="hdr-appt">
@@ -2227,10 +2228,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   ═══════════════════════════════════ -->
   <div class="screen" id="s1">
     <div class="hdr" style="padding-bottom:22px">
-      <div class="hdr-logo">
-        <div class="hdr-mark"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-        <div><div class="hdr-brand">Recall Health</div></div>
-      </div>
       <div class="hdr-title">Verify your identity</div>
       <div class="hdr-desc">To protect your health information, please confirm your date of birth.</div>
     </div>
@@ -2290,7 +2287,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   ═══════════════════════════════════ -->
   <div class="screen" id="s2">
     <div class="hdr" style="padding-bottom:22px">
-      <div class="hdr-logo"><div class="hdr-mark"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div><div class="hdr-brand">Recall Health</div></div></div>
       <div class="hdr-title">Review your information</div>
       <div class="hdr-desc">We've pre-filled your details from our records. Please review and update anything that's changed.</div>
     </div>
@@ -2355,7 +2351,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   ═══════════════════════════════════ -->
   <div class="screen" id="s3">
     <div class="hdr" style="padding-bottom:22px">
-      <div class="hdr-logo"><div class="hdr-mark"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div><div class="hdr-brand">Recall Health</div></div></div>
       <div class="hdr-title">Insurance & Benefits</div>
       <div class="hdr-desc">We've verified your coverage. Please confirm the details below are up to date.</div>
     </div>
@@ -2448,7 +2443,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   ═══════════════════════════════════ -->
   <div class="screen" id="s4">
     <div class="hdr" style="padding-bottom:22px">
-      <div class="hdr-logo"><div class="hdr-mark"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div><div class="hdr-brand">Recall Health</div></div></div>
       <div class="hdr-title">Health History</div>
       <div class="hdr-desc">Your provider needs this to give you the best care. Tap to update anything that's changed.</div>
     </div>
@@ -2544,7 +2538,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   ═══════════════════════════════════ -->
   <div class="screen" id="s5">
     <div class="hdr" style="padding-bottom:22px">
-      <div class="hdr-logo"><div class="hdr-mark"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div><div class="hdr-brand">Recall Health</div></div></div>
       <div class="hdr-title">Consents & Agreements</div>
       <div class="hdr-desc">Please review and sign the following documents. Tap each signature field to sign.</div>
     </div>
@@ -2612,7 +2605,6 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   ═══════════════════════════════════ -->
   <div class="screen" id="s6">
     <div class="hdr" style="padding-bottom:22px">
-      <div class="hdr-logo"><div class="hdr-mark"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div><div class="hdr-brand">Recall Health</div></div></div>
       <div class="hdr-title">Payment</div>
       <div class="hdr-desc">Paying before your visit reduces wait time and helps our staff serve you faster.</div>
     </div>
