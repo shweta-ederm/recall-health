@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(\"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\" api repos/shweta-ederm/recall-health/pages -X POST --field source='{\"\"branch\"\":\"\"master\"\",\"\"path\"\":\"\"/\"\"}')",
+      "Bash(powershell.exe -Command \"Invoke-Item ''c:\\\\Users\\\\ShwetaSingh\\\\OneDrive - Integrated Dermatology\\\\Jandy Health\\\\Patient Intake\\\\recall-health-prototype.html''; Start-Sleep -Milliseconds 500; Invoke-Item ''c:\\\\Users\\\\ShwetaSingh\\\\OneDrive - Integrated Dermatology\\\\Jandy Health\\\\Patient Intake\\\\recall-health-deck.html''\")",
+      "Bash(node -e \":*)",
+      "Bash(sed -i 's/#0066FF/#2563EB/g; s/#0052CC/#1D4ED8/g; s/rgba\\(0,102,255,\\\\.25\\)/rgba\\(37,99,235,.18\\)/g; s/rgba\\(0,102,255,\\\\.12\\)/rgba\\(37,99,235,.1\\)/g' recall-health-prototype.html)",
+      "Bash(sed -i 's/#0066FF/#2563EB/g; s/#0052CC/#1D4ED8/g; s/rgba\\(0,102,255,\\\\.25\\)/rgba\\(37,99,235,.18\\)/g; s/rgba\\(0,102,255,\\\\.12\\)/rgba\\(37,99,235,.1\\)/g' recall-health-deck.html)",
+      "Bash(powershell.exe -Command \"Invoke-Item ''c:\\\\Users\\\\ShwetaSingh\\\\OneDrive - Integrated Dermatology\\\\Jandy Health\\\\Patient Intake\\\\recall-health-prototype.html''\")"
+    ]
+  }
+}
