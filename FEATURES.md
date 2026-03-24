@@ -21,7 +21,7 @@ Internal tool for front desk and clinical staff.
 
 ---
 
-### Patient Intake
+### Self Check-In
 Mobile-optimized pre-visit flow sent via SMS link. No app download required.
 
 - **Appointment Reminder** — Confirms upcoming visit details before starting intake
@@ -34,7 +34,7 @@ Mobile-optimized pre-visit flow sent via SMS link. No app download required.
 
 ---
 
-### Self-Registration
+### New Patient Self-Registration
 For brand new patients with no existing EHR record.
 
 - Phone number verification

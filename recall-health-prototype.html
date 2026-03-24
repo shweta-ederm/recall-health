@@ -29,9 +29,9 @@
       <div class="asw-sec">Staff-Facing</div>
       <div class="asw-item" onclick="switchAppMenu('staff')"><div class="asw-item-dot" style="background:#6366F1"></div>Staff Dashboard</div>
       <div class="asw-sec">Patient-Facing</div>
-      <div class="asw-item" onclick="switchAppMenu('intake')"><div class="asw-item-dot" style="background:var(--orange)"></div>Patient Intake</div>
+      <div class="asw-item" onclick="switchAppMenu('intake')"><div class="asw-item-dot" style="background:var(--orange)"></div>Self Check-In</div>
       <div class="asw-item" onclick="switchAppMenu('portal')"><div class="asw-item-dot" style="background:#1B6FEB"></div>Patient Portal</div>
-      <div class="asw-item" onclick="switchAppMenu('register')"><div class="asw-item-dot" style="background:#10B981"></div>Self-Registration</div>
+      <div class="asw-item" onclick="switchAppMenu('register')"><div class="asw-item-dot" style="background:#10B981"></div>New Patient Self-Registration</div>
       <div class="asw-item" onclick="switchAppMenu('followup')"><div class="asw-item-dot" style="background:#F59E0B"></div>Post-Visit Follow-Up</div>
       <div class="asw-item" onclick="switchAppMenu('kiosk')"><div class="asw-item-dot" style="background:#8B5CF6"></div>Kiosk Check-In</div>
       <div style="border-top:1px solid var(--borderlt);margin:6px 0 2px"></div>
@@ -99,7 +99,7 @@
       </div>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
 
-        <!-- Patient Intake -->
+        <!-- Self Check-In -->
         <div class="lcard" onclick="launchApp('intake')" style="background:var(--white);border-radius:16px;overflow:hidden;border:1px solid var(--borderlt);box-shadow:var(--sh1);cursor:pointer;transition:all .2s">
           <div style="height:6px;background:linear-gradient(90deg,var(--orange),#F97C3C)"></div>
           <div style="padding:22px">
@@ -108,7 +108,7 @@
                 <svg width="24" height="24" viewBox="0 0 20 20" fill="var(--orange)"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
               </div>
             </div>
-            <div style="font-size:17px;font-weight:700;color:var(--t1);margin-bottom:6px">Patient Intake</div>
+            <div style="font-size:17px;font-weight:700;color:var(--t1);margin-bottom:6px">Self Check-In</div>
             <div style="font-size:13px;color:var(--t2);line-height:1.5;margin-bottom:16px">The full pre-visit flow - from appointment reminder SMS to identity verify, insurance, clinical history, consents, and payment.</div>
             <div style="display:flex;align-items:center;justify-content:flex-end">
               <div style="display:flex;align-items:center;gap:5px;font-size:13px;font-weight:600;color:var(--orange)">Open <svg width="14" height="14" viewBox="0 0 20 20" fill="var(--orange)"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></div>
@@ -116,7 +116,7 @@
           </div>
         </div>
 
-        <!-- Self-Registration -->
+        <!-- New Patient Self-Registration -->
         <div class="lcard" onclick="launchApp('register')" style="background:var(--white);border-radius:16px;overflow:hidden;border:1px solid var(--borderlt);box-shadow:var(--sh1);cursor:pointer;transition:all .2s">
           <div style="height:6px;background:linear-gradient(90deg,#8B5CF6,#A78BFA)"></div>
           <div style="padding:22px">
@@ -125,7 +125,7 @@
                 <svg width="24" height="24" viewBox="0 0 20 20" fill="#8B5CF6"><path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"/></svg>
               </div>
             </div>
-            <div style="font-size:17px;font-weight:700;color:var(--t1);margin-bottom:6px">Self-Registration</div>
+            <div style="font-size:17px;font-weight:700;color:var(--t1);margin-bottom:6px">New Patient Self-Registration</div>
             <div style="font-size:13px;color:var(--t2);line-height:1.5;margin-bottom:16px">Brand new patients create their account, enter insurance, and book their first appointment - all without calling the office.</div>
             <div style="display:flex;align-items:center;justify-content:flex-end">
               <div style="display:flex;align-items:center;gap:5px;font-size:13px;font-weight:600;color:#8B5CF6">Open <svg width="14" height="14" viewBox="0 0 20 20" fill="#8B5CF6"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></div>
@@ -704,9 +704,9 @@
         <div style="background:var(--white);border-radius:var(--r);border:1px solid var(--borderlt);box-shadow:var(--sh1);overflow:hidden">
           <div style="padding:12px 14px;border-bottom:1px solid var(--borderlt);font-size:12.5px;font-weight:700;color:var(--t1)">Form Library</div>
           <div style="display:flex;flex-direction:column">
-            <div onclick="selectForm(this,'New Patient Intake')" class="form-item active-form" style="display:flex;align-items:center;gap:9px;padding:10px 14px;cursor:pointer;border-left:3px solid var(--brand);background:var(--brand-lt)">
+            <div onclick="selectForm(this,'New Self Check-In')" class="form-item active-form" style="display:flex;align-items:center;gap:9px;padding:10px 14px;cursor:pointer;border-left:3px solid var(--brand);background:var(--brand-lt)">
               <div style="width:28px;height:28px;border-radius:7px;background:var(--brand);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0">📋</div>
-              <div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600;color:var(--t1)">New Patient Intake</div><div style="font-size:11px;color:var(--t3)">24 fields · Active</div></div>
+              <div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600;color:var(--t1)">New Self Check-In</div><div style="font-size:11px;color:var(--t3)">24 fields · Active</div></div>
             </div>
             <div onclick="selectForm(this,'Return Visit')" class="form-item" style="display:flex;align-items:center;gap:9px;padding:10px 14px;cursor:pointer;border-left:3px solid transparent;transition:all .15s" onmouseover="this.style.background='var(--surface)'" onmouseout="this.style.background=''">
               <div style="width:28px;height:28px;border-radius:7px;background:var(--blue-bg);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0">🔄</div>
@@ -746,7 +746,7 @@
       <div style="background:var(--white);border-radius:var(--r);border:1px solid var(--borderlt);box-shadow:var(--sh1);overflow:hidden;display:flex;flex-direction:column">
         <div style="padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
           <div>
-            <div style="font-size:14px;font-weight:700;color:var(--t1)" id="form-editor-title">New Patient Intake</div>
+            <div style="font-size:14px;font-weight:700;color:var(--t1)" id="form-editor-title">New Self Check-In</div>
             <div style="font-size:12px;color:var(--t3);margin-top:1px">24 fields · Shown to: New patients only · Trigger: First appointment</div>
           </div>
           <div style="display:flex;gap:8px">
@@ -1295,7 +1295,7 @@
         <div class="sec-t">Visit History</div>
         <div style="display:flex;flex-direction:column;gap:6px">
           <div style="padding:10px 12px;background:var(--surface);border-radius:8px;border-left:3px solid var(--orange)"><div style="font-size:13px;font-weight:600;color:var(--t1)">Acne Follow-up</div><div style="font-size:11.5px;color:var(--t2);margin-top:2px">02/14/2026 · Dr. Reyes · Room 3B</div></div>
-          <div style="padding:10px 12px;background:var(--surface);border-radius:8px;border-left:3px solid var(--blue)"><div style="font-size:13px;font-weight:600;color:var(--t1)">New Patient Intake</div><div style="font-size:11.5px;color:var(--t2);margin-top:2px">01/08/2026 · Dr. Reyes · Room 2A</div></div>
+          <div style="padding:10px 12px;background:var(--surface);border-radius:8px;border-left:3px solid var(--blue)"><div style="font-size:13px;font-weight:600;color:var(--t1)">New Self Check-In</div><div style="font-size:11.5px;color:var(--t2);margin-top:2px">01/08/2026 · Dr. Reyes · Room 2A</div></div>
         </div>
       </div>
       <div class="info-section">
@@ -1608,10 +1608,8 @@
             <div class="frow"><label>Last Name</label><input class="fi filled" value="Thompson"></div>
           </div>
           <div class="frow"><label>Date of Birth</label><input class="fi filled" type="date" value="1989-04-12"></div>
-          <div class="frow-2">
-            <div class="frow"><label>Sex at Birth</label><select class="fi filled"><option>Male</option><option>Female</option><option>Other</option></select></div>
-            <div class="frow"><label>Preferred Pronouns</label><select class="fi filled"><option>He/Him</option><option>She/Her</option><option>They/Them</option></select></div>
-          </div>
+          <div class="frow"><label>Sex at Birth</label><div class="opt-group" id="sex-group"><label class="opt-btn selected"><input type="radio" name="sex" value="male" checked onchange="selectOption(this,'sex-group')">Male</label><label class="opt-btn"><input type="radio" name="sex" value="female" onchange="selectOption(this,'sex-group')">Female</label><label class="opt-btn"><input type="radio" name="sex" value="other" onchange="selectOption(this,'sex-group')">Other</label></div></div>
+          <div class="frow"><label>Preferred Pronouns</label><div class="opt-group" id="pronouns-group"><label class="opt-btn selected"><input type="radio" name="pronouns" value="he-him" checked onchange="selectOption(this,'pronouns-group')">He / Him</label><label class="opt-btn"><input type="radio" name="pronouns" value="she-her" onchange="selectOption(this,'pronouns-group')">She / Her</label><label class="opt-btn"><input type="radio" name="pronouns" value="they-them" onchange="selectOption(this,'pronouns-group')">They / Them</label></div></div>
           <div class="frow"><label>Preferred Language</label><select class="fi filled"><option>English</option><option>Spanish</option><option>Portuguese</option></select></div>
         </div>
       </div>
@@ -2052,11 +2050,6 @@
   </div>
 
   <div class="p-main">
-    <div class="p-topbar">
-      <span class="p-topbar-title" id="p-title">My Health Overview</span>
-      <div class="p-srch"><svg width="13" height="13" viewBox="0 0 20 20" fill="#9CA3AF"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg><input placeholder="Search records…"></div>
-      <div style="width:34px;height:34px;background:var(--surface);border:1px solid var(--border);border-radius:7px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative" onclick="showToast('2 unread notifications')"><svg width="15" height="15" viewBox="0 0 20 20" fill="#6B7280"><path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/></svg><div style="position:absolute;top:5px;right:5px;width:7px;height:7px;background:var(--red);border-radius:50%;border:2px solid var(--white)"></div></div>
-    </div>
 
     <!-- HOME -->
     <div class="p-view active" id="pv-home">
@@ -2127,7 +2120,7 @@
         <div class="pc-head"><span class="pc-title">Past Visits</span></div>
         <div style="padding:0 18px">
           <div class="appt-item"><div class="appt-date" style="background:var(--surface);border:1px solid var(--border)"><div class="appt-month" style="color:var(--t3)">Feb</div><div class="appt-day" style="color:var(--t2)">14</div></div><div><div class="appt-name">Acne Follow-up</div><div class="appt-meta">10:00 AM · Dr. Isabel Reyes</div><span class="appt-pill" style="background:var(--surface);color:var(--t3)">Completed</span><div class="appt-acts"><button class="abtn" onclick="showToast('Visit summary opened')">📄 Summary</button><button class="abtn" onclick="showToast('Review form opened')">⭐ Review</button></div></div></div>
-          <div class="appt-item"><div class="appt-date" style="background:var(--surface);border:1px solid var(--border)"><div class="appt-month" style="color:var(--t3)">Jan</div><div class="appt-day" style="color:var(--t2)">08</div></div><div><div class="appt-name">New Patient Intake</div><div class="appt-meta">9:00 AM · Dr. Isabel Reyes</div><span class="appt-pill" style="background:var(--surface);color:var(--t3)">Completed</span><div class="appt-acts"><button class="abtn" onclick="showToast('Visit summary opened')">📄 Summary</button></div></div></div>
+          <div class="appt-item"><div class="appt-date" style="background:var(--surface);border:1px solid var(--border)"><div class="appt-month" style="color:var(--t3)">Jan</div><div class="appt-day" style="color:var(--t2)">08</div></div><div><div class="appt-name">New Self Check-In</div><div class="appt-meta">9:00 AM · Dr. Isabel Reyes</div><span class="appt-pill" style="background:var(--surface);color:var(--t3)">Completed</span><div class="appt-acts"><button class="abtn" onclick="showToast('Visit summary opened')">📄 Summary</button></div></div></div>
         </div>
       </div>
     </div>
@@ -2147,7 +2140,7 @@
     <div class="p-view" id="pv-documents">
       <div><div class="pg-title">Documents & Records</div><div class="pg-sub">Your signed forms, visit summaries, and care documents</div></div>
       <div class="pc"><div class="pc-head"><span class="pc-title">Consents & Legal</span></div><div style="padding:0 18px"><div class="doc-row"><div class="doc-ic" style="background:var(--green-bg)">🔒</div><div><div class="doc-name">HIPAA Authorization</div><div class="doc-meta">Signed 01/08/2026 · Renewal due Jan 2027</div></div><span style="font-size:11.5px;font-weight:600;background:var(--green-bg);color:var(--green);padding:3px 9px;border-radius:10px;margin-right:8px">Valid</span><button class="sdl" onclick="showToast('Document downloaded')">⬇ Download</button></div><div class="doc-row"><div class="doc-ic" style="background:var(--amber-bg)">📋</div><div><div class="doc-name">Financial Policy Agreement</div><div class="doc-meta">Signed 01/08/2026</div></div><span style="font-size:11.5px;font-weight:600;background:var(--amber-bg);color:var(--amber);padding:3px 9px;border-radius:10px;margin-right:8px">Renewal Due</span><button class="sdl" onclick="showToast('Re-sign flow opened')">✍ Re-sign</button></div><div class="doc-row"><div class="doc-ic" style="background:var(--blue-bg)">🏥</div><div><div class="doc-name">Treatment Authorization</div><div class="doc-meta">Signed 01/08/2026</div></div><span style="font-size:11.5px;font-weight:600;background:var(--green-bg);color:var(--green);padding:3px 9px;border-radius:10px;margin-right:8px">Valid</span><button class="sdl" onclick="showToast('Document downloaded')">⬇ Download</button></div></div></div>
-      <div class="pc"><div class="pc-head"><span class="pc-title">Visit Summaries</span></div><div style="padding:0 18px"><div class="doc-row"><div class="doc-ic" style="background:var(--orange-lt)">🩺</div><div><div class="doc-name">Acne Follow-up - Feb 14, 2026</div><div class="doc-meta">Dr. Isabel Reyes</div></div><button class="sdl" onclick="showToast('Summary opened')">⬇ View</button></div><div class="doc-row"><div class="doc-ic" style="background:var(--purple-bg)">📝</div><div><div class="doc-name">New Patient Intake - Jan 08, 2026</div><div class="doc-meta">Dr. Isabel Reyes</div></div><button class="sdl" onclick="showToast('Summary opened')">⬇ View</button></div></div></div>
+      <div class="pc"><div class="pc-head"><span class="pc-title">Visit Summaries</span></div><div style="padding:0 18px"><div class="doc-row"><div class="doc-ic" style="background:var(--orange-lt)">🩺</div><div><div class="doc-name">Acne Follow-up - Feb 14, 2026</div><div class="doc-meta">Dr. Isabel Reyes</div></div><button class="sdl" onclick="showToast('Summary opened')">⬇ View</button></div><div class="doc-row"><div class="doc-ic" style="background:var(--purple-bg)">📝</div><div><div class="doc-name">New Self Check-In - Jan 08, 2026</div><div class="doc-meta">Dr. Isabel Reyes</div></div><button class="sdl" onclick="showToast('Summary opened')">⬇ View</button></div></div></div>
     </div>
 
     <!-- BILLING -->
@@ -2233,14 +2226,8 @@
       <div><div class="pg-title">Profile & Settings</div><div class="pg-sub">Manage your personal and account information</div></div>
       <div class="two-col">
         <div class="pc"><div class="pc-head"><span class="pc-title">Personal Information</span><button class="pc-act" onclick="showToast('Edit profile opened')">Edit</button></div><div class="pc-body"><div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--borderlt)"><div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#6366F1,#8B5CF6);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#fff">MT</div><div><div style="font-size:15px;font-weight:700">Marcus Thompson</div><div style="font-size:12px;color:var(--t3)">Patient since Jan 2026</div></div></div><div style="display:flex;flex-direction:column;gap:9px"><div style="display:flex;justify-content:space-between"><span style="font-size:12px;color:var(--t3)">Date of Birth</span><span style="font-size:13px;font-weight:500">April 12, 1989</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:12px;color:var(--t3)">Phone</span><span style="font-size:13px;font-weight:500">(561) 400-2291</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:12px;color:var(--t3)">Email</span><span style="font-size:13px;font-weight:500">m.thompson@email.com</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:12px;color:var(--t3)">Language</span><span style="font-size:13px;font-weight:500">English</span></div></div></div></div>
-        <div class="pc"><div class="pc-head"><span class="pc-title">Notification Preferences</span></div><div class="pc-body"><div style="display:flex;flex-direction:column;gap:12px">
-          <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13.5px;font-weight:500">Appointment Reminders</div><div style="font-size:12px;color:var(--t3)">SMS & Email</div></div><div style="width:42px;height:24px;background:var(--green);border-radius:12px;cursor:pointer;position:relative" onclick="showToast('Toggled')"><div style="width:18px;height:18px;background:#fff;border-radius:50%;position:absolute;top:3px;right:3px"></div></div></div>
-          <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13.5px;font-weight:500">Billing Notices</div><div style="font-size:12px;color:var(--t3)">Email only</div></div><div style="width:42px;height:24px;background:var(--green);border-radius:12px;cursor:pointer;position:relative" onclick="showToast('Toggled')"><div style="width:18px;height:18px;background:#fff;border-radius:50%;position:absolute;top:3px;right:3px"></div></div></div>
-          <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13.5px;font-weight:500">AI Care Reminders</div><div style="font-size:12px;color:var(--t3)">Personalized nudges</div></div><div style="width:42px;height:24px;background:var(--green);border-radius:12px;cursor:pointer;position:relative" onclick="showToast('Toggled')"><div style="width:18px;height:18px;background:#fff;border-radius:50%;position:absolute;top:3px;right:3px"></div></div></div>
-          <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13.5px;font-weight:500">Practice Broadcasts</div><div style="font-size:12px;color:var(--t3)">Office announcements</div></div><div style="width:42px;height:24px;background:var(--border);border-radius:12px;cursor:pointer;position:relative" onclick="showToast('Toggled')"><div style="width:18px;height:18px;background:#fff;border-radius:50%;position:absolute;top:3px;left:3px"></div></div></div>
-        </div></div></div>
+        <div class="pc"><div class="pc-head"><span class="pc-title">Privacy & Security</span></div><div style="padding:0 18px"><div class="bill-row"><div class="bill-ic" style="background:var(--green-bg)">🔐</div><div style="flex:1"><div class="bill-name">Two-Factor Authentication</div><div class="bill-date">Enabled via SMS (561) 400-2291</div></div><span style="font-size:11.5px;font-weight:600;background:var(--green-bg);color:var(--green);padding:3px 9px;border-radius:10px">Active</span></div><div class="bill-row" style="border-bottom:none"><div class="bill-ic" style="background:var(--surface)">📥</div><div style="flex:1"><div class="bill-name">Download My Health Records</div><div class="bill-date">FHIR-compliant export</div></div><button class="sdl" onclick="showToast('Download started')">⬇ Export</button></div></div></div>
       </div>
-      <div class="pc"><div class="pc-head"><span class="pc-title">Privacy & Security</span></div><div style="padding:0 18px"><div class="bill-row"><div class="bill-ic" style="background:var(--green-bg)">🔐</div><div style="flex:1"><div class="bill-name">Two-Factor Authentication</div><div class="bill-date">Enabled via SMS (561) 400-2291</div></div><span style="font-size:11.5px;font-weight:600;background:var(--green-bg);color:var(--green);padding:3px 9px;border-radius:10px">Active</span></div><div class="bill-row"><div class="bill-ic" style="background:var(--blue-bg)">📧</div><div style="flex:1"><div class="bill-name">Authorized Representatives</div><div class="bill-date">Jennifer Thompson - Spouse</div></div><button class="sdl" onclick="showToast('Manage access opened')">Manage</button></div><div class="bill-row" style="border-bottom:none"><div class="bill-ic" style="background:var(--surface)">📥</div><div style="flex:1"><div class="bill-name">Download My Health Records</div><div class="bill-date">FHIR-compliant export</div></div><button class="sdl" onclick="showToast('Download started')">⬇ Export</button></div></div></div>
     </div>
 
   </div><!-- /p-main -->
@@ -2312,8 +2299,8 @@
           </div>
           <div class="frow"><label>Date of Birth *</label><input class="fi" type="date" id="reg-dob"></div>
           <div class="frow-2">
-            <div class="frow"><label>Sex at Birth</label><select class="fi"><option>-- Select --</option><option>Male</option><option>Female</option><option>Other / Prefer not to say</option></select></div>
-            <div class="frow"><label>Preferred Pronouns</label><select class="fi"><option>-- Select --</option><option>He / Him</option><option>She / Her</option><option>They / Them</option></select></div>
+            <div class="frow"><label>Sex at Birth</label><div class="opt-group" id="reg-sex-group"><label class="opt-btn"><input type="radio" name="reg-sex" value="male" onchange="selectOption(this,'reg-sex-group')">Male</label><label class="opt-btn"><input type="radio" name="reg-sex" value="female" onchange="selectOption(this,'reg-sex-group')">Female</label><label class="opt-btn"><input type="radio" name="reg-sex" value="other" onchange="selectOption(this,'reg-sex-group')">Other / Prefer not to say</label></div></div>
+            <div class="frow"><label>Preferred Pronouns</label><div class="opt-group" id="reg-pronouns-group"><label class="opt-btn"><input type="radio" name="reg-pronouns" value="he-him" onchange="selectOption(this,'reg-pronouns-group')">He / Him</label><label class="opt-btn"><input type="radio" name="reg-pronouns" value="she-her" onchange="selectOption(this,'reg-pronouns-group')">She / Her</label><label class="opt-btn"><input type="radio" name="reg-pronouns" value="they-them" onchange="selectOption(this,'reg-pronouns-group')">They / Them</label></div></div>
           </div>
           <div class="frow"><label>Preferred Language</label><select class="fi"><option>English</option><option>Spanish</option><option>Portuguese</option><option>Haitian Creole</option><option>Other</option></select></div>
         </div>
@@ -2535,34 +2522,35 @@
         </div>
       </div>
       <div class="sc">
-        <div class="sc-head"><div class="sc-ic b"><svg width="16" height="16" viewBox="0 0 20 20" fill="#3B82F6"><path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/></svg></div><div><div class="sc-title">Quick Questions</div></div></div>
-        <div class="sc-body" style="display:flex;flex-direction:column;gap:14px">
+        <div class="sc-head"><div class="sc-ic b"><svg width="16" height="16" viewBox="0 0 20 20" fill="#3B82F6"><path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/></svg></div><div><div class="sc-title">Help us improve</div><div style="font-size:12px;color:var(--t3);margin-top:2px">Your feedback matters</div></div></div>
+        <div class="sc-body" style="display:flex;flex-direction:column;gap:20px">
           <div>
-            <div style="font-size:13.5px;font-weight:600;color:var(--t1);margin-bottom:8px">Was Dr. Reyes easy to understand and communicate with?</div>
-            <div style="display:flex;gap:8px">
-              <div onclick="fuSelect(this,'.fu-comm')" class="fu-comm qopt">Definitely yes</div>
-              <div onclick="fuSelect(this,'.fu-comm')" class="fu-comm qopt">Mostly yes</div>
-              <div onclick="fuSelect(this,'.fu-comm')" class="fu-comm qopt">Not really</div>
+            <div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:16px">Was Dr. Reyes easy to understand and communicate with?</div>
+            <div class="sent-wrap">
+              <div class="sent-btn fu-comm" onclick="sentSelect(this,'.fu-comm')"><div class="sent-emoji">😞</div><div class="sent-label">No</div></div>
+              <div class="sent-btn fu-comm" onclick="sentSelect(this,'.fu-comm')"><div class="sent-emoji">😐</div><div class="sent-label">Not really</div></div>
+              <div class="sent-btn fu-comm" onclick="sentSelect(this,'.fu-comm')"><div class="sent-emoji">🙂</div><div class="sent-label">Mostly</div></div>
+              <div class="sent-btn fu-comm" onclick="sentSelect(this,'.fu-comm')"><div class="sent-emoji">😊</div><div class="sent-label">Definitely</div></div>
             </div>
           </div>
           <div>
-            <div style="font-size:13.5px;font-weight:600;color:var(--t1);margin-bottom:8px">How was your wait time today?</div>
-            <div style="display:flex;gap:8px">
-              <div onclick="fuSelect(this,'.fu-wait')" class="fu-wait qopt">Short (&lt; 10 min)</div>
-              <div onclick="fuSelect(this,'.fu-wait')" class="fu-wait qopt">Acceptable</div>
-              <div onclick="fuSelect(this,'.fu-wait')" class="fu-wait qopt">Too long</div>
+            <div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:16px">How was your wait time today?</div>
+            <div class="sent-wrap">
+              <div class="sent-btn fu-wait" onclick="sentSelect(this,'.fu-wait')"><div class="sent-emoji">😊</div><div class="sent-label">Quick</div></div>
+              <div class="sent-btn fu-wait" onclick="sentSelect(this,'.fu-wait')"><div class="sent-emoji">🙂</div><div class="sent-label">Good</div></div>
+              <div class="sent-btn fu-wait" onclick="sentSelect(this,'.fu-wait')"><div class="sent-emoji">😞</div><div class="sent-label">Long</div></div>
             </div>
           </div>
           <div>
-            <div style="font-size:13.5px;font-weight:600;color:var(--t1);margin-bottom:8px">Would you recommend us to a friend or family member?</div>
-            <div style="display:flex;gap:8px">
-              <div onclick="fuSelect(this,'.fu-rec')" class="fu-rec qopt">Absolutely</div>
-              <div onclick="fuSelect(this,'.fu-rec')" class="fu-rec qopt">Probably</div>
-              <div onclick="fuSelect(this,'.fu-rec')" class="fu-rec qopt">Not sure</div>
-              <div onclick="fuSelect(this,'.fu-rec')" class="fu-rec qopt">No</div>
+            <div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:16px">Would you recommend us to a friend or family member?</div>
+            <div class="sent-wrap">
+              <div class="sent-btn fu-rec" onclick="sentSelect(this,'.fu-rec')"><div class="sent-emoji">😊</div><div class="sent-label">Absolutely</div></div>
+              <div class="sent-btn fu-rec" onclick="sentSelect(this,'.fu-rec')"><div class="sent-emoji">🙂</div><div class="sent-label">Probably</div></div>
+              <div class="sent-btn fu-rec" onclick="sentSelect(this,'.fu-rec')"><div class="sent-emoji">😐</div><div class="sent-label">Not sure</div></div>
+              <div class="sent-btn fu-rec" onclick="sentSelect(this,'.fu-rec')"><div class="sent-emoji">😞</div><div class="sent-label">No</div></div>
             </div>
           </div>
-          <div class="frow"><label>Any additional feedback? (optional)</label><textarea class="fi" rows="3" style="resize:none" placeholder="Tell us what we did well or how we can improve..."></textarea></div>
+          <div class="frow"><label style="font-weight:600;margin-bottom:10px;display:block">Any additional feedback? <span style="font-weight:400;color:var(--t3)">Optional</span></label><textarea class="fi" rows="4" style="resize:none;font-size:14px" placeholder="Tell us what we did well or how we can improve..."></textarea></div>
         </div>
       </div>
     </div>
