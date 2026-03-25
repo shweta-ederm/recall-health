@@ -11,6 +11,12 @@ function switchApp(id) {
     a.classList.remove('active');
     a.style.display = 'none';
   });
+  // Update active state in switcher menu
+  document.querySelectorAll('.asw-item').forEach(function(item) {
+    item.classList.remove('active');
+  });
+  var switcherItem = document.querySelector('.asw-item[onclick*="switchAppMenu(\''+id+'\')"]');
+  if (switcherItem) switcherItem.classList.add('active');
   var app = document.getElementById('app-' + id);
   if (!app) return;
   app.style.display = (id === 'staff' || id === 'portal' || id === 'landing' || id === 'kiosk') ? 'flex' : 'flex';
@@ -18,7 +24,7 @@ function switchApp(id) {
   // Show/hide global nav
   var nav = document.getElementById('global-nav');
   var nameEl = document.getElementById('global-nav-app-name');
-  var appNames = {staff:'Staff Dashboard',intake:'Patient Intake',portal:'Patient Portal',register:'Self-Registration',followup:'Post-Visit Follow-Up',kiosk:'Kiosk Check-In',outreach:'Pre-Visit Outreach'};
+  var appNames = {staff:'Staff Dashboard',intake:'Patient Intake',portal:'Patient Portal',register:'Self-Registration',followup:'Post-Visit Follow-Up',kiosk:'Kiosk Check-In'};
   nav.classList.add('visible');
   var backBtn = nav.querySelector('.global-nav-back');
   var dividers = nav.querySelectorAll('.global-nav-divider');
@@ -191,7 +197,7 @@ function showView(id, btn) {
   document.getElementById('view-'+id).classList.add('active');
   document.querySelectorAll('.ni').forEach(n => n.classList.remove('active'));
   btn.classList.add('active');
-  const titles = {dashboard:"Today's Check-In",patients:"Patient Registry",schedule:"Schedule",messages:"Messages",analytics:"Analytics & Reports",reports:"Custom Reports",forms:"Form Builder",settings:"Settings",accelerator:"Appointment Accelerator"};
+  const titles = {dashboard:"Today's Check-In",patients:"Patient Registry",schedule:"Schedule",messages:"Messages",analytics:"Analytics & Reports",reports:"Custom Reports",forms:"Form Builder",settings:"Settings",accelerator:"Appointment Accelerator",outreach:"Pre-Visit Outreach"};
   document.getElementById('view-title').textContent = titles[id] || id;
   onShowView(id);
 }
@@ -349,7 +355,6 @@ function buildProgress() {
     d.className = 'ps' + (i < cur ? ' done' : i === cur ? ' active' : '');
     wrap.appendChild(d);
   });
-  document.getElementById('prog-label').textContent = STEPS[cur] || 'Complete';
   document.getElementById('prog-count').textContent = `Step ${Math.min(cur+1, STEPS.length)} of ${STEPS.length}`;
   if(cur >= STEPS.length) {
     document.getElementById('prog-wrap').style.display = 'none';
@@ -986,9 +991,7 @@ function regBuildProgress() {
     d.className = 'ps' + (i < regCur ? ' done' : i === regCur ? ' active' : '');
     wrap.appendChild(d);
   });
-  const lbl = document.getElementById('reg-prog-label');
   const cnt = document.getElementById('reg-prog-count');
-  if(lbl) lbl.textContent = REG_STEPS[regCur] || 'Done';
   if(cnt) cnt.textContent = 'Step ' + (Math.min(regCur+1, REG_STEPS.length)) + ' of ' + REG_STEPS.length;
   const wrap2 = document.getElementById('reg-prog-wrap');
   if(wrap2) wrap2.style.display = regCur >= REG_STEPS.length ? 'none' : 'block';
@@ -1253,6 +1256,78 @@ function pvoNext() {
 function pvoSelect(type) {
   pvoSelection = type;
   pvoNext();
+}
+
+// ═══════════════════════════════════════
+// MESSAGE PREVIEW MODAL - OUTREACH
+// ═══════════════════════════════════════
+const messages = {
+  'Marcus Thompson': {
+    'email-t5': { type: '📧 Email', time: 'T-5 Days', subject: 'Appointment Reminder - March 21', body: 'Hi Marcus,\n\nThis is a reminder that you have an appointment with Dr. Isabel Reyes on Friday, March 21, 2026 at 10:15 AM for your acne follow-up visit.\n\nLocation: Universal Dermatology, 2200 N Congress Ave, Miami, FL 33127\nProvider: Dr. Isabel Reyes, MD\n\nPlease plan to arrive 10 minutes early. To confirm your appointment or make changes, reply to this message or call us at (305) 555-0100.\n\nBest regards,\nUniversal Dermatology Team' },
+    'sms-t5': { type: '💬 SMS', time: 'T-5 Days', subject: 'Appointment Confirmed', body: 'Hi Marcus! Reminder: Your appointment with Dr. Reyes is Friday Mar 21 at 10:15 AM. Reply CONFIRM to confirm, RESCHEDULE to change, or CANCEL. Call (305) 555-0100 to speak with us.' },
+    'sms-t2': { type: '💬 SMS', time: 'T-2 Days', subject: 'Confirm Appointment', body: 'Marcus, this is a reminder: appointment with Dr. Reyes in 2 days (Mar 21, 10:15 AM). Still coming? Reply CONFIRM or call us back.' },
+    'call-t1': { type: '📞 Call', time: 'T-1 Day', subject: 'IVR Message', body: 'Hello, this is a reminder from Universal Dermatology. You have an appointment with Dr. Isabel Reyes tomorrow, March 21st at 10:15 AM. To confirm your appointment, press 1. To request a telehealth visit, press 2. To reschedule, press 3. To cancel, press 4. Thank you.' },
+    'sms-t1': { type: '💬 SMS', time: 'T-1 Day', subject: 'Final Reminder', body: 'Final reminder: Your appointment is tomorrow (Mar 21) at 10:15 AM with Dr. Reyes. See you soon! Call (305) 555-0100 with any questions.' }
+  },
+  'Sarah Chen': {
+    'email-t5': { type: '📧 Email', time: 'T-5 Days', subject: 'Appointment Reminder - March 22', body: 'Hi Sarah,\n\nThis is a reminder about your upcoming appointment with Dr. Nguyen on Saturday, March 22, 2026 at 2:30 PM.\n\nVisit Type: Skin Check & Biopsy (45 minutes)\nLocation: Universal Dermatology - Miami\n\nPlease bring your insurance card and photo ID. If you need to reschedule or have questions, please contact us at (305) 555-0100.\n\nWe look forward to seeing you!' },
+    'sms-t5': { type: '💬 SMS', time: 'T-5 Days', subject: 'Appointment Reminder', body: 'Sarah, reminder: Your appointment with Dr. Nguyen is Sat Mar 22 at 2:30 PM for skin check & biopsy. Please reply CONFIRM or call (305) 555-0100.' },
+    'sms-t2': { type: '💬 SMS', time: 'T-2 Days', subject: 'Still Coming?', body: 'Hi Sarah, 2 days until your appointment with Dr. Nguyen (Mar 22, 2:30 PM). Please confirm you\'re still coming by replying CONFIRM.' }
+  },
+  'James Rodriguez': {
+    'email-t5': { type: '📧 Email', time: 'T-5 Days', subject: 'Appointment Reminder - March 19', body: 'Hi James,\n\nWe wanted to remind you about your psoriasis consultation appointment on Wednesday, March 19, 2026 at 1:00 PM with Dr. Patel.\n\nPlease bring any recent medical records and insurance information. To confirm or if you have questions, call us at (305) 555-0100.\n\nBest regards,\nUniversal Dermatology' },
+    'sms-t5': { type: '💬 SMS', time: 'T-5 Days', subject: 'Appointment Reminder', body: 'James, reminder: Appointment with Dr. Patel for psoriasis consultation on Wed Mar 19 at 1:00 PM. Please confirm by replying CONFIRM.' },
+    'sms-t2': { type: '💬 SMS', time: 'T-2 Days', subject: 'Confirm Appointment', body: 'Appointment reminder: Dr. Patel on Mar 19 at 1:00 PM. Still planning to come? Reply CONFIRM or call us.' },
+    'call-t1': { type: '📞 Call', time: 'T-1 Day', subject: 'IVR Delivery Failed', body: '(Failed to deliver - invalid phone number on file)' }
+  },
+  'Emily Wong': {
+    'email-t5': { type: '📧 Email', time: 'T-5 Days', subject: 'Appointment Reminder - March 25', body: 'Hi Emily,\n\nJust a friendly reminder about your upcoming appointment with Dr. Reyes on Tuesday, March 25, 2026 at 11:00 AM.\n\nVisit Type: Cosmetic Consult\n\nWe\'re excited to discuss your aesthetic goals with you. Please reply to confirm or call (305) 555-0100 if you have any questions.\n\nWarm regards,\nUniversal Dermatology Team' },
+    'sms-t5': { type: '💬 SMS', time: 'T-5 Days', subject: 'Appointment Reminder', body: 'Emily, reminder: Cosmetic consult with Dr. Reyes on Tue Mar 25 at 11:00 AM. Please confirm by replying CONFIRM. Call (305) 555-0100 with questions.' }
+  }
+};
+
+function showMessageModal(patient, date, messageType, status) {
+  const modal = document.getElementById('message-modal');
+  const patientInfo = document.getElementById('modal-patient-info');
+  const container = document.getElementById('modal-messages-container');
+
+  patientInfo.textContent = patient + ' · ' + date;
+  container.innerHTML = '';
+
+  const patientMessages = messages[patient] || {};
+
+  if (messageType === 'all') {
+    // Show all messages
+    Object.entries(patientMessages).forEach(([key, msg]) => {
+      container.innerHTML += createMessageCard(msg);
+    });
+  } else {
+    // Show specific message
+    const msg = patientMessages[messageType];
+    if (msg) {
+      container.innerHTML = createMessageCard(msg);
+    }
+  }
+
+  modal.style.display = 'flex';
+}
+
+function createMessageCard(msg) {
+  const bgColor = msg.type.includes('📧') ? '#F0F7FF' : msg.type.includes('📞') ? '#FEF3C7' : '#E0F2FE';
+  const borderColor = msg.type.includes('📧') ? '#BAE6FD' : msg.type.includes('📞') ? '#FDE68A' : '#7DD3FC';
+
+  return `
+    <div style="background:${bgColor};border:1px solid ${borderColor};border-radius:12px;padding:16px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <div style="font-size:13px;font-weight:700;color:var(--t1)">${msg.type}</div>
+        <div style="font-size:11px;color:var(--t3);background:var(--surface);padding:3px 8px;border-radius:4px">${msg.time}</div>
+      </div>
+      <div style="background:var(--white);border-radius:8px;padding:12px;border:1px solid var(--borderlt);margin-bottom:12px">
+        <div style="font-size:12px;font-weight:600;color:var(--t1);margin-bottom:8px">${msg.subject}</div>
+        <div style="font-size:12px;color:var(--t2);white-space:pre-wrap;line-height:1.5;font-family:'Roboto',sans-serif">${msg.body}</div>
+      </div>
+    </div>
+  `;
 }
 
 // Init registration progress on load
