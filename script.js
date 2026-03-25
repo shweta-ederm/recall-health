@@ -18,7 +18,7 @@ function switchApp(id) {
   // Show/hide global nav
   var nav = document.getElementById('global-nav');
   var nameEl = document.getElementById('global-nav-app-name');
-  var appNames = {staff:'Staff Dashboard',intake:'Patient Intake',portal:'Patient Portal',register:'Self-Registration',followup:'Post-Visit Follow-Up',kiosk:'Kiosk Check-In'};
+  var appNames = {staff:'Staff Dashboard',intake:'Patient Intake',portal:'Patient Portal',register:'Self-Registration',followup:'Post-Visit Follow-Up',kiosk:'Kiosk Check-In',outreach:'Pre-Visit Outreach'};
   nav.classList.add('visible');
   var backBtn = nav.querySelector('.global-nav-back');
   var dividers = nav.querySelectorAll('.global-nav-divider');
@@ -346,6 +346,13 @@ function next() {
     }
     window.scrollTo(0,0);
   }, 180);
+}
+
+function selectOption(radio, groupId) {
+  const group = document.getElementById(groupId);
+  const buttons = group.querySelectorAll('.opt-btn');
+  buttons.forEach(btn => btn.classList.remove('selected'));
+  radio.closest('.opt-btn').classList.add('selected');
 }
 
 function checkDOB() {
@@ -975,6 +982,13 @@ function fuSelect(el, cls) {
   el.classList.add('sel');
 }
 
+function sentSelect(el, cls) {
+  document.querySelectorAll(cls).forEach(function(o) {
+    o.classList.remove('sel');
+  });
+  el.classList.add('sel');
+}
+
 // ══════════════════════════════════════
 // KIOSK CHECK-IN
 // ══════════════════════════════════════
@@ -1019,6 +1033,70 @@ function kioskReset() {
   document.getElementById('kiosk-flow').style.display = 'none';
   document.getElementById('kiosk-idle').style.display = 'flex';
   showKioskStep(0);
+}
+
+// ═══════════════════════════════════════
+// PRE-VISIT OUTREACH
+// ═══════════════════════════════════════
+
+let pvoCur = 0;
+let pvoSelection = '';
+
+function launchOutreach(startAt) {
+  pvoCur = startAt || 0;
+  const screens = document.querySelectorAll('#app-outreach .screen');
+  screens.forEach(s => s.classList.remove('active'));
+  if (screens[pvoCur]) {
+    screens[pvoCur].classList.add('active');
+  }
+  switchApp('outreach');
+}
+
+function pvoNext() {
+  const screens = document.querySelectorAll('#app-outreach .screen');
+  screens[pvoCur].classList.remove('active');
+  pvoCur = Math.min(pvoCur + 1, screens.length - 1);
+  screens[pvoCur].classList.add('active');
+
+  // Update confirmation screen based on selection
+  if (pvoCur === 4) {
+    const titleMap = {
+      confirm: "You're Confirmed!",
+      telehealth: "Telehealth Confirmed!",
+      reschedule: "Reschedule Requested",
+      cancel: "Appointment Cancelled"
+    };
+    const descMap = {
+      confirm: "See you soon, Sarah",
+      telehealth: "Video call scheduled with Dr. Reyes",
+      reschedule: "We'll help you find a new time",
+      cancel: "We hope to see you soon"
+    };
+    const headlineMap = {
+      confirm: "Appointment Confirmed",
+      telehealth: "Telehealth Visit Confirmed",
+      reschedule: "Reschedule Request Submitted",
+      cancel: "Appointment Cancelled"
+    };
+
+    const sel = pvoSelection || 'confirm';
+    document.getElementById('pvo-title').textContent = titleMap[sel] || titleMap.confirm;
+    document.getElementById('pvo-desc').textContent = descMap[sel] || descMap.confirm;
+    document.getElementById('pvo-headline').textContent = headlineMap[sel] || headlineMap.confirm;
+
+    // Show/hide intake card based on selection
+    const intakeCard = document.getElementById('pvo-intake-card');
+    if (sel === 'confirm') {
+      intakeCard.style.display = 'block';
+    } else {
+      intakeCard.style.display = 'none';
+    }
+  }
+}
+
+function pvoSelect(type) {
+  pvoSelection = type;
+  pvoNext();
 }
 
 // Init registration progress on load
