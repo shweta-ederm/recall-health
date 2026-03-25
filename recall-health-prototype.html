@@ -1410,6 +1410,23 @@
 
     <!-- PAYMENT TAB -->
     <div class="spv" id="spv-payment">
+      <!-- ACTIVE PAYMENT PLAN (if applicable) -->
+      <div id="staff-active-plan" style="display:none;margin-bottom:14px">
+        <div class="info-section" style="margin-bottom:0">
+          <div class="sec-t">Active Payment Plan</div>
+          <div style="background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(16,185,129,.05));border:1.5px solid rgba(16,185,129,.2);border-radius:8px;padding:14px;display:flex;justify-content:space-between;align-items:flex-start">
+            <div style="flex:1">
+              <div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:8px">6-Month Plan · $56.67/month</div>
+              <div style="font-size:12px;color:var(--t2);margin-bottom:6px">Started: Jan 15, 2026 · 5 payments remaining</div>
+              <div style="font-size:12px;color:var(--t3)">Next payment due: April 2, 2026</div>
+            </div>
+            <div style="text-align:right">
+              <span style="font-size:11px;font-weight:700;color:#10B981;background:#ECFDF5;padding:4px 10px;border-radius:20px;display:inline-block">ACTIVE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="info-section">
         <div class="sec-t">Amount Due Today</div>
         <div class="pp">
@@ -1426,7 +1443,7 @@
           <div class="pb" onclick="showToast('Google Pay flow initiated')"><span class="pb-ic">🔵</span><span class="pb-l">Google Pay</span></div>
           <div class="pb" onclick="showToast('Card-on-file charged')"><span class="pb-ic">💳</span><span class="pb-l">Card on File</span></div>
           <div class="pb" onclick="showToast('Payment link sent via SMS')"><span class="pb-ic">📱</span><span class="pb-l">SMS Link</span></div>
-          <div class="pb" onclick="showToast('Payment plan modal opened')"><span class="pb-ic">📋</span><span class="pb-l">Pay Plan</span></div>
+          <div class="pb" onclick="showToast('Payment plan setup opened')"><span class="pb-ic">📋</span><span class="pb-l">Pay Plan</span></div>
           <div class="pb" onclick="showToast('Manual entry mode')"><span class="pb-ic">✏️</span><span class="pb-l">Manual</span></div>
         </div>
       </div>
@@ -2062,7 +2079,7 @@
   </div>
 
   <!-- ═══════════════════════════════════
-       SCREEN 7 - PAYMENT
+       SCREEN 7 - PAYMENT METHOD SELECTION
   ═══════════════════════════════════ -->
   <div class="screen" id="s6">
     <div class="hdr" style="padding-bottom:22px">
@@ -2084,6 +2101,22 @@
           </div>
         </div>
       </div>
+
+      <!-- EXISTING PAYMENT PLAN (if applicable) -->
+      <div id="existing-plan-card" style="display:none;margin-bottom:12px">
+        <div style="padding:14px 16px;background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(16,185,129,.04));border:1.5px solid rgba(16,185,129,.2);border-radius:12px;cursor:pointer" onclick="selectExistingPlan(this)">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+            <div style="display:flex;align-items:center;gap:8px">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="#10B981"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 1 1 0 000 2h10a1 1 0 100-2 2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 1a1 1 0 000 2h6a1 1 0 000-2H7z" clip-rule="evenodd"/></svg>
+              <div style="font-weight:700;color:var(--t1)">Active Payment Plan</div>
+            </div>
+            <span style="font-size:11px;font-weight:700;color:#10B981;background:#ECFDF5;padding:4px 10px;border-radius:20px">ACTIVE</span>
+          </div>
+          <div style="font-size:13px;color:var(--t2);margin-bottom:6px">6 months at $63.33/month</div>
+          <div style="font-size:12px;color:var(--t3)">Started Jan 15 · 5 payments remaining</div>
+        </div>
+      </div>
+
       <div style="font-size:12px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px">Choose Payment Method</div>
       <div class="pay-methods">
         <div class="pm" onclick="selectPay(this)">
@@ -2106,9 +2139,9 @@
           <div class="pm-l">HSA / FSA</div>
           <div class="pm-sub">Tax-free</div>
         </div>
-        <div class="pm pm-plan" onclick="selectPayPlan()">
+        <div class="pm pm-plan" onclick="goToPayPlanSetup()">
           <span class="pm-ic">📋</span>
-          <div class="pm-l">Set Up Payment Plan</div>
+          <div class="pm-l">Set Up New Payment Plan</div>
           <div class="pm-sub">Split $340 over 3–12 months · No interest</div>
         </div>
       </div>
@@ -2120,6 +2153,140 @@
     <div class="bot">
       <button class="btn-p" id="pay-btn" onclick="processPayment()">Pay $380.00 →</button>
       <button class="btn-s" onclick="skipPayment()">Pay at Front Desk</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SCREEN 7A - PAYMENT PLAN SETUP (Duration)
+  ═══════════════════════════════════ -->
+  <div class="screen" id="s6a" style="display:none;">
+    <div class="hdr" style="padding-bottom:22px">
+      <div class="hdr-title">Set Up Payment Plan</div>
+      <div class="hdr-desc">Spread your outstanding balance across monthly payments with no interest.</div>
+    </div>
+    <div class="body">
+      <div class="sc">
+        <div class="sc-body">
+          <div style="margin-bottom:20px">
+            <div style="font-size:12px;font-weight:700;color:var(--t2);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px">Amount to Finance</div>
+            <div style="font-size:24px;font-weight:900;color:var(--t1);margin-bottom:4px">$340.00</div>
+            <div style="font-size:13px;color:var(--t3)">Outstanding balance (co-pay due today)</div>
+          </div>
+          <div style="padding:12px 14px;background:var(--orange-lt);border-radius:8px;border:1px solid rgba(232,101,45,.2);margin-bottom:20px">
+            <div style="font-size:12px;font-weight:600;color:var(--orange)">⚡ All plans include 0% interest</div>
+          </div>
+
+          <div style="font-size:12px;font-weight:700;color:var(--t2);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px">Choose Plan Duration</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div class="plan-opt" onclick="selectPayPlanDuration(this, 3, 113.33)">
+              <div style="display:flex;align-items:center;gap:12px;flex:1">
+                <div style="width:20px;height:20px;border:2px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center">
+                  <div style="width:10px;height:10px;border-radius:50%;background:var(--brand);opacity:0" class="plan-opt-radio"></div>
+                </div>
+                <div>
+                  <div style="font-weight:700;color:var(--t1)">3 months</div>
+                  <div style="font-size:13px;color:var(--t2);margin-top:2px">$113.33 per month</div>
+                </div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-size:12px;color:var(--t3)">Total payments</div>
+                <div style="font-weight:700;color:var(--t1)">$340.00</div>
+              </div>
+            </div>
+            <div class="plan-opt" onclick="selectPayPlanDuration(this, 6, 56.67)">
+              <div style="display:flex;align-items:center;gap:12px;flex:1">
+                <div style="width:20px;height:20px;border:2px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center">
+                  <div style="width:10px;height:10px;border-radius:50%;background:var(--brand);opacity:0" class="plan-opt-radio"></div>
+                </div>
+                <div>
+                  <div style="font-weight:700;color:var(--t1)">6 months</div>
+                  <div style="font-size:13px;color:var(--t2);margin-top:2px">$56.67 per month</div>
+                </div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-size:12px;color:var(--t3)">Total payments</div>
+                <div style="font-weight:700;color:var(--t1)">$340.00</div>
+              </div>
+            </div>
+            <div class="plan-opt" onclick="selectPayPlanDuration(this, 12, 28.33)">
+              <div style="display:flex;align-items:center;gap:12px;flex:1">
+                <div style="width:20px;height:20px;border:2px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center">
+                  <div style="width:10px;height:10px;border-radius:50%;background:var(--brand);opacity:0" class="plan-opt-radio"></div>
+                </div>
+                <div>
+                  <div style="font-weight:700;color:var(--t1)">12 months</div>
+                  <div style="font-size:13px;color:var(--t2);margin-top:2px">$28.33 per month</div>
+                </div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-size:12px;color:var(--t3)">Total payments</div>
+                <div style="font-weight:700;color:var(--t1)">$340.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bot">
+      <button class="btn-p" id="plan-next-btn" onclick="goToPayPlanReview()" disabled>Review Plan →</button>
+      <button class="btn-s" onclick="goBackPayment()">Back</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SCREEN 7B - PAYMENT PLAN REVIEW
+  ═══════════════════════════════════ -->
+  <div class="screen" id="s6b" style="display:none;">
+    <div class="hdr" style="padding-bottom:22px">
+      <div class="hdr-title">Review Your Payment Plan</div>
+      <div class="hdr-desc">Confirm your payment plan details before proceeding.</div>
+    </div>
+    <div class="body">
+      <div class="sc">
+        <div class="sc-head">
+          <div class="sc-ic o"><svg width="16" height="16" viewBox="0 0 20 20" fill="var(--orange)"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 1 1 0 000 2h10a1 1 0 100-2 2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 1a1 1 0 000 2h6a1 1 0 000-2H7z" clip-rule="evenodd"/></svg></div>
+          <div><div class="sc-title">Plan Details</div><div class="sc-sub">Your payment schedule</div></div>
+        </div>
+        <div class="sc-body">
+          <div class="rv" style="padding:12px 0;border-bottom:1px solid var(--borderlt)">
+            <div><div class="rvl">Amount to Finance</div><div class="rvv">$340.00</div></div>
+          </div>
+          <div class="rv" style="padding:12px 0;border-bottom:1px solid var(--borderlt)">
+            <div><div class="rvl">Plan Duration</div><div class="rvv" id="plan-duration-display">6 months</div></div>
+          </div>
+          <div class="rv" style="padding:12px 0;border-bottom:1px solid var(--borderlt)">
+            <div><div class="rvl">Monthly Payment</div><div class="rvv" id="plan-monthly-display">$56.67</div></div>
+          </div>
+          <div class="rv" style="padding:12px 0;border-bottom:none">
+            <div><div class="rvl" style="font-weight:700">Interest Rate</div><div class="rvv" style="color:var(--green);font-weight:700">0% APR</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc">
+        <div class="sc-head">
+          <div class="sc-ic g"><svg width="16" height="16" viewBox="0 0 20 20" fill="#10B981"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg></div>
+          <div><div class="sc-title">Payment Schedule</div><div class="sc-sub">First payment due one week after visit</div></div>
+        </div>
+        <div class="sc-body">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="padding:10px 12px;background:var(--surface);border-radius:8px;display:flex;justify-content:space-between;font-size:13px">
+              <span style="color:var(--t2)"><strong>Payment 1</strong> of <span id="plan-count-display">6</span></span>
+              <span style="color:var(--t1);font-weight:700" id="plan-payment-display">$56.67</span>
+            </div>
+            <div style="text-align:center;color:var(--t3);font-size:12px;padding:4px 0">Due April 2, 2026</div>
+            <div style="font-size:11px;color:var(--t3);text-align:center;padding-top:4px">Additional payments due monthly on the 2nd</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:12px 14px;background:var(--green-bg);border-radius:8px;border:1px solid rgba(16,185,129,.2)">
+        <div style="font-size:13px;font-weight:600;color:var(--green)">✓ No interest · No hidden fees · Cancel anytime</div>
+      </div>
+    </div>
+    <div class="bot">
+      <button class="btn-p" onclick="goToPaymentMethod()">Continue with Plan →</button>
+      <button class="btn-s" onclick="goBackPayment()">Back</button>
     </div>
   </div>
 
@@ -2216,7 +2383,7 @@
           <div class="pb-sub">You have an appointment today at 10:15 AM with Dr. Reyes.<br>Your pre-registration is complete - just show up!</div>
           <div class="pb-badge"><svg width="13" height="13" viewBox="0 0 20 20" fill="#34D399"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>Pre-registration complete ✓</div>
         </div>
-        <button class="pb-btn" onclick="launchApp('intake')[1])"><svg width="16" height="16" viewBox="0 0 20 20" fill="white"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>Start Check-In</button>
+        <button class="pb-btn" onclick="launchIntakeScreen(1)"><svg width="16" height="16" viewBox="0 0 20 20" fill="white"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>Start Check-In</button>
       </div>
       <div class="qa-grid">
         <div class="qa" onclick="showPV('appointments',document.querySelectorAll('.pni')[1])"><div class="qa-ic">📅</div><div class="qa-l">Book Appointment</div><div class="qa-s">Schedule a visit</div></div>
@@ -2265,7 +2432,7 @@
         <div style="padding:0 18px">
           <div class="appt-item">
             <div class="appt-date" style="background:var(--orange-lt);border:1px solid rgba(232,101,45,.2)"><div class="appt-month" style="color:var(--orange)">Mar</div><div class="appt-day" style="color:var(--orange)">21</div></div>
-            <div><div class="appt-name">Acne Follow-up</div><div class="appt-meta">10:15 AM · Dr. Isabel Reyes · Room 3B</div><div class="appt-meta" style="margin-top:2px">Universal Dermatology - Miami</div><span class="appt-pill" style="background:var(--green-bg);color:var(--green)">✓ Pre-Registered</span><div class="appt-acts"><button class="abtn primary" onclick="launchApp('intake')[1])">Complete Check-In</button><button class="abtn" onclick="showToast('Directions opened')">📍 Directions</button><button class="abtn" onclick="showToast('Reschedule request sent')">Reschedule</button></div></div>
+            <div><div class="appt-name">Acne Follow-up</div><div class="appt-meta">10:15 AM · Dr. Isabel Reyes · Room 3B</div><div class="appt-meta" style="margin-top:2px">Universal Dermatology - Miami</div><span class="appt-pill" style="background:var(--green-bg);color:var(--green)">✓ Pre-Registered</span><div class="appt-acts"><button class="abtn primary" onclick="launchIntakeScreen(1)">Complete Check-In</button><button class="abtn" onclick="showToast('Directions opened')">📍 Directions</button><button class="abtn" onclick="showToast('Reschedule request sent')">Reschedule</button></div></div>
           </div>
           <div class="appt-item">
             <div class="appt-date" style="background:var(--blue-bg);border:1px solid rgba(59,130,246,.2)"><div class="appt-month" style="color:var(--blue)">Apr</div><div class="appt-day" style="color:var(--blue)">15</div></div>
@@ -2303,7 +2470,33 @@
     <!-- BILLING -->
     <div class="p-view" id="pv-billing">
       <div><div class="pg-title">Billing & Payments</div><div class="pg-sub">Review your balance and payment history</div></div>
-      <div style="background:linear-gradient(135deg,var(--red),#DC2626);border-radius:var(--r);padding:20px 24px;color:#fff;display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:11.5px;font-weight:500;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.5px">Outstanding Balance</div><div style="font-size:36px;font-weight:700;line-height:1.1;margin-top:4px">$340.00</div><div style="font-size:12.5px;color:rgba(255,255,255,.65);margin-top:4px">Due from visit 11/30/2025</div></div><div style="display:flex;flex-direction:column;gap:8px"><button style="padding:11px 20px;background:#fff;color:var(--red);border:none;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Roboto',sans-serif" onclick="showToast('Payment processed ✓')">Pay Now</button><button style="padding:9px 20px;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Roboto',sans-serif" onclick="showToast('Payment plan: $113/mo × 3')">Set Up Plan</button></div></div>
+
+      <!-- Active Payment Plan Card (if applicable) -->
+      <div id="portal-active-plan" style="display:none;background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(16,185,129,.05));border-radius:var(--r);padding:18px 24px;margin-bottom:16px;border:1.5px solid rgba(16,185,129,.2)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="#10B981"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 1 1 0 000 2h10a1 1 0 100-2 2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 1a1 1 0 000 2h6a1 1 0 000-2H7z" clip-rule="evenodd"/></svg>
+            <div style="font-weight:700;color:var(--t1)">Active Payment Plan</div>
+          </div>
+          <span style="font-size:11px;font-weight:700;color:#10B981;background:#ECFDF5;padding:4px 10px;border-radius:20px">ACTIVE</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div>
+            <div style="font-size:11px;color:var(--t3);margin-bottom:4px">Monthly Payment</div>
+            <div style="font-size:20px;font-weight:700;color:#10B981">$56.67</div>
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--t3);margin-bottom:4px">Payments Remaining</div>
+            <div style="font-size:20px;font-weight:700;color:var(--t1)">5 of 6</div>
+          </div>
+        </div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid rgba(16,185,129,.2);font-size:12px;color:var(--t2)">
+          Next payment due <strong>April 2, 2026</strong> · Started Jan 15
+        </div>
+      </div>
+
+      <!-- Outstanding Balance Card -->
+      <div style="background:linear-gradient(135deg,var(--red),#DC2626);border-radius:var(--r);padding:20px 24px;color:#fff;display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:11.5px;font-weight:500;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.5px">Outstanding Balance</div><div style="font-size:36px;font-weight:700;line-height:1.1;margin-top:4px" id="portal-balance">$340.00</div><div style="font-size:12.5px;color:rgba(255,255,255,.65);margin-top:4px" id="portal-balance-date">Due from visit 11/30/2025</div></div><div style="display:flex;flex-direction:column;gap:8px"><button style="padding:11px 20px;background:#fff;color:var(--red);border:none;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Roboto',sans-serif" onclick="showToast('Payment processed ✓')">Pay Now</button><button style="padding:9px 20px;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Roboto',sans-serif" onclick="showToast('Opening payment plan setup...')">Set Up Plan</button></div></div>
       <div style="background:linear-gradient(135deg,var(--navy),var(--navy2));border-radius:var(--r);padding:18px 20px;color:#fff"><div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px;display:flex;align-items:center;gap:7px">Insurance Benefits <span style="background:rgba(232,101,45,.3);color:#F97C3C;font-size:9px;font-weight:700;padding:2px 6px;border-radius:8px">✦ AI</span></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:12px"><div><div style="font-size:10px;color:rgba(255,255,255,.38)">Deductible</div><div style="font-size:22px;font-weight:700">$1,500</div></div><div><div style="font-size:10px;color:rgba(255,255,255,.38)">Met</div><div style="font-size:22px;font-weight:700">$1,180</div></div><div><div style="font-size:10px;color:rgba(255,255,255,.38)">Remaining</div><div style="font-size:22px;font-weight:700;color:#FCD34D">$320</div></div></div><div style="background:rgba(255,255,255,.1);border-radius:4px;height:7px;overflow:hidden;margin-bottom:4px"><div style="width:78.7%;height:100%;background:linear-gradient(90deg,#10B981,#34D399);border-radius:4px"></div></div><div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.35)"><span>$0</span><span>78.7% met</span><span>$1,500</span></div></div>
       <div class="pc"><div class="pc-head"><span class="pc-title">Payment History</span></div><div style="padding:0 18px"><div class="bill-row"><div class="bill-ic" style="background:var(--red-bg)">⚠️</div><div style="flex:1"><div class="bill-name">Balance Due - Acne Follow-up</div><div class="bill-date">11/30/2025</div></div><div style="text-align:right"><div style="font-size:14px;font-weight:700;color:var(--red)">$340.00</div><div style="font-size:11.5px;font-weight:600;background:var(--red-bg);color:var(--red);padding:2px 8px;border-radius:8px;display:inline-block;margin-top:3px">Unpaid</div></div></div><div class="bill-row"><div class="bill-ic" style="background:var(--green-bg)">✅</div><div style="flex:1"><div class="bill-name">Co-pay - Acne Follow-up</div><div class="bill-date">02/14/2026 · Visa ••••4421</div></div><div style="text-align:right"><div style="font-size:14px;font-weight:700;color:var(--green)">$40.00</div><div style="font-size:11.5px;font-weight:600;background:var(--green-bg);color:var(--green);padding:2px 8px;border-radius:8px;display:inline-block;margin-top:3px">Paid</div></div></div><div class="bill-row"><div class="bill-ic" style="background:var(--green-bg)">✅</div><div style="flex:1"><div class="bill-name">Co-pay - New Patient Visit</div><div class="bill-date">01/08/2026 · Visa ••••4421</div></div><div style="text-align:right"><div style="font-size:14px;font-weight:700;color:var(--green)">$40.00</div><div style="font-size:11.5px;font-weight:600;background:var(--green-bg);color:var(--green);padding:2px 8px;border-radius:8px;display:inline-block;margin-top:3px">Paid</div></div></div></div></div>
     </div>
@@ -2407,9 +2600,14 @@
   <div class="screen active" id="rs0">
     <div class="hdr" style="padding-bottom:24px">
 
-      <div class="hdr-logo">
-        <div class="hdr-mark"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-        <div><div class="hdr-brand">Recall Health</div><div class="hdr-sub">New Patient Registration</div></div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.1)">
+        <div style="width:48px;height:48px;background:#0066FF;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <div>
+          <div style="font-size:16px;font-weight:700;color:#fff">Universal Dermatology</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.7)">New Patient Registration</div>
+        </div>
       </div>
       <div class="hdr-title">Welcome to Universal Dermatology</div>
       <div class="hdr-desc">Register as a new patient in just a few minutes. No app download required - everything happens right here in your browser.</div>
@@ -2455,10 +2653,8 @@
             <div class="frow"><label>Last Name *</label><input class="fi" placeholder="Last name" id="reg-last"></div>
           </div>
           <div class="frow"><label>Date of Birth *</label><input class="fi" type="date" id="reg-dob"></div>
-          <div class="frow-2">
-            <div class="frow"><label>Sex at Birth</label><div class="opt-group" id="reg-sex-group"><label class="opt-btn"><input type="radio" name="reg-sex" value="male" onchange="selectOption(this,'reg-sex-group')">Male</label><label class="opt-btn"><input type="radio" name="reg-sex" value="female" onchange="selectOption(this,'reg-sex-group')">Female</label><label class="opt-btn"><input type="radio" name="reg-sex" value="other" onchange="selectOption(this,'reg-sex-group')">Other / Prefer not to say</label></div></div>
-            <div class="frow"><label>Preferred Pronouns</label><div class="opt-group" id="reg-pronouns-group"><label class="opt-btn"><input type="radio" name="reg-pronouns" value="he-him" onchange="selectOption(this,'reg-pronouns-group')">He / Him</label><label class="opt-btn"><input type="radio" name="reg-pronouns" value="she-her" onchange="selectOption(this,'reg-pronouns-group')">She / Her</label><label class="opt-btn"><input type="radio" name="reg-pronouns" value="they-them" onchange="selectOption(this,'reg-pronouns-group')">They / Them</label></div></div>
-          </div>
+          <div class="frow"><label>Sex at Birth</label><div class="opt-group" id="reg-sex-group"><label class="opt-btn"><input type="radio" name="reg-sex" value="male" onchange="selectOption(this,'reg-sex-group')">Male</label><label class="opt-btn"><input type="radio" name="reg-sex" value="female" onchange="selectOption(this,'reg-sex-group')">Female</label><label class="opt-btn"><input type="radio" name="reg-sex" value="other" onchange="selectOption(this,'reg-sex-group')">Other / Prefer not to say</label></div></div>
+          <div class="frow"><label>Preferred Pronouns</label><div class="opt-group" id="reg-pronouns-group"><label class="opt-btn"><input type="radio" name="reg-pronouns" value="he-him" onchange="selectOption(this,'reg-pronouns-group')">He / Him</label><label class="opt-btn"><input type="radio" name="reg-pronouns" value="she-her" onchange="selectOption(this,'reg-pronouns-group')">She / Her</label><label class="opt-btn"><input type="radio" name="reg-pronouns" value="they-them" onchange="selectOption(this,'reg-pronouns-group')">They / Them</label></div></div>
           <div class="frow"><label>Preferred Language</label><select class="fi"><option>English</option><option>Spanish</option><option>Portuguese</option><option>Haitian Creole</option><option>Other</option></select></div>
         </div>
       </div>
@@ -2467,10 +2663,8 @@
         <div class="sc-body">
           <div class="frow"><label>Email Address *</label><input class="fi" type="email" placeholder="your@email.com" id="reg-email"></div>
           <div class="frow"><label>Mobile Phone *</label><input class="fi" type="tel" placeholder="(561) 555-0000" id="reg-phone"><div class="fi-note">We'll send a verification code to this number</div></div>
-          <div class="frow-2">
-            <div class="frow"><label>Password *</label><input class="fi" type="password" placeholder="Min. 8 characters"></div>
-            <div class="frow"><label>Confirm Password *</label><input class="fi" type="password" placeholder="Repeat password"></div>
-          </div>
+          <div class="frow"><label>Password *</label><input class="fi" type="password" placeholder="Min. 8 characters"></div>
+          <div class="frow"><label>Confirm Password *</label><input class="fi" type="password" placeholder="Repeat password"></div>
           <div style="padding:10px 12px;background:var(--surface);border-radius:8px;font-size:12px;color:var(--t3)">🔒 Your password is encrypted and never stored in plain text.</div>
         </div>
       </div>
@@ -2637,15 +2831,62 @@
       <div class="success-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
       <div class="success-title">You're registered!</div>
       <div class="success-sub">Your account has been created and your first appointment is confirmed. Welcome to Universal Dermatology!</div>
-      <div class="wait-badge">📅 Dr. Reyes · Tuesday, March 25 · 9:00 AM</div>
     </div>
-    <div class="next-steps">
-      <div class="ns-item"><div class="ns-ic" style="background:var(--green-bg)">✅</div><div><div class="ns-title">Account Created</div><div class="ns-sub">Login credentials sent to your email</div></div></div>
-      <div class="ns-item"><div class="ns-ic" style="background:var(--blue-bg)">📋</div><div><div class="ns-title">Appointment Confirmed</div><div class="ns-sub">Dr. Reyes · Tue Mar 25 · 9:00 AM · Miami</div></div></div>
-      <div class="ns-item"><div class="ns-ic" style="background:var(--orange-lt)">📱</div><div><div class="ns-title">Reminder Will Be Sent</div><div class="ns-sub">SMS + email 7 days and 2 days before your visit</div></div></div>
-      <div class="ns-item"><div class="ns-ic" style="background:var(--amber-bg)">📝</div><div><div class="ns-title">Pre-Visit Forms Coming</div><div class="ns-sub">We'll send your intake link 7 days before your appointment</div></div></div>
+
+    <!-- TIMELINE VIEW -->
+    <div style="max-width:480px;margin:32px auto 0;padding:0 20px">
+      <div style="position:relative;padding:20px 0">
+        <!-- Timeline line -->
+        <div style="position:absolute;left:19px;top:40px;bottom:0;width:2px;background:linear-gradient(180deg,#10B981 0%,#10B981 50%,var(--border) 100%)"></div>
+
+        <!-- Step 1: Account Created -->
+        <div style="display:flex;gap:16px;margin-bottom:28px;position:relative">
+          <div style="width:40px;height:40px;background:#10B981;border:3px solid var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;z-index:2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <div style="flex:1;padding-top:4px">
+            <div style="font-size:14px;font-weight:700;color:var(--t1)">Account Created</div>
+            <div style="font-size:13px;color:var(--t2);margin-top:2px">Login credentials sent to <strong>m.thompson@email.com</strong></div>
+            <div style="font-size:11px;color:var(--green);font-weight:600;margin-top:6px">✓ Completed</div>
+          </div>
+        </div>
+
+        <!-- Step 2: Appointment Confirmed -->
+        <div style="display:flex;gap:16px;margin-bottom:28px;position:relative">
+          <div style="width:40px;height:40px;background:#10B981;border:3px solid var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;z-index:2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <div style="flex:1;padding-top:4px">
+            <div style="font-size:14px;font-weight:700;color:var(--t1)">Appointment Confirmed</div>
+            <div style="font-size:13px;color:var(--t2);margin-top:2px">Dr. Isabel Reyes · Tuesday, March 25 · 9:00 AM</div>
+            <div style="font-size:11px;color:var(--t3);margin-top:2px">Miami, FL · Room assigned at check-in</div>
+            <div style="font-size:11px;color:var(--green);font-weight:600;margin-top:6px">✓ Confirmed</div>
+          </div>
+        </div>
+
+        <!-- Step 3: Reminders Will Be Sent -->
+        <div style="display:flex;gap:16px;margin-bottom:28px;position:relative">
+          <div style="width:40px;height:40px;background:var(--orange);border:3px solid var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;z-index:2;font-weight:700;color:#fff;font-size:18px">→</div>
+          <div style="flex:1;padding-top:4px">
+            <div style="font-size:14px;font-weight:700;color:var(--t1)">Appointment Reminders</div>
+            <div style="font-size:13px;color:var(--t2);margin-top:2px">You'll get SMS + email reminders 7 days and 2 days before</div>
+            <div style="font-size:11px;color:var(--t3);margin-top:2px">Upcoming</div>
+          </div>
+        </div>
+
+        <!-- Step 4: Pre-Visit Forms -->
+        <div style="display:flex;gap:16px;position:relative">
+          <div style="width:40px;height:40px;background:var(--t3);border:3px solid var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;z-index:2;font-weight:700;color:#fff;font-size:18px">→</div>
+          <div style="flex:1;padding-top:4px">
+            <div style="font-size:14px;font-weight:700;color:var(--t1)">Pre-Visit Intake Forms</div>
+            <div style="font-size:13px;color:var(--t2);margin-top:2px">We'll send your intake link 7 days before your appointment</div>
+            <div style="font-size:11px;color:var(--t3);margin-top:2px">Pending</div>
+          </div>
+        </div>
+      </div>
     </div>
-    <button class="portal-btn" onclick="launchApp('portal')[2])">Open My Patient Portal →</button>
+
+    <button class="portal-btn" onclick="launchPortalView('home')">Open My Patient Portal →</button>
     <div style="padding:0 20px 24px;text-align:center;font-size:12px;color:var(--t3)">Questions? Call us: <strong style="color:var(--t1)">(561) 555-0100</strong></div>
   </div>
 </div>
@@ -2790,7 +3031,7 @@
       </div>
       <div style="text-align:center;font-size:12.5px;color:var(--t3);cursor:pointer" onclick="showToast('Dismissed - thank you!')">Maybe later</div>
     </div>
-    <div class="bot"><button class="btn-p" onclick="launchApp('portal')[2])">Go to My Portal →</button></div>
+    <div class="bot"><button class="btn-p" onclick="launchPortalView('home')">Go to My Portal →</button></div>
   </div>
 </div>
 </div><!-- /app-followup -->
@@ -2803,56 +3044,145 @@
   <!-- SCREEN 0 - 5 DAYS BEFORE -->
   <div class="screen active" id="pvo0">
     <div class="hdr">
-      <div class="hdr-logo"><div class="hdr-mark"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div><div class="hdr-brand">Recall Health</div><div class="hdr-sub">Pre-Visit Reminder</div></div></div>
-      <div class="hdr-title">📅 5 Days Before Your Visit</div>
-      <div class="hdr-desc">Your appointment is coming up, Sarah. Please confirm to ensure your spot.</div>
+      <div class="hdr-logo"><div class="hdr-mark"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div><div class="hdr-brand">Recall Health</div><div class="hdr-sub">Pre-Visit Outreach Timeline</div></div></div>
+      <div class="hdr-title">Appointment Reminder Touchpoints</div>
+      <div class="hdr-desc">Complete workflow showing all reminder stages before the visit</div>
       <div class="hdr-appt"><svg width="14" height="14" viewBox="0 0 20 20" fill="rgba(255,255,255,.6)"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg><div class="hdr-appt-text"><strong>Dr. Isabel Reyes</strong> · Acne Follow-up · <strong>Friday, Mar 21 · 10:15 AM</strong></div></div>
     </div>
-    <div class="body">
-      <div class="sc">
-        <div class="sc-head"><div class="sc-ic o"><svg width="16" height="16" viewBox="0 0 20 20" fill="var(--orange)"><path d="M2.5 3A1.5 1.5 0 001 4.5v.006c0 .068.012.135.03.2v.009l1.867 6.836.02.042c.16.331.487.646 1.022.646.29 0 .56-.099.796-.296l5.8-4.835 5.8 4.835c.236.197.506.296.796.296.535 0 .863-.315 1.022-.646l.02-.042L19 4.708v-.008c.018-.066.03-.133.03-.201A1.5 1.5 0 0017.5 3h-15z"/></svg></div><div><div class="sc-title">Email Reminder</div><div class="sc-sub">Appointment details with confirm link</div></div></div>
-        <div class="sc-body" style="padding:16px;background:#FAFAFA;border:1px solid var(--border);border-radius:8px;font-size:13px;color:var(--t2);line-height:1.6">
-          <div style="margin-bottom:12px"><strong style="color:var(--t1)">Subject: Your Appointment Reminder</strong></div>
-          <div style="margin-bottom:12px">Hi Sarah,<br><br>Your appointment is scheduled for:<br><strong>Friday, March 21, 2025 at 10:15 AM</strong><br>Dr. Isabel Reyes<br>Universal Dermatology - Miami<br>2200 N Congress Ave, Miami FL 33127</div>
-          <div style="margin-bottom:12px"><strong>What to bring:</strong><br>• Photo ID<br>• Insurance card<br>• List of current medications</div>
-          <div style="padding:12px;background:var(--orange-lt);border-radius:6px;border-left:3px solid var(--orange)"><strong style="color:var(--orange)">→ Confirm your appointment</strong></div>
-        </div>
-      </div>
-      <div class="sc">
-        <div class="sc-head"><div class="sc-ic o"><svg width="16" height="16" viewBox="0 0 20 20" fill="var(--orange)"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 00.948-.684l1.498-4.493a1 1 0 011.502 0l1.498 4.493a1 1 0 00.948.684H17a2 2 0 012 2v2a2 2 0 01-2 2H5a2 2 0 01-2-2V5zM5 13a2 2 0 00-2 2v2a2 2 0 002 2h10a2 2 0 002-2v-2a2 2 0 00-2-2H5z"/></svg></div><div><div class="sc-title">SMS Reminder</div><div class="sc-sub">Text message with confirmation link</div></div></div>
-        <div class="sc-body" style="padding:12px;background:#E0F2FE;border:1px solid #BAE6FD;border-radius:8px;font-size:12px">
-          <div style="display:flex;gap:8px;align-items:flex-end;margin-bottom:10px">
-            <div style="width:32px;height:32px;background:var(--t1);border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center"><span style="color:white;font-size:14px">R</span></div>
-            <div style="background:white;padding:10px 12px;border-radius:12px;max-width:85%;color:var(--t1)">Hi Sarah! Confirming your appointment on Friday, Mar 21 at 10:15 AM with Dr. Reyes at Universal Dermatology. Confirm: [link]</div>
+    <div class="body" style="overflow-x:auto;padding:0">
+      <!-- Timeline Container -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:24px;min-width:100%">
+
+        <!-- T-5 DAYS -->
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <!-- Timeline Node -->
+          <div style="display:flex;align-items:center;justify-content:center">
+            <div style="width:48px;height:48px;background:linear-gradient(135deg,#0EA5E9,#38BDF8);border-radius:50%;display:flex;align-items:center;justify-content:center;border:3px solid var(--navy);position:relative;z-index:2">
+              <span style="color:#fff;font-size:20px;font-weight:700">5</span>
+            </div>
+            <!-- Timeline connector (hidden on first) -->
+            <div style="position:absolute;left:calc(50% + 24px);width:calc((100% - 48px) / 2);height:3px;background:linear-gradient(90deg,#0EA5E9,rgba(14,165,233,.2));z-index:1"></div>
+          </div>
+
+          <!-- Content Card -->
+          <div style="background:var(--white);border:1.5px solid #0EA5E9;border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px">
+            <div>
+              <div style="font-size:13px;font-weight:700;color:#0EA5E9;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">5 Days Before</div>
+              <div style="font-size:15px;font-weight:700;color:var(--t1)">Initial Reminder</div>
+            </div>
+
+            <!-- Email -->
+            <div style="background:#F0F9FF;border-radius:8px;padding:12px;border-left:3px solid #0EA5E9">
+              <div style="font-size:11px;font-weight:700;color:#0EA5E9;margin-bottom:4px">📧 Email</div>
+              <div style="font-size:12px;color:var(--t2)">Full appointment details + what to bring</div>
+            </div>
+
+            <!-- SMS -->
+            <div style="background:#F0F9FF;border-radius:8px;padding:12px;border-left:3px solid #0EA5E9">
+              <div style="font-size:11px;font-weight:700;color:#0EA5E9;margin-bottom:4px">💬 SMS</div>
+              <div style="font-size:12px;color:var(--t2)">Quick reminder with confirmation link</div>
+            </div>
+
+            <div style="padding:10px;background:rgba(14,165,233,.05);border-radius:6px">
+              <div style="font-size:11px;color:var(--t3)">✓ Confirmation link provided</div>
+            </div>
           </div>
         </div>
+
+        <!-- T-2 DAYS -->
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <!-- Timeline Node -->
+          <div style="display:flex;align-items:center;justify-content:center">
+            <div style="width:48px;height:48px;background:linear-gradient(135deg,#F59E0B,#FBBF24);border-radius:50%;display:flex;align-items:center;justify-content:center;border:3px solid var(--navy);position:relative;z-index:2">
+              <span style="color:#fff;font-size:20px;font-weight:700">2</span>
+            </div>
+            <!-- Timeline connectors (left + right) -->
+            <div style="position:absolute;right:calc(50% + 24px);width:calc((100% - 48px) / 2);height:3px;background:linear-gradient(90deg,rgba(14,165,233,.2),#F59E0B);z-index:1"></div>
+            <div style="position:absolute;left:calc(50% + 24px);width:calc((100% - 48px) / 2);height:3px;background:linear-gradient(90deg,#F59E0B,rgba(245,158,11,.2));z-index:1"></div>
+          </div>
+
+          <!-- Content Card -->
+          <div style="background:var(--white);border:1.5px solid #F59E0B;border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px">
+            <div>
+              <div style="font-size:13px;font-weight:700;color:#F59E0B;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">2 Days Before</div>
+              <div style="font-size:15px;font-weight:700;color:var(--t1)">Confirmation Check</div>
+            </div>
+
+            <!-- SMS -->
+            <div style="background:#FFFBEB;border-radius:8px;padding:12px;border-left:3px solid #F59E0B">
+              <div style="font-size:11px;font-weight:700;color:#F59E0B;margin-bottom:4px">💬 SMS</div>
+              <div style="font-size:12px;color:var(--t2)">Professional confirmation request</div>
+            </div>
+
+            <div style="padding:10px;background:rgba(245,158,11,.05);border-radius:6px">
+              <div style="font-size:11px;color:var(--t3)">→ If no response, escalate to call</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- T-1 DAY -->
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <!-- Timeline Node -->
+          <div style="display:flex;align-items:center;justify-content:center">
+            <div style="width:48px;height:48px;background:linear-gradient(135deg,#EF4444,#F87171);border-radius:50%;display:flex;align-items:center;justify-content:center;border:3px solid var(--navy);position:relative;z-index:2">
+              <span style="color:#fff;font-size:20px;font-weight:700">1</span>
+            </div>
+            <!-- Timeline connector (left only) -->
+            <div style="position:absolute;right:calc(50% + 24px);width:calc((100% - 48px) / 2);height:3px;background:linear-gradient(90deg,rgba(245,158,11,.2),#EF4444);z-index:1"></div>
+          </div>
+
+          <!-- Content Card -->
+          <div style="background:var(--white);border:1.5px solid #EF4444;border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px">
+            <div>
+              <div style="font-size:13px;font-weight:700;color:#EF4444;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">1 Day Before</div>
+              <div style="font-size:15px;font-weight:700;color:var(--t1)">Final Confirmation</div>
+            </div>
+
+            <!-- Call -->
+            <div style="background:#FEF2F2;border-radius:8px;padding:12px;border-left:3px solid #EF4444">
+              <div style="font-size:11px;font-weight:700;color:#EF4444;margin-bottom:4px">📞 IVR Call</div>
+              <div style="font-size:12px;color:var(--t2)">Automated voicemail with menu options</div>
+            </div>
+
+            <!-- SMS Backup -->
+            <div style="background:#FEF2F2;border-radius:8px;padding:12px;border-left:3px solid #EF4444">
+              <div style="font-size:11px;font-weight:700;color:#EF4444;margin-bottom:4px">💬 SMS</div>
+              <div style="font-size:12px;color:var(--t2)">Text backup with all options</div>
+            </div>
+
+            <div style="padding:10px;background:rgba(239,68,68,.05);border-radius:6px">
+              <div style="font-size:11px;color:var(--t3)">⚠ Final chance to confirm</div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
     <div class="bot">
-      <button class="btn-p" onclick="pvoNext()">Patient Responds →</button>
+      <button class="btn-p" onclick="pvoNext()">View Patient Response Flow →</button>
     </div>
   </div>
 
-  <!-- SCREEN 1 - 2 DAYS BEFORE -->
+  <!-- SCREEN 1 - 2 DAYS BEFORE (Detail View) -->
   <div class="screen" id="pvo1">
     <div class="hdr">
-      <div class="hdr-logo"><div class="hdr-mark"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div><div class="hdr-brand">Recall Health</div><div class="hdr-sub">Pre-Visit Reminder</div></div></div>
-      <div class="hdr-title">💬 2 Days Before Your Visit</div>
-      <div class="hdr-desc">Quick check-in: Are you still coming to your appointment?</div>
+      <div class="hdr-logo"><div class="hdr-mark"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div><div class="hdr-brand">Recall Health</div><div class="hdr-sub">2 Days Before</div></div></div>
+      <div class="hdr-title">📋 SMS Confirmation Request</div>
+      <div class="hdr-desc">Professional reminder requesting visit confirmation</div>
       <div class="hdr-appt"><svg width="14" height="14" viewBox="0 0 20 20" fill="rgba(255,255,255,.6)"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg><div class="hdr-appt-text"><strong>Dr. Isabel Reyes</strong> · Acne Follow-up · <strong>Friday, Mar 21 · 10:15 AM</strong></div></div>
     </div>
     <div class="body">
       <div class="sc">
-        <div class="sc-head"><div class="sc-ic o"><svg width="16" height="16" viewBox="0 0 20 20" fill="var(--orange)"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 00.948-.684l1.498-4.493a1 1 0 011.502 0l1.498 4.493a1 1 0 00.948.684H17a2 2 0 012 2v2a2 2 0 01-2 2H5a2 2 0 01-2-2V5zM5 13a2 2 0 00-2 2v2a2 2 0 002 2h10a2 2 0 002-2v-2a2 2 0 00-2-2H5z"/></svg></div><div><div class="sc-title">SMS Follow-Up</div><div class="sc-sub">Quick reminder message</div></div></div>
+        <div class="sc-head"><div class="sc-ic o"><svg width="16" height="16" viewBox="0 0 20 20" fill="var(--orange)"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 00.948-.684l1.498-4.493a1 1 0 011.502 0l1.498 4.493a1 1 0 00.948.684H17a2 2 0 012 2v2a2 2 0 01-2 2H5a2 2 0 01-2-2V5zM5 13a2 2 0 00-2 2v2a2 2 0 002 2h10a2 2 0 002-2v-2a2 2 0 00-2-2H5z"/></svg></div><div><div class="sc-title">SMS Reminder</div><div class="sc-sub">Professional confirmation request</div></div></div>
         <div class="sc-body" style="padding:12px;background:#E0F2FE;border:1px solid #BAE6FD;border-radius:8px;font-size:12px">
           <div style="display:flex;gap:8px;align-items:flex-end;margin-bottom:10px">
             <div style="width:32px;height:32px;background:var(--t1);border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center"><span style="color:white;font-size:14px">R</span></div>
-            <div style="background:white;padding:10px 12px;border-radius:12px;max-width:85%;color:var(--t1)">Hi Sarah, just checking in! Still coming Friday at 10:15 AM? Tap to confirm: [link]</div>
+            <div style="background:white;padding:10px 12px;border-radius:12px;max-width:85%;color:var(--t1)">Hello Sarah, this is a reminder that you have an appointment with Dr. Reyes on Friday, March 21st at 10:15 AM. Please confirm by tapping below or call (305) 555-0100.</div>
           </div>
         </div>
       </div>
       <div style="padding:16px;background:rgba(14,165,233,.05);border-radius:10px;margin-top:12px">
-        <div style="font-size:13px;color:var(--t2);line-height:1.6"><strong style="color:var(--t1)">What happens when the patient taps the link:</strong><br>They see the confirmation screen with options to confirm, request telehealth, reschedule, or cancel their appointment.</div>
+        <div style="font-size:13px;color:var(--t2);line-height:1.6"><strong style="color:var(--t1)">Next step:</strong><br>Tap the link in your SMS to confirm your appointment or select another option (reschedule, telehealth, or cancel).</div>
       </div>
     </div>
     <div class="bot">
@@ -2860,25 +3190,34 @@
     </div>
   </div>
 
-  <!-- SCREEN 2 - 1 DAY BEFORE -->
+  <!-- SCREEN 2 - 1 DAY BEFORE (Detail View) -->
   <div class="screen" id="pvo2">
     <div class="hdr">
-      <div class="hdr-logo"><div class="hdr-mark"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div><div class="hdr-brand">Recall Health</div><div class="hdr-sub">Pre-Visit Reminder</div></div></div>
-      <div class="hdr-title">📞 1 Day Before Your Visit</div>
-      <div class="hdr-desc">Final confirmation call and SMS reminder</div>
+      <div class="hdr-logo"><div class="hdr-mark"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div><div class="hdr-brand">Recall Health</div><div class="hdr-sub">1 Day Before</div></div></div>
+      <div class="hdr-title">📞 Final Confirmation</div>
+      <div class="hdr-desc">Automated call with IVR menu and SMS backup</div>
       <div class="hdr-appt"><svg width="14" height="14" viewBox="0 0 20 20" fill="rgba(255,255,255,.6)"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg><div class="hdr-appt-text"><strong>Dr. Isabel Reyes</strong> · Acne Follow-up · <strong>Friday, Mar 21 · 10:15 AM</strong></div></div>
     </div>
     <div class="body">
       <div class="sc">
-        <div class="sc-head"><div class="sc-ic o"><svg width="16" height="16" viewBox="0 0 20 20" fill="var(--orange)"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.608.801c.58 1.91 2.126 3.457 4.04 4.038l.802-1.605a1 1 0 011.06-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2.694a7 7 0 01-7-7v-1H3a1 1 0 01-1-1V3z"/></svg></div><div><div class="sc-title">Voicemail Notification</div></div></div>
+        <div class="sc-head"><div class="sc-ic o"><svg width="16" height="16" viewBox="0 0 20 20" fill="var(--orange)"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.608.801c.58 1.91 2.126 3.457 4.04 4.038l.802-1.605a1 1 0 011.06-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2.694a7 7 0 01-7-7v-1H3a1 1 0 01-1-1V3z"/></svg></div><div><div class="sc-title">Voicemail with IVR Options</div><div class="sc-sub">Automated call with menu options</div></div></div>
         <div class="sc-body" style="padding:14px;background:#FEF3C7;border:1px solid #FDE68A;border-radius:8px">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
             <div style="font-size:13px;color:var(--t1);font-weight:600">Universal Dermatology</div>
             <div style="font-size:11px;color:var(--t3)">Thu 10:30 AM</div>
           </div>
-          <div style="font-size:12px;color:var(--t2);">Voicemail (1 min 12 sec)</div>
-          <div style="margin-top:10px;padding:10px;background:white;border-radius:6px;font-size:12px;color:var(--t2)">
-            "Hi Sarah, this is a reminder about your appointment tomorrow at 10:15 AM with Dr. Reyes. If you need to reschedule or cancel, please reply to your SMS or call us at 305-555-1234."
+          <div style="font-size:12px;color:var(--t2);margin-bottom:10px">Recorded message (1 min 45 sec)</div>
+          <div style="margin-bottom:12px;padding:10px;background:white;border-radius:6px;font-size:12px;color:var(--t2);line-height:1.5">
+            "Hello, this is a reminder from Universal Dermatology. You have an appointment with Dr. Reyes tomorrow, Friday, March 21st at 10:15 AM. To confirm your appointment, press 1. To request a telehealth visit, press 2. To reschedule, press 3. To cancel, press 4. Or reply to the text message sent to your phone. Thank you."
+          </div>
+          <div style="background:var(--surface);border-radius:8px;padding:12px;font-size:12px">
+            <div style="font-weight:600;color:var(--t1);margin-bottom:8px">IVR Menu Options:</div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="display:flex;align-items:center;gap:8px"><span style="background:var(--brand);color:#fff;width:24px;height:24px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">1</span><span style="color:var(--t2)">Confirm appointment</span></div>
+              <div style="display:flex;align-items:center;gap:8px"><span style="background:#EC4899;color:#fff;width:24px;height:24px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">2</span><span style="color:var(--t2)">Switch to telehealth</span></div>
+              <div style="display:flex;align-items:center;gap:8px"><span style="background:#F59E0B;color:#fff;width:24px;height:24px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">3</span><span style="color:var(--t2)">Request reschedule</span></div>
+              <div style="display:flex;align-items:center;gap:8px"><span style="background:#EF4444;color:#fff;width:24px;height:24px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">4</span><span style="color:var(--t2)">Cancel appointment</span></div>
+            </div>
           </div>
         </div>
       </div>
@@ -3064,14 +3403,36 @@
           </div>
         </div>
         <div style="display:flex;gap:12px">
-          <button onclick="kioskComplete()" style="flex:1;padding:16px;background:var(--surface);color:var(--t2);border:1px solid var(--border);border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;font-family:'Roboto',sans-serif">Skip to Front Desk</button>
-          <button onclick="kioskComplete()" style="flex:2;padding:16px;background:var(--brand);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Inter','Roboto',sans-serif">Complete on This Screen</button>
+          <button onclick="kioskSkipPayment()" style="flex:1;padding:16px;background:var(--surface);color:var(--t2);border:1px solid var(--border);border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;font-family:'Roboto',sans-serif">Skip to Front Desk</button>
+          <button onclick="kioskGoToPayment()" style="flex:2;padding:16px;background:var(--brand);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Inter','Roboto',sans-serif">Pay Now</button>
         </div>
       </div>
     </div>
 
-    <!-- Step 3: Done -->
-    <div id="ks3" style="flex:1;display:none;flex-direction:column;align-items:center;justify-content:center;padding:40px;text-align:center">
+    <!-- Step 3: Kiosk Payment -->
+    <div id="ks-pay" style="flex:1;display:none;flex-direction:column;align-items:center;justify-content:center;padding:40px">
+      <div style="font-size:32px;font-weight:700;color:var(--t1);margin-bottom:8px;text-align:center">Co-pay Payment</div>
+      <div style="font-size:16px;color:var(--t2);margin-bottom:32px;text-align:center">Collect co-pay before visit</div>
+      <div style="background:var(--white);border-radius:20px;padding:32px;width:100%;max-width:520px;box-shadow:var(--sh2);border:1px solid var(--borderlt);margin-bottom:24px">
+        <div style="background:linear-gradient(135deg,var(--brand),var(--brand-dk));border-radius:16px;padding:24px;color:#fff;margin-bottom:24px;text-align:center">
+          <div style="font-size:14px;color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Amount Due</div>
+          <div style="font-size:56px;font-weight:700;line-height:1">$40.00</div>
+        </div>
+        <div style="font-size:14px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px">Payment Method</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px">
+          <button onclick="kioskProcessPayment()" style="width:100%;padding:18px;background:var(--brand);color:#fff;border:none;border-radius:12px;font-size:18px;font-weight:700;cursor:pointer;font-family:'Roboto',sans-serif">💳 Card</button>
+          <button onclick="kioskProcessPayment()" style="width:100%;padding:18px;background:var(--surface);color:var(--t1);border:2px solid var(--border);border-radius:12px;font-size:18px;font-weight:700;cursor:pointer;font-family:'Roboto',sans-serif">📱 Apple/Google Pay</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;padding:10px 12px;background:var(--green-bg);border-radius:8px;font-size:13px;color:var(--green);font-weight:600">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="#10B981"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg>
+          Secure payment processing
+        </div>
+      </div>
+      <button onclick="kioskSkipPayment()" style="padding:14px 36px;background:var(--surface);color:var(--t2);border:1px solid var(--border);border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;font-family:'Roboto',sans-serif">Skip Payment</button>
+    </div>
+
+    <!-- Step 4: Done -->
+    <div id="ks3" style="flex:1;display:none;flex-direction:column;align-items:center;justify-content:flex-start;padding:60px 40px 40px;text-align:center">
       <div style="width:100px;height:100px;background:var(--green-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:28px;border:3px solid rgba(16,185,129,.3);animation:pulse 2s ease-in-out infinite">
         <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
       </div>

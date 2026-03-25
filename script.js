@@ -43,6 +43,32 @@ function launchApp(id, callback) {
   if (typeof callback === 'function') setTimeout(callback, 80);
 }
 
+// ══ CROSS-APP NAVIGATION ══
+// Launch intake app starting at screen N
+function launchIntakeScreen(screenNum) {
+  cur = screenNum || 0;
+  const screens = document.querySelectorAll('#app-intake .screen');
+  screens.forEach((s, i) => s.classList.remove('active'));
+  if (screens[cur]) screens[cur].classList.add('active');
+  buildProgress();
+  switchApp('intake');
+  window.scrollTo(0, 0);
+}
+
+// Launch portal app starting at view (home, appointments, health, documents, billing, messages, profile)
+function launchPortalView(viewName) {
+  switchApp('portal');
+  setTimeout(() => {
+    const navItems = document.querySelectorAll('.pni');
+    const viewMap = {home:0, appointments:1, health:2, documents:3, billing:5, messages:6, profile:7};
+    const idx = viewMap[viewName] !== undefined ? viewMap[viewName] : 0;
+    if (navItems[idx]) {
+      showPV(viewName || 'home', navItems[idx]);
+    }
+    window.scrollTo(0, 0);
+  }, 80);
+}
+
 function showPV(id, btn) {
   document.querySelectorAll('.p-view').forEach(v => v.classList.remove('active'));
   document.querySelectorAll('.pni').forEach(b => b.classList.remove('active'));
@@ -343,6 +369,10 @@ function next() {
       nxt.classList.add('active');
       nxt.offsetHeight;
       nxt.style.animation = 'si .3s ease';
+      // Initialize payment screen
+      if(cur === 6) {
+        initPaymentScreen();
+      }
     }
     window.scrollTo(0,0);
   }, 180);
@@ -444,26 +474,128 @@ function checkConsentBtn() {
 }
 
 let paySkipped = false;
+let selectedPlanMonths = 0;
+let selectedPlanMonthly = 0;
+let hasExistingPlan = true; // Set to true to show existing plan card
+
+function initPaymentScreen() {
+  const existingCard = document.getElementById('existing-plan-card');
+  if (hasExistingPlan) {
+    existingCard.style.display = 'block';
+  } else {
+    existingCard.style.display = 'none';
+  }
+}
+
 function selectPay(el) {
   document.querySelectorAll('.pm').forEach(p=>p.classList.remove('sel'));
   el.classList.add('sel');
 }
-function selectPayPlan() {
-  showToast('Payment plan: $113.33/mo × 3 - 0% interest');
+
+function selectExistingPlan(el) {
+  document.querySelectorAll('.pm').forEach(p=>p.classList.remove('sel'));
+  el.classList.add('sel');
+  showToast('Existing plan selected');
 }
+
+function goToPayPlanSetup() {
+  const screens = document.querySelectorAll('#app-intake .screen');
+  screens[cur].classList.remove('active');
+  cur = 6.5; // Use decimal for sub-screens
+  screens[6].style.display = 'none';
+  const s6a = document.getElementById('s6a');
+  s6a.style.display = 'flex';
+  s6a.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function selectPayPlanDuration(el, months, monthly) {
+  document.querySelectorAll('.plan-opt').forEach(p=>p.classList.remove('sel'));
+  el.classList.add('sel');
+  el.querySelector('.plan-opt-radio').style.opacity = '1';
+  selectedPlanMonths = months;
+  selectedPlanMonthly = monthly;
+  document.getElementById('plan-next-btn').disabled = false;
+}
+
+function goToPayPlanReview() {
+  if (!selectedPlanMonths) {
+    showToast('Please select a plan duration');
+    return;
+  }
+  // Update review screen
+  document.getElementById('plan-duration-display').textContent = selectedPlanMonths + ' months';
+  document.getElementById('plan-monthly-display').textContent = '$' + selectedPlanMonthly.toFixed(2);
+  document.getElementById('plan-count-display').textContent = selectedPlanMonths;
+  document.getElementById('plan-payment-display').textContent = '$' + selectedPlanMonthly.toFixed(2);
+
+  const s6a = document.getElementById('s6a');
+  const s6b = document.getElementById('s6b');
+  s6a.classList.remove('active');
+  s6a.style.display = 'none';
+  s6b.classList.add('active');
+  s6b.style.display = 'flex';
+  window.scrollTo(0, 0);
+}
+
+function goToPaymentMethod() {
+  const s6b = document.getElementById('s6b');
+  const s6 = document.getElementById('s6');
+  s6b.classList.remove('active');
+  s6b.style.display = 'none';
+  s6.classList.add('active');
+  s6.style.display = 'flex';
+  window.scrollTo(0, 0);
+  showToast('Payment plan selected: $' + selectedPlanMonthly.toFixed(2) + '/month for ' + selectedPlanMonths + ' months');
+}
+
+function goBackPayment() {
+  const s6a = document.getElementById('s6a');
+  const s6b = document.getElementById('s6b');
+  const s6 = document.getElementById('s6');
+
+  if (s6a.classList.contains('active')) {
+    s6a.classList.remove('active');
+    s6a.style.display = 'none';
+    s6.classList.add('active');
+    s6.style.display = 'flex';
+  } else if (s6b.classList.contains('active')) {
+    s6b.classList.remove('active');
+    s6b.style.display = 'none';
+    s6a.classList.add('active');
+    s6a.style.display = 'flex';
+  }
+  window.scrollTo(0, 0);
+}
+
 function processPayment() {
+  const selected = document.querySelector('.pm.sel');
+  if (!selected) {
+    showToast('Please select a payment method');
+    return;
+  }
+
   const btn = document.getElementById('pay-btn');
   btn.textContent = 'Processing…';
   btn.disabled = true;
+
+  const paymentAmount = selectedPlanMonths > 0 ? selectedPlanMonthly : 380;
+  const paymentDesc = selectedPlanMonths > 0 ? 'First payment of $' + selectedPlanMonthly.toFixed(2) : 'Payment of $380.00';
+
   setTimeout(() => {
-    showToast('Payment of $380.00 successful ✓');
-    setTimeout(() => next(), 800);
+    showToast(paymentDesc + ' successful ✓');
+    setTimeout(() => {
+      cur = 6; // Reset to regular screen number
+      next();
+    }, 800);
   }, 1200);
 }
+
 function skipPayment() {
   paySkipped = true;
   document.getElementById('pay-confirm-title').textContent = 'Pay at Front Desk';
   document.getElementById('pay-confirm-sub').textContent = 'Balance of $380.00 to be collected on arrival';
+  cur = 6;
   next();
 }
 
@@ -1033,6 +1165,30 @@ function kioskReset() {
   document.getElementById('kiosk-flow').style.display = 'none';
   document.getElementById('kiosk-idle').style.display = 'flex';
   showKioskStep(0);
+}
+
+function kioskGoToPayment() {
+  document.getElementById('ks2').style.display = 'none';
+  document.getElementById('ks-pay').style.display = 'flex';
+}
+
+function kioskProcessPayment() {
+  const payBtn = event.target;
+  const origText = payBtn.textContent;
+  payBtn.textContent = 'Processing...';
+  payBtn.disabled = true;
+  showToast('Processing payment...');
+  setTimeout(function() {
+    document.getElementById('ks-pay').style.display = 'none';
+    document.getElementById('ks3').style.display = 'flex';
+    showToast('Payment of $40.00 successful ✓');
+  }, 1200);
+}
+
+function kioskSkipPayment() {
+  document.getElementById('ks-pay').style.display = 'none';
+  document.getElementById('ks3').style.display = 'flex';
+  showToast('Payment skipped - will collect at checkout');
 }
 
 // ═══════════════════════════════════════
