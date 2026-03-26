@@ -81,22 +81,22 @@ function showPV(id, btn) {
   const el = document.getElementById('pv-' + id);
   if (el) el.classList.add('active');
   if (btn) btn.classList.add('active');
-  const titles = {home:'My Health Overview',appointments:'Appointments',health:'Health Summary',documents:'Documents & Records',billing:'Billing & Payments',messages:'Messages',profile:'Profile & Settings'};
+  const titles = {home:'My Health Overview',appointments:'Appointments',health:'Health Summary',documents:'Documents & Records',prescriptions:'Prescriptions',billing:'Billing & Payments',messages:'Messages',profile:'Profile & Settings'};
   document.getElementById('p-title').textContent = titles[id] || id;
 }
 
 // ───── DATA ─────
 const patients = [
-  {id:0,name:"Marcus Thompson",init:"MT",color:"pc1",dob:"04/12/1989",mrn:"UD-00421",time:"9:00 AM",type:"Acne Follow-up",provider:"Dr. Reyes",provColor:"pv1",status:"partial",ebStatus:"g",ebLabel:"Active",deductAmt:"$320",deductPct:79,copay:"$40",flags:["Pay"],phone:"(561) 400-2291",email:"m.thompson@email.com",addr:"142 Palmetto Way, Miami FL"},
-  {id:1,name:"Sandra Okafor",init:"SO",color:"pc3",dob:"07/22/1975",mrn:"UD-00187",time:"9:15 AM",type:"Skin Check / Biopsy",provider:"Dr. Nguyen",provColor:"pv2",status:"complete",ebStatus:"g",ebLabel:"Active",deductAmt:"$0",deductPct:100,copay:"$55",flags:["OK"],phone:"(561) 312-0988",email:"sokafor@gmail.com",addr:"88 Glades Blvd, Miami FL"},
-  {id:2,name:"James Whitfield",init:"JW",color:"pc7",dob:"11/05/1982",mrn:"UD-00309",time:"9:30 AM",type:"Psoriasis Consult",provider:"Dr. Patel",provColor:"pv3",status:"pending",ebStatus:"r",ebLabel:"Inactive",deductAmt:"$1,500",deductPct:0,copay:"-",flags:["Ins","Consent"],phone:"(561) 778-2200",email:"jwhit@email.com",addr:"250 Town Center Dr, Miami FL"},
-  {id:3,name:"Priya Mehta",init:"PM",color:"pc5",dob:"03/14/1991",mrn:"UD-00556",time:"9:45 AM",type:"Cosmetic Consult",provider:"Dr. Reyes",provColor:"pv1",status:"checkedin",ebStatus:"g",ebLabel:"Active",deductAmt:"$800",deductPct:47,copay:"$40",flags:["OK"],phone:"(561) 900-1234",email:"priya.m@email.com",addr:"14 Mizner Park, Miami FL"},
-  {id:4,name:"David Chen",init:"DC",color:"pc8",dob:"09/30/1968",mrn:"UD-00098",time:"10:00 AM",type:"Eczema Review",provider:"Dr. Nguyen",provColor:"pv2",status:"complete",ebStatus:"g",ebLabel:"Active",deductAmt:"$200",deductPct:87,copay:"$55",flags:["OK"],phone:"(561) 444-7890",email:"dchen@work.com",addr:"600 N Federal Hwy, Miami FL"},
-  {id:5,name:"Linda Russo",init:"LR",color:"pc2",dob:"06/18/1958",mrn:"UD-00712",time:"10:15 AM",type:"Annual Skin Exam",provider:"Dr. Patel",provColor:"pv3",status:"pending",ebStatus:"a",ebLabel:"Check Req.",deductAmt:"$650",deductPct:57,copay:"$35",flags:["Ins"],phone:"(561) 211-5566",email:"lrusso@aol.com",addr:"3300 S Ocean Blvd, Palm Beach FL"},
-  {id:6,name:"Kevin O'Brien",init:"KO",color:"pc6",dob:"02/27/1979",mrn:"UD-00433",time:"10:30 AM",type:"Acne Treatment",provider:"Dr. Reyes",provColor:"pv1",status:"complete",ebStatus:"g",ebLabel:"Active",deductAmt:"$0",deductPct:100,copay:"$40",flags:["OK"],phone:"(561) 600-3344",email:"kobrien@email.com",addr:"7 Palmetto Park Rd, Miami FL"},
-  {id:7,name:"Aisha Williams",init:"AW",color:"pc4",dob:"12/04/1995",mrn:"UD-00821",time:"10:45 AM",type:"New Patient",provider:"Dr. Nguyen",provColor:"pv2",status:"partial",ebStatus:"g",ebLabel:"Active",deductAmt:"$1,200",deductPct:20,copay:"$55",flags:["New","Consent"],phone:"(561) 730-8899",email:"aisha.w@email.com",addr:"1000 NW 15th St, Miami FL"},
-  {id:8,name:"Robert Harmon",init:"RH",color:"pc1",dob:"08/16/1952",mrn:"UD-00044",time:"11:00 AM",type:"Mohs Surgery Consult",provider:"Dr. Patel",provColor:"pv3",status:"checkedin",ebStatus:"g",ebLabel:"Medicare",deductAmt:"$185",deductPct:91,copay:"$20",flags:["OK"],phone:"(561) 277-1122",email:"rharmon@email.com",addr:"22 Spanish River Rd, Miami FL"},
-  {id:9,name:"Jessica Torres",init:"JT",color:"pc5",dob:"05/09/1987",mrn:"UD-00615",time:"11:15 AM",type:"Rosacea Follow-up",provider:"Dr. Reyes",provColor:"pv1",status:"pending",ebStatus:"r",ebLabel:"Self-Pay",deductAmt:"-",deductPct:0,copay:"$150",flags:["Pay","Ins"],phone:"(561) 988-0021",email:"jtorres@gmail.com",addr:"450 W Camino Real, Miami FL"},
+  {id:0,name:"Marcus Thompson",init:"MT",color:"pc1",dob:"04/12/1989",mrn:"UD-00421",time:"9:00 AM",type:"Acne Follow-up",provider:"Dr. Reyes",provColor:"pv1",status:"partial",ebStatus:"g",ebLabel:"Active",deductAmt:"$320",deductPct:79,copay:"$40",flags:["Pay"],phone:"(561) 400-2291",email:"m.thompson@email.com",addr:"142 Palmetto Way, Miami FL",priorAuth:{status:"none"}},
+  {id:1,name:"Sandra Okafor",init:"SO",color:"pc3",dob:"07/22/1975",mrn:"UD-00187",time:"9:15 AM",type:"Skin Check / Biopsy",provider:"Dr. Nguyen",provColor:"pv2",status:"complete",ebStatus:"g",ebLabel:"Active",deductAmt:"$0",deductPct:100,copay:"$55",flags:["OK"],phone:"(561) 312-0988",email:"sokafor@gmail.com",addr:"88 Glades Blvd, Miami FL",priorAuth:{status:"approved",procedure:"Skin Biopsy",payer:"United Healthcare",submittedDate:"03/20/2026"}},
+  {id:2,name:"James Whitfield",init:"JW",color:"pc7",dob:"11/05/1982",mrn:"UD-00309",time:"9:30 AM",type:"Psoriasis Consult",provider:"Dr. Patel",provColor:"pv3",status:"pending",ebStatus:"r",ebLabel:"Inactive",deductAmt:"$1,500",deductPct:0,copay:"-",flags:["Ins","Consent"],phone:"(561) 778-2200",email:"jwhit@email.com",addr:"250 Town Center Dr, Miami FL",priorAuth:{status:"pending",procedure:"Biologic Treatment (Dupilumab)",payer:"Aetna",submittedDate:"03/18/2026"}},
+  {id:3,name:"Priya Mehta",init:"PM",color:"pc5",dob:"03/14/1991",mrn:"UD-00556",time:"9:45 AM",type:"Cosmetic Consult",provider:"Dr. Reyes",provColor:"pv1",status:"checkedin",ebStatus:"g",ebLabel:"Active",deductAmt:"$800",deductPct:47,copay:"$40",flags:["OK"],phone:"(561) 900-1234",email:"priya.m@email.com",addr:"14 Mizner Park, Miami FL",priorAuth:{status:"none"}},
+  {id:4,name:"David Chen",init:"DC",color:"pc8",dob:"09/30/1968",mrn:"UD-00098",time:"10:00 AM",type:"Eczema Review",provider:"Dr. Nguyen",provColor:"pv2",status:"complete",ebStatus:"g",ebLabel:"Active",deductAmt:"$200",deductPct:87,copay:"$55",flags:["OK"],phone:"(561) 444-7890",email:"dchen@work.com",addr:"600 N Federal Hwy, Miami FL",priorAuth:{status:"none"}},
+  {id:5,name:"Linda Russo",init:"LR",color:"pc2",dob:"06/18/1958",mrn:"UD-00712",time:"10:15 AM",type:"Annual Skin Exam",provider:"Dr. Patel",provColor:"pv3",status:"pending",ebStatus:"a",ebLabel:"Check Req.",deductAmt:"$650",deductPct:57,copay:"$35",flags:["Ins"],phone:"(561) 211-5566",email:"lrusso@aol.com",addr:"3300 S Ocean Blvd, Palm Beach FL",priorAuth:{status:"none"}},
+  {id:6,name:"Kevin O'Brien",init:"KO",color:"pc6",dob:"02/27/1979",mrn:"UD-00433",time:"10:30 AM",type:"Acne Treatment",provider:"Dr. Reyes",provColor:"pv1",status:"complete",ebStatus:"g",ebLabel:"Active",deductAmt:"$0",deductPct:100,copay:"$40",flags:["OK"],phone:"(561) 600-3344",email:"kobrien@email.com",addr:"7 Palmetto Park Rd, Miami FL",priorAuth:{status:"denied",procedure:"Laser Treatment (IPL)",payer:"Blue Cross",submittedDate:"03/19/2026",reason:"Not deemed medically necessary"}},
+  {id:7,name:"Aisha Williams",init:"AW",color:"pc4",dob:"12/04/1995",mrn:"UD-00821",time:"10:45 AM",type:"New Patient",provider:"Dr. Nguyen",provColor:"pv2",status:"partial",ebStatus:"g",ebLabel:"Active",deductAmt:"$1,200",deductPct:20,copay:"$55",flags:["New","Consent"],phone:"(561) 730-8899",email:"aisha.w@email.com",addr:"1000 NW 15th St, Miami FL",priorAuth:{status:"none"}},
+  {id:8,name:"Robert Harmon",init:"RH",color:"pc1",dob:"08/16/1952",mrn:"UD-00044",time:"11:00 AM",type:"Mohs Surgery Consult",provider:"Dr. Patel",provColor:"pv3",status:"checkedin",ebStatus:"g",ebLabel:"Medicare",deductAmt:"$185",deductPct:91,copay:"$20",flags:["OK"],phone:"(561) 277-1122",email:"rharmon@email.com",addr:"22 Spanish River Rd, Miami FL",priorAuth:{status:"approved",procedure:"Mohs Micrographic Surgery",payer:"Medicare",submittedDate:"03/17/2026"}},
+  {id:9,name:"Jessica Torres",init:"JT",color:"pc5",dob:"05/09/1987",mrn:"UD-00615",time:"11:15 AM",type:"Rosacea Follow-up",provider:"Dr. Reyes",provColor:"pv1",status:"pending",ebStatus:"r",ebLabel:"Self-Pay",deductAmt:"-",deductPct:0,copay:"$150",flags:["Pay","Ins"],phone:"(561) 988-0021",email:"jtorres@gmail.com",addr:"450 W Camino Real, Miami FL",priorAuth:{status:"none"}},
 ];
 
 let currentPatient = 0;
@@ -132,6 +132,15 @@ function renderTable(filter='all', search='') {
       : `<button class="ab ci" onclick="event.stopPropagation();quickCheckin(${p.id})">Check In</button>
          <button class="ab sm" onclick="event.stopPropagation();openMsgForPatient(${p.id})"><svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/><path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"/></svg></button>`;
 
+    const paStatus = p.priorAuth?.status || 'none';
+    const paMap = {
+      approved: '<span class="spill s-done"><span class="sdot"></span>Approved</span>',
+      pending:  '<span class="spill s-pend"><span class="sdot"></span>Pending</span>',
+      denied:   '<span class="spill s-fail"><span class="sdot"></span>Denied</span>',
+      none:     '<span style="font-size:12px;color:var(--t3)">—</span>'
+    };
+    const hasPriorAuth = paStatus !== 'none';
+
     const tr = document.createElement('tr');
     tr.className = 'rw' + (isCheckedIn ? ' row-checked' : '');
     tr.onclick = () => openPanel(p.id);
@@ -152,6 +161,7 @@ function renderTable(filter='all', search='') {
         ${p.deductPct > 0 ? `<div class="dbar"><div class="dfill" style="width:${p.deductPct}%;background:${deductColor}"></div></div>` : ''}
         <span class="dcp">${p.deductPct}% met</span>
       </div></div></td>
+      <td><div class="tdi">${paMap[paStatus]}</div></td>
       <td><div class="tdi"><div class="flags">${flagHtml}</div></div></td>
       <td><div class="tdi"><div class="acell">${actionHtml}</div></div></td>
     `;
@@ -228,6 +238,41 @@ function openPanel(id) {
   document.getElementById('sp-time').textContent = p.time;
   document.getElementById('sp-type').textContent = p.type;
   document.getElementById('sp-prov').textContent = p.provider;
+
+  // Populate Prior Auth sections
+  const paContent = document.getElementById('sp-pa-content');
+  const paInsurance = document.getElementById('sp-pa-insurance');
+  const pa = p.priorAuth;
+  const renderPAContent = () => {
+    if (pa?.status && pa.status !== 'none') {
+      const statusClass = pa.status === 'approved' ? 's-done' : pa.status === 'pending' ? 's-pend' : 's-fail';
+      const statusLabel = pa.status.charAt(0).toUpperCase() + pa.status.slice(1);
+      return `
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:13px;color:var(--t1);font-weight:600">${pa.procedure}</span>
+            <span class="spill ${statusClass}"><span class="sdot"></span>${statusLabel}</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div style="background:var(--surface);padding:10px;border-radius:8px">
+              <div style="font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Payer</div>
+              <div style="font-size:13px;font-weight:600;color:var(--t1)">${pa.payer}</div>
+            </div>
+            <div style="background:var(--surface);padding:10px;border-radius:8px">
+              <div style="font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Submitted</div>
+              <div style="font-size:13px;font-weight:600;color:var(--t1)">${pa.submittedDate}</div>
+            </div>
+          </div>
+          ${pa.reason ? `<div style="background:var(--red-bg);padding:10px;border-radius:8px;font-size:12px;color:var(--red)"><strong>Note:</strong> ${pa.reason}</div>` : ''}
+        </div>
+      `;
+    } else {
+      return '<div style="padding:12px;background:var(--surface);border-radius:8px;font-size:13px;color:var(--t3);text-align:center">—</div>';
+    }
+  };
+  paContent.innerHTML = renderPAContent();
+  paInsurance.innerHTML = renderPAContent();
+
   setSPTab(document.querySelector('.spt.active') || document.querySelectorAll('.spt')[0], 'overview');
   document.querySelector('.spt').classList.add('active');
   document.getElementById('overlay').classList.add('open');
@@ -1330,6 +1375,42 @@ function createMessageCard(msg) {
   `;
 }
 
+// ══ REPORTS ══
+let activeReport = 'intake';
+
+function switchReport(type) {
+  document.querySelectorAll('[id^="report-"]').forEach(r => r.style.display = 'none');
+  document.querySelectorAll('[data-report]').forEach(item => item.classList.remove('active-report'));
+  const report = document.getElementById('report-' + type);
+  if (report) {
+    report.style.display = 'block';
+    activeReport = type;
+    const reportItem = document.querySelector('[data-report="' + type + '"]');
+    if (reportItem) reportItem.classList.add('active-report');
+  }
+}
+
+// ══ PRESCRIPTION RENEWAL ══
+function requestRxRenewal(rxName) {
+  const button = event.target;
+  button.disabled = true;
+  button.textContent = '⏳ Requesting...';
+  button.style.opacity = '0.7';
+
+  setTimeout(() => {
+    const newHtml = `
+      <div style="background:var(--green-bg);border:1px solid var(--border);border-radius:6px;padding:8px 12px">
+        <span style="font-size:11.5px;font-weight:600;color:var(--green)">✓ Request received</span>
+      </div>
+    `;
+    button.parentElement.innerHTML = newHtml;
+    showToast(`Renewal request sent for ${rxName} - Staff will review shortly`);
+  }, 800);
+}
+
 // Init registration progress on load
 regBuildProgress();
+
+// Init reports selection
+switchReport('intake');
 

@@ -100,11 +100,12 @@ kbd{font-size:11px;color:rgba(255,255,255,.28);font-family:'Roboto',sans-serif;m
 
 /* ── SLIDE 4: STAFF DASHBOARD ── */
 #s4{background:#FAFBFC}
+#s4 .s-inner{padding:32px 96px}
 #s4 .left{flex:1;max-width:480px}
 #s4 .right{flex:1;display:flex;flex-direction:column;gap:16px}
-#s4 .s-h2{color:var(--t1)}
+#s4 .s-h2{color:var(--t1);margin-bottom:12px}
 #s4 .s-tag{color:#6366F1}
-#s4 .feat-list{display:flex;flex-direction:column;gap:14px;margin-top:32px}
+#s4 .feat-list{display:flex;flex-direction:column;gap:10px;margin-top:18px}
 #s4 .feat{display:flex;align-items:flex-start;gap:14px;padding:18px 20px;border-radius:13px;background:var(--white);border:1px solid var(--border);box-shadow:var(--sh1)}
 #s4 .feat-ic{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px}
 #s4 .feat-title{font-size:14px;font-weight:700;color:var(--t1);margin-bottom:3px}

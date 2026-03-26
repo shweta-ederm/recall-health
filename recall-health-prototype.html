@@ -28,12 +28,13 @@
     <div class="asw-menu" id="asw-menu">
       <div class="asw-sec">Staff-Facing</div>
       <div class="asw-item" onclick="switchAppMenu('staff')"><div class="asw-item-dot" style="background:#08979D"></div>Staff Dashboard</div>
-      <div class="asw-sec">Patient-Facing</div>
-      <div class="asw-item" onclick="switchAppMenu('intake')"><div class="asw-item-dot" style="background:var(--orange)"></div>Self Check-In</div>
-      <div class="asw-item" onclick="switchAppMenu('portal')"><div class="asw-item-dot" style="background:#1B6FEB"></div>Patient Portal</div>
+      <div class="asw-sec">Patient Journey</div>
       <div class="asw-item" onclick="switchAppMenu('register')"><div class="asw-item-dot" style="background:#10B981"></div>New Patient Self-Registration</div>
-      <div class="asw-item" onclick="switchAppMenu('followup')"><div class="asw-item-dot" style="background:#F59E0B"></div>Post-Visit Follow-Up</div>
+      <div class="asw-item" onclick="window.open('https://rhonlinescheduler-v3.figma.site/','_blank')"><div class="asw-item-dot" style="background:#0EA5E9"></div>Self Scheduling</div>
+      <div class="asw-item" onclick="switchAppMenu('intake')"><div class="asw-item-dot" style="background:var(--orange)"></div>Self Check-In</div>
       <div class="asw-item" onclick="switchAppMenu('kiosk')"><div class="asw-item-dot" style="background:#8B5CF6"></div>Arrive & Check-In (Kiosk)</div>
+      <div class="asw-item" onclick="switchAppMenu('followup')"><div class="asw-item-dot" style="background:#F59E0B"></div>Post-Visit Follow-Up</div>
+      <div class="asw-item" onclick="switchAppMenu('portal')"><div class="asw-item-dot" style="background:#1B6FEB"></div>Patient Portal</div>
       <div style="border-top:1px solid var(--borderlt);margin:6px 0 2px"></div>
       <div class="asw-item" onclick="switchAppMenu('landing')"><div class="asw-item-dot" style="background:var(--t3)"></div>Landing Page</div>
     </div>
@@ -95,148 +96,84 @@
         <span>Complete Patient Journey</span>
         <div style="flex:1;height:1px;background:var(--border)"></div>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+      <div style="position:relative;padding:60px 40px;background:linear-gradient(180deg,rgba(14,165,233,.04),transparent);border-radius:20px;border:1px solid var(--borderlt)">
+        <!-- Timeline line -->
+        <div style="position:absolute;top:80px;left:80px;right:80px;height:3px;background:linear-gradient(90deg,#8B5CF6,#0EA5E9,var(--orange),var(--amber),#6EC6CA,var(--green));border-radius:2px"></div>
 
-        <!-- New Patient -->
-        <div class="lcard" onclick="launchApp('register')" style="background:var(--white);border-radius:16px;overflow:hidden;border:1px solid var(--borderlt);box-shadow:var(--sh1);cursor:pointer;transition:all .2s">
-          <div style="height:6px;background:linear-gradient(90deg,#8B5CF6,#A78BFA)"></div>
-          <div style="padding:16px;display:flex;flex-direction:column;height:100%">
-            <div style="display:inline-block;background:#F5F3FF;color:#8B5CF6;font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;margin-bottom:10px;width:fit-content">NEW PATIENT</div>
-            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px">
-              <div style="width:40px;height:40px;background:#F5F3FF;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                <svg width="22" height="22" viewBox="0 0 20 20" fill="#8B5CF6"><path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"/></svg>
-              </div>
+        <!-- Timeline nodes -->
+        <div style="display:flex;justify-content:space-between;position:relative;z-index:2">
+          <!-- Node 1: Registration -->
+          <div style="display:flex;flex-direction:column;align-items:center;width:16.66%;cursor:pointer;transition:transform .3s" onclick="launchApp('register')" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+            <div style="width:72px;height:72px;background:linear-gradient(135deg,#8B5CF6,#A78BFA);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(139,92,246,.2);margin-bottom:16px;position:relative;z-index:3">
+              <svg width="32" height="32" viewBox="0 0 20 20" fill="white"><path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"/></svg>
             </div>
-            <div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:6px;flex-grow:1">New Patient Self-Registration</div>
-            <div style="font-size:12px;color:var(--t2);line-height:1.4;margin-bottom:10px">Create account, enter insurance, book first appointment.</div>
-            <div style="display:flex;align-items:center;justify-content:flex-end">
-              <div style="display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:#8B5CF6">Open <svg width="12" height="12" viewBox="0 0 20 20" fill="#8B5CF6"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></div>
+            <div style="text-align:center">
+              <div style="font-size:11px;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">New Patient</div>
+              <div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:8px">Self Registration</div>
+              <div style="font-size:11px;color:var(--t3);line-height:1.4">Create account, enter insurance, book visit</div>
+            </div>
+          </div>
+
+          <!-- Node 2: Self Scheduling -->
+          <div style="display:flex;flex-direction:column;align-items:center;width:16.66%;cursor:pointer;transition:transform .3s" onclick="window.open('https://rhonlinescheduler-v3.figma.site/','_blank')" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+            <div style="width:72px;height:72px;background:linear-gradient(135deg,#0EA5E9,#38BDF8);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(14,165,233,.2);margin-bottom:16px;position:relative;z-index:3">
+              <svg width="32" height="32" viewBox="0 0 20 20" fill="white"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg>
+            </div>
+            <div style="text-align:center">
+              <div style="font-size:11px;font-weight:700;color:#0EA5E9;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Anytime</div>
+              <div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:8px">Self Scheduling</div>
+              <div style="font-size:11px;color:var(--t3);line-height:1.4">Book appointment online</div>
+            </div>
+          </div>
+
+          <!-- Node 3: Self Check-In -->
+          <div style="display:flex;flex-direction:column;align-items:center;width:16.66%;cursor:pointer;transition:transform .3s" onclick="launchApp('intake')" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+            <div style="width:72px;height:72px;background:linear-gradient(135deg,var(--orange),#F97C3C);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(132,116,161,.2);margin-bottom:16px;position:relative;z-index:3">
+              <svg width="32" height="32" viewBox="0 0 20 20" fill="white"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            </div>
+            <div style="text-align:center">
+              <div style="font-size:11px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Before Visit</div>
+              <div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:8px">Self Check-In</div>
+              <div style="font-size:11px;color:var(--t3);line-height:1.4">Complete intake & consents online</div>
+            </div>
+          </div>
+
+          <!-- Node 3: Kiosk -->
+          <div style="display:flex;flex-direction:column;align-items:center;width:16.66%;cursor:pointer;transition:transform .3s" onclick="launchApp('kiosk')" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+            <div style="width:72px;height:72px;background:linear-gradient(135deg,var(--amber),#FCD34D);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(245,158,11,.2);margin-bottom:16px;position:relative;z-index:3">
+              <svg width="32" height="32" viewBox="0 0 20 20" fill="white"><path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z" clip-rule="evenodd"/></svg>
+            </div>
+            <div style="text-align:center">
+              <div style="font-size:11px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Day Of</div>
+              <div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:8px">Kiosk Check-In</div>
+              <div style="font-size:11px;color:var(--t3);line-height:1.4">iPad check-in at front desk</div>
+            </div>
+          </div>
+
+          <!-- Node 4: Follow-Up -->
+          <div style="display:flex;flex-direction:column;align-items:center;width:18%;cursor:pointer;transition:transform .3s" onclick="launchApp('followup')" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+            <div style="width:72px;height:72px;background:linear-gradient(135deg,#6EC6CA,#2DD4BF);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(110,198,202,.2);margin-bottom:16px;position:relative;z-index:3">
+              <svg width="32" height="32" viewBox="0 0 20 20" fill="white"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            </div>
+            <div style="text-align:center">
+              <div style="font-size:11px;font-weight:700;color:#6EC6CA;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">After Visit</div>
+              <div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:8px">Follow-Up</div>
+              <div style="font-size:11px;color:var(--t3);line-height:1.4">Survey & care instructions</div>
+            </div>
+          </div>
+
+          <!-- Node 5: Portal -->
+          <div style="display:flex;flex-direction:column;align-items:center;width:18%;cursor:pointer;transition:transform .3s" onclick="launchApp('portal')" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+            <div style="width:72px;height:72px;background:linear-gradient(135deg,var(--green),#34D399);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(16,185,129,.2);margin-bottom:16px;position:relative;z-index:3">
+              <svg width="32" height="32" viewBox="0 0 20 20" fill="white"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg>
+            </div>
+            <div style="text-align:center">
+              <div style="font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Anytime</div>
+              <div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:8px">Patient Portal</div>
+              <div style="font-size:11px;color:var(--t3);line-height:1.4">Manage appts & records</div>
             </div>
           </div>
         </div>
-
-        <!-- T-5 Days -->
-        <div class="lcard" onclick="launchOutreach(0)" style="background:var(--white);border-radius:16px;overflow:hidden;border:1px solid var(--borderlt);box-shadow:var(--sh1);cursor:pointer;transition:all .2s">
-          <div style="height:6px;background:linear-gradient(90deg,#0EA5E9,#38BDF8)"></div>
-          <div style="padding:16px;display:flex;flex-direction:column;height:100%">
-            <div style="display:inline-block;background:rgba(14,165,233,.1);color:#0EA5E9;font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;margin-bottom:10px;width:fit-content">T-5 DAYS</div>
-            <div style="width:52px;height:40px;background:rgba(14,165,233,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;gap:4px;margin-bottom:12px;flex-shrink:0">
-              <svg width="22" height="22" viewBox="0 0 20 20" fill="#0EA5E9"><path d="M3 4a1 1 0 00-1 1v12a1 1 0 001 1h14a1 1 0 001-1V5a1 1 0 00-1-1H3zm0 2h14v2l-7 5-7-5V6z"/></svg>
-              <svg width="22" height="22" viewBox="0 0 20 20" fill="#0EA5E9"><path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/></svg>
-            </div>
-            <div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:6px;flex-grow:1">Appointment Reminder</div>
-            <div style="font-size:12px;color:var(--t2);line-height:1.4;margin-bottom:10px">Email + SMS reminder with appointment details and confirm link.</div>
-            <div style="display:flex;align-items:center;justify-content:flex-end">
-              <div style="display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:#0EA5E9">Preview <svg width="12" height="12" viewBox="0 0 20 20" fill="#0EA5E9"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- T-2 Days -->
-        <div class="lcard" onclick="launchOutreach(1)" style="background:var(--white);border-radius:16px;overflow:hidden;border:1px solid var(--borderlt);box-shadow:var(--sh1);cursor:pointer;transition:all .2s">
-          <div style="height:6px;background:linear-gradient(90deg,#0EA5E9,#38BDF8)"></div>
-          <div style="padding:16px;display:flex;flex-direction:column;height:100%">
-            <div style="display:inline-block;background:rgba(14,165,233,.1);color:#0EA5E9;font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;margin-bottom:10px;width:fit-content">T-2 DAYS</div>
-            <div style="width:40px;height:40px;background:rgba(14,165,233,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;flex-shrink:0">
-              <svg width="22" height="22" viewBox="0 0 20 20" fill="#0EA5E9"><path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/></svg>
-            </div>
-            <div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:6px;flex-grow:1">Follow-Up Reminder</div>
-            <div style="font-size:12px;color:var(--t2);line-height:1.4;margin-bottom:10px">SMS follow-up if patient hasn't yet confirmed.</div>
-            <div style="display:flex;align-items:center;justify-content:flex-end">
-              <div style="display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:#0EA5E9">Preview <svg width="12" height="12" viewBox="0 0 20 20" fill="#0EA5E9"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- T-1 Day -->
-        <div class="lcard" onclick="launchOutreach(2)" style="background:var(--white);border-radius:16px;overflow:hidden;border:1px solid var(--borderlt);box-shadow:var(--sh1);cursor:pointer;transition:all .2s">
-          <div style="height:6px;background:linear-gradient(90deg,#0EA5E9,#38BDF8)"></div>
-          <div style="padding:16px;display:flex;flex-direction:column;height:100%">
-            <div style="display:inline-block;background:rgba(14,165,233,.1);color:#0EA5E9;font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;margin-bottom:10px;width:fit-content">T-1 DAY</div>
-            <div style="width:52px;height:40px;background:rgba(14,165,233,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;gap:4px;margin-bottom:12px;flex-shrink:0">
-              <svg width="22" height="22" viewBox="0 0 20 20" fill="#0EA5E9"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.608.801c.58 1.91 2.126 3.457 4.04 4.038l.802-1.605a1 1 0 011.06-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2.694a7 7 0 01-7-7v-1H3a1 1 0 01-1-1V3z"/></svg>
-              <svg width="22" height="22" viewBox="0 0 20 20" fill="#0EA5E9"><path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/></svg>
-            </div>
-            <div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:6px;flex-grow:1">Final Reminder</div>
-            <div style="font-size:12px;color:var(--t2);line-height:1.4;margin-bottom:10px">Call + SMS reminder one day before visit.</div>
-            <div style="display:flex;align-items:center;justify-content:flex-end">
-              <div style="display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:#0EA5E9">Preview <svg width="12" height="12" viewBox="0 0 20 20" fill="#0EA5E9"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Self Check-In -->
-        <div class="lcard" onclick="launchApp('intake')" style="background:var(--white);border-radius:16px;overflow:hidden;border:1px solid var(--borderlt);box-shadow:var(--sh1);cursor:pointer;transition:all .2s">
-          <div style="height:6px;background:linear-gradient(90deg,var(--orange),#F97C3C)"></div>
-          <div style="padding:16px;display:flex;flex-direction:column;height:100%">
-            <div style="display:inline-block;background:var(--orange-lt);color:var(--orange);font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;margin-bottom:10px;width:fit-content">DAY OF</div>
-            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px">
-              <div style="width:40px;height:40px;background:var(--orange-lt);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                <svg width="22" height="22" viewBox="0 0 20 20" fill="var(--orange)"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-              </div>
-            </div>
-            <div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:6px;flex-grow:1">Self Check-In</div>
-            <div style="font-size:12px;color:var(--t2);line-height:1.4;margin-bottom:10px">Complete intake, insurance, clinical history, consents before arriving.</div>
-            <div style="display:flex;align-items:center;justify-content:flex-end">
-              <div style="display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:var(--orange)">Open <svg width="12" height="12" viewBox="0 0 20 20" fill="var(--orange)"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Kiosk Check-In -->
-        <div class="lcard" onclick="launchApp('kiosk')" style="background:var(--white);border-radius:16px;overflow:hidden;border:1px solid var(--borderlt);box-shadow:var(--sh1);cursor:pointer;transition:all .2s">
-          <div style="height:6px;background:linear-gradient(90deg,var(--amber),#FCD34D)"></div>
-          <div style="padding:16px;display:flex;flex-direction:column;height:100%">
-            <div style="display:inline-block;background:var(--amber-bg);color:var(--amber);font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;margin-bottom:10px;width:fit-content">DAY OF</div>
-            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px">
-              <div style="width:40px;height:40px;background:var(--amber-bg);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                <svg width="22" height="22" viewBox="0 0 20 20" fill="var(--amber)"><path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z" clip-rule="evenodd"/></svg>
-              </div>
-            </div>
-            <div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:6px;flex-grow:1">Arrive & Check-In (Kiosk)</div>
-            <div style="font-size:12px;color:var(--t2);line-height:1.4;margin-bottom:10px">iPad kiosk experience - DOB lookup, payment, consent at front desk.</div>
-            <div style="display:flex;align-items:center;justify-content:flex-end">
-              <div style="display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:var(--amber)">Open <svg width="12" height="12" viewBox="0 0 20 20" fill="var(--amber)"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Post-Visit Follow-Up -->
-        <div class="lcard" onclick="launchApp('followup')" style="background:var(--white);border-radius:16px;overflow:hidden;border:1px solid var(--borderlt);box-shadow:var(--sh1);cursor:pointer;transition:all .2s">
-          <div style="height:6px;background:linear-gradient(90deg,#6EC6CA,#2DD4BF)"></div>
-          <div style="padding:16px;display:flex;flex-direction:column;height:100%">
-            <div style="display:inline-block;background:#F0FDFA;color:#6EC6CA;font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;margin-bottom:10px;width:fit-content">AFTER VISIT</div>
-            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px">
-              <div style="width:40px;height:40px;background:#F0FDFA;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                <svg width="22" height="22" viewBox="0 0 20 20" fill="#6EC6CA"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              </div>
-            </div>
-            <div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:6px;flex-grow:1">Post-Visit Follow-Up</div>
-            <div style="font-size:12px;color:var(--t2);line-height:1.4;margin-bottom:10px">Satisfaction survey, care instructions, and review requests.</div>
-            <div style="display:flex;align-items:center;justify-content:flex-end">
-              <div style="display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:#6EC6CA">Open <svg width="12" height="12" viewBox="0 0 20 20" fill="#6EC6CA"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Patient Portal -->
-        <div class="lcard" onclick="launchApp('portal')" style="background:var(--white);border-radius:16px;overflow:hidden;border:1px solid var(--borderlt);box-shadow:var(--sh1);cursor:pointer;transition:all .2s">
-          <div style="height:6px;background:linear-gradient(90deg,var(--green),#34D399)"></div>
-          <div style="padding:16px;display:flex;flex-direction:column;height:100%">
-            <div style="display:inline-block;background:var(--green-bg);color:var(--green);font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;margin-bottom:10px;width:fit-content">ANYTIME</div>
-            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px">
-              <div style="width:40px;height:40px;background:var(--green-bg);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                <svg width="22" height="22" viewBox="0 0 20 20" fill="var(--green)"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg>
-              </div>
-            </div>
-            <div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:6px;flex-grow:1">Patient Portal</div>
-            <div style="font-size:12px;color:var(--t2);line-height:1.4;margin-bottom:10px">Manage appointments, documents, billing, messages, and health records.</div>
-            <div style="display:flex;align-items:center;justify-content:flex-end">
-              <div style="display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:var(--green)">Open <svg width="12" height="12" viewBox="0 0 20 20" fill="var(--green)"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></div>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
 
@@ -261,14 +198,6 @@
     <button class="ni active" onclick="showView('dashboard',this)">
       <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/></svg>
       Dashboard
-    </button>
-    <button class="ni" onclick="showView('patients',this)">
-      <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/></svg>
-      Patients
-    </button>
-    <button class="ni" onclick="showView('schedule',this)">
-      <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg>
-      Schedule
     </button>
     <button class="ni" onclick="showView('messages',this)">
       <svg viewBox="0 0 20 20" fill="currentColor"><path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/><path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"/></svg>
@@ -328,9 +257,6 @@
       <input placeholder="Search patients…" id="search-inp" oninput="filterTable(this.value)">
     </div>
     <div class="tbb" onclick="showToast('Notifications panel')"><svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/></svg><div class="ndot"></div></div>
-    <div class="tbb" onclick="window.open('recall-patient-intake.html','_blank')">
-      <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
-    </div>
   </div>
 
   <!-- ───── DASHBOARD VIEW ───── -->
@@ -418,6 +344,7 @@
             <th>Pre-Reg</th>
             <th>Insurance E&B</th>
             <th>Deductible Due</th>
+            <th>Prior Auth</th>
             <th>Flags</th>
             <th>Actions</th>
           </tr>
@@ -777,34 +704,30 @@
       <div style="background:var(--white);border-radius:var(--r);border:1px solid var(--borderlt);box-shadow:var(--sh1);overflow:hidden">
         <div style="padding:14px 16px 12px;border-bottom:1px solid var(--borderlt);font-size:13px;font-weight:700;color:var(--t1)">Saved Reports</div>
         <div style="display:flex;flex-direction:column">
-          <div onclick="showToast('Intake Completion Report opened')" style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--borderlt);cursor:pointer;transition:background .15s" onmouseover="this.style.background='var(--surface)'" onmouseout="this.style.background=''">
+          <div data-report="intake" onclick="switchReport('intake')" style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--borderlt);cursor:pointer;transition:all .15s;border-left:3px solid transparent" onmouseover="if(!this.classList.contains('active-report'))this.style.background='var(--surface)'" onmouseout="if(!this.classList.contains('active-report'))this.style.background=''">
             <div style="width:32px;height:32px;border-radius:8px;background:var(--orange-lt);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px">📊</div>
             <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--t1)">Intake Completion Rate</div><div style="font-size:11.5px;color:var(--t3)">Daily · Last run: today</div></div>
-            <span style="font-size:11px;font-weight:600;background:var(--green-bg);color:var(--green);padding:2px 7px;border-radius:8px">Auto</span>
           </div>
-          <div onclick="showToast('Revenue by Channel report opened')" style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--borderlt);cursor:pointer;transition:background .15s" onmouseover="this.style.background='var(--surface)'" onmouseout="this.style.background=''">
+          <div data-report="revenue" onclick="switchReport('revenue')" style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--borderlt);cursor:pointer;transition:all .15s;border-left:3px solid transparent" onmouseover="if(!this.classList.contains('active-report'))this.style.background='var(--surface)'" onmouseout="if(!this.classList.contains('active-report'))this.style.background=''">
             <div style="width:32px;height:32px;border-radius:8px;background:var(--green-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px">💰</div>
             <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--t1)">Revenue by Channel</div><div style="font-size:11.5px;color:var(--t3)">Monthly · Last run: Mar 1</div></div>
-            <span style="font-size:11px;font-weight:600;background:var(--green-bg);color:var(--green);padding:2px 7px;border-radius:8px">Auto</span>
           </div>
-          <div onclick="showToast('No-Show Analysis report opened')" style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--borderlt);cursor:pointer;transition:background .15s" onmouseover="this.style.background='var(--surface)'" onmouseout="this.style.background=''">
+          <div data-report="noshow" onclick="switchReport('noshow')" style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--borderlt);cursor:pointer;transition:all .15s;border-left:3px solid transparent" onmouseover="if(!this.classList.contains('active-report'))this.style.background='var(--surface)'" onmouseout="if(!this.classList.contains('active-report'))this.style.background=''">
             <div style="width:32px;height:32px;border-radius:8px;background:var(--red-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px">📉</div>
             <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--t1)">No-Show Analysis</div><div style="font-size:11.5px;color:var(--t3)">Weekly · Last run: Mon</div></div>
-            <span style="font-size:11px;font-weight:600;background:var(--amber-bg);color:var(--amber);padding:2px 7px;border-radius:8px">Weekly</span>
           </div>
-          <div onclick="showToast('Insurance Denial report opened')" style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--borderlt);cursor:pointer;transition:background .15s" onmouseover="this.style.background='var(--surface)'" onmouseout="this.style.background=''">
+          <div data-report="insurance" onclick="switchReport('insurance')" style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--borderlt);cursor:pointer;transition:all .15s;border-left:3px solid transparent" onmouseover="if(!this.classList.contains('active-report'))this.style.background='var(--surface)'" onmouseout="if(!this.classList.contains('active-report'))this.style.background=''">
             <div style="width:32px;height:32px;border-radius:8px;background:var(--amber-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px">🏥</div>
             <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--t1)">Insurance Denial Rate</div><div style="font-size:11.5px;color:var(--t3)">Monthly · Last run: Mar 1</div></div>
-            <span style="font-size:11px;font-weight:600;background:var(--green-bg);color:var(--green);padding:2px 7px;border-radius:8px">Auto</span>
           </div>
-          <div onclick="showToast('Patient Satisfaction report opened')" style="display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;transition:background .15s" onmouseover="this.style.background='var(--surface)'" onmouseout="this.style.background=''">
+          <div data-report="satisfaction" onclick="switchReport('satisfaction')" style="display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;transition:all .15s;border-left:3px solid transparent" onmouseover="if(!this.classList.contains('active-report'))this.style.background='var(--surface)'" onmouseout="if(!this.classList.contains('active-report'))this.style.background=''">
             <div style="width:32px;height:32px;border-radius:8px;background:var(--blue-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px">⭐</div>
             <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--t1)">Patient Satisfaction</div><div style="font-size:11.5px;color:var(--t3)">On-demand · Last run: yesterday</div></div>
           </div>
         </div>
       </div>
 
-      <div style="background:var(--white);border-radius:var(--r);border:1px solid var(--borderlt);box-shadow:var(--sh1);overflow:hidden;grid-column:2/4">
+      <div id="report-intake" style="background:var(--white);border-radius:var(--r);border:1px solid var(--borderlt);box-shadow:var(--sh1);overflow:hidden;grid-column:2/4">
         <div style="padding:14px 16px 12px;border-bottom:1px solid var(--borderlt);display:flex;align-items:center;justify-content:space-between">
           <span style="font-size:13px;font-weight:700;color:var(--t1)">Intake Completion Rate - March 2026</span>
           <div style="display:flex;gap:8px">
@@ -839,6 +762,146 @@
           </div>
         </div>
       </div>
+
+      <div id="report-revenue" style="display:none;background:var(--white);border-radius:var(--r);border:1px solid var(--borderlt);box-shadow:var(--sh1);overflow:hidden;grid-column:2/4">
+        <div style="padding:14px 16px 12px;border-bottom:1px solid var(--borderlt);display:flex;align-items:center;justify-content:space-between">
+          <span style="font-size:13px;font-weight:700;color:var(--t1)">Revenue by Channel - March 2026</span>
+          <div style="display:flex;gap:8px">
+            <button onclick="showToast('Exported to Excel')" style="padding:5px 12px;border:1px solid var(--border);border-radius:6px;background:var(--white);color:var(--t2);font-size:12px;font-weight:500;cursor:pointer;font-family:'Roboto',sans-serif">Export XLS</button>
+            <button onclick="showToast('PDF downloaded')" style="padding:5px 12px;border:1px solid var(--border);border-radius:6px;background:var(--white);color:var(--t2);font-size:12px;font-weight:500;cursor:pointer;font-family:'Roboto',sans-serif">Export PDF</button>
+          </div>
+        </div>
+        <div style="padding:18px">
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px">
+            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--blue)">$184,820</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Total Revenue</div></div>
+            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--green)">$98,240</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Self-Pay Revenue</div></div>
+            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--orange)">$76,580</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Insurance Revenue</div></div>
+            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--amber)">42.5%</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Insurance Mix</div></div>
+          </div>
+          <div style="overflow-x:auto">
+            <table style="width:100%;border-collapse:collapse">
+              <thead><tr style="background:var(--surface)">
+                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Channel</th>
+                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Visits</th>
+                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Avg Charge</th>
+                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Total Revenue</th>
+                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">% of Total</th>
+                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Trend</th>
+              </tr></thead>
+              <tbody>
+                <tr style="border-bottom:1px solid var(--borderlt)"><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#08979D;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Self-Pay</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">542</td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">$181</td><td style="padding:10px 12px;font-size:13px;font-weight:600;color:var(--t1)">$98,240</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:53%;height:100%;background:var(--green);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--green)">53.2%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--green)">↑ 8.2%</td></tr>
+                <tr style="border-bottom:1px solid var(--borderlt)"><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#8474A1;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Insurance</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">428</td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">$179</td><td style="padding:10px 12px;font-size:13px;font-weight:600;color:var(--t1)">$76,580</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:42%;height:100%;background:var(--orange);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--orange)">41.5%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--amber)">↑ 4.1%</td></tr>
+                <tr><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#6EC6CA;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Other</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">115</td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">$165</td><td style="padding:10px 12px;font-size:13px;font-weight:600;color:var(--t1)">$10,000</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:5%;height:100%;background:var(--blue);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--blue)">5.4%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--red)">↓ 2.3%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="report-noshow" style="display:none;background:var(--white);border-radius:var(--r);border:1px solid var(--borderlt);box-shadow:var(--sh1);overflow:hidden;grid-column:2/4">
+        <div style="padding:14px 16px 12px;border-bottom:1px solid var(--borderlt);display:flex;align-items:center;justify-content:space-between">
+          <span style="font-size:13px;font-weight:700;color:var(--t1)">No-Show Analysis - Last 30 Days</span>
+          <div style="display:flex;gap:8px">
+            <button onclick="showToast('Exported to Excel')" style="padding:5px 12px;border:1px solid var(--border);border-radius:6px;background:var(--white);color:var(--t2);font-size:12px;font-weight:500;cursor:pointer;font-family:'Roboto',sans-serif">Export XLS</button>
+            <button onclick="showToast('PDF downloaded')" style="padding:5px 12px;border:1px solid var(--border);border-radius:6px;background:var(--white);color:var(--t2);font-size:12px;font-weight:500;cursor:pointer;font-family:'Roboto',sans-serif">Export PDF</button>
+          </div>
+        </div>
+        <div style="padding:18px">
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px">
+            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--red)">142</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Total No-Shows</div></div>
+            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--amber)">5.8%</div><div style="font-size:11px;color:var(--t3);margin-top:3px">No-Show Rate</div></div>
+            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--orange)">$24,380</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Est. Lost Revenue</div></div>
+            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--blue)">Wed</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Highest No-Show Day</div></div>
+          </div>
+          <div style="overflow-x:auto">
+            <table style="width:100%;border-collapse:collapse">
+              <thead><tr style="background:var(--surface)">
+                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Provider</th>
+                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Scheduled</th>
+                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">No-Shows</th>
+                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Rate</th>
+                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Top Reason</th>
+                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Trend</th>
+              </tr></thead>
+              <tbody>
+                <tr style="border-bottom:1px solid var(--borderlt)"><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#08979D;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Dr. Reyes</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">284</td><td style="padding:10px 12px;font-size:13px;color:var(--red)">12</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:42%;height:100%;background:var(--red);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--red)">4.2%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">Forgot appt</td><td style="padding:10px 12px;font-size:13px;color:var(--green)">↓ 1.2%</td></tr>
+                <tr style="border-bottom:1px solid var(--borderlt)"><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#8474A1;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Dr. Nguyen</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">261</td><td style="padding:10px 12px;font-size:13px;color:var(--red)">18</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:69%;height:100%;background:var(--red);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--red)">6.9%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">Weather</td><td style="padding:10px 12px;font-size:13px;color:var(--red)">↑ 2.1%</td></tr>
+                <tr><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#6EC6CA;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Dr. Patel</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">238</td><td style="padding:10px 12px;font-size:13px;color:var(--red)">8</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:34%;height:100%;background:var(--red);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--red)">3.4%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">Work conflict</td><td style="padding:10px 12px;font-size:13px;color:var(--green)">↓ 0.8%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="report-insurance" style="display:none;background:var(--white);border-radius:var(--r);border:1px solid var(--borderlt);box-shadow:var(--sh1);overflow:hidden;grid-column:2/4">
+        <div style="padding:14px 16px 12px;border-bottom:1px solid var(--borderlt);display:flex;align-items:center;justify-content:space-between">
+          <span style="font-size:13px;font-weight:700;color:var(--t1)">Insurance Denial Rate - Q1 2026</span>
+          <div style="display:flex;gap:8px">
+            <button onclick="showToast('Exported to Excel')" style="padding:5px 12px;border:1px solid var(--border);border-radius:6px;background:var(--white);color:var(--t2);font-size:12px;font-weight:500;cursor:pointer;font-family:'Roboto',sans-serif">Export XLS</button>
+            <button onclick="showToast('PDF downloaded')" style="padding:5px 12px;border:1px solid var(--border);border-radius:6px;background:var(--white);color:var(--t2);font-size:12px;font-weight:500;cursor:pointer;font-family:'Roboto',sans-serif">Export PDF</button>
+          </div>
+        </div>
+        <div style="padding:18px">
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px">
+            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--red)">3.2%</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Overall Denial Rate</div></div>
+            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--orange)">47</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Claims Denied</div></div>
+            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--amber)">$38,960</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Est. Denial Value</div></div>
+            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--green)">72%</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Appeals Success</div></div>
+          </div>
+          <div style="overflow-x:auto">
+            <table style="width:100%;border-collapse:collapse">
+              <thead><tr style="background:var(--surface)">
+                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Payer</th>
+                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Claims</th>
+                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Denied</th>
+                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Rate</th>
+                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Top Reason</th>
+                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Trend</th>
+              </tr></thead>
+              <tbody>
+                <tr style="border-bottom:1px solid var(--borderlt)"><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#08979D;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Aetna</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">284</td><td style="padding:10px 12px;font-size:13px;color:var(--red)">8</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:28%;height:100%;background:var(--amber);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--amber)">2.8%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">Non-covered proc</td><td style="padding:10px 12px;font-size:13px;color:var(--green)">↓ 0.9%</td></tr>
+                <tr style="border-bottom:1px solid var(--borderlt)"><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#8474A1;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Blue Cross</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">261</td><td style="padding:10px 12px;font-size:13px;color:var(--red)">12</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:46%;height:100%;background:var(--red);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--red)">4.6%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">Prior auth</td><td style="padding:10px 12px;font-size:13px;color:var(--red)">↑ 1.2%</td></tr>
+                <tr><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#6EC6CA;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">United Health</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">238</td><td style="padding:10px 12px;font-size:13px;color:var(--red)">15</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:63%;height:100%;background:var(--red);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--red)">6.3%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">Out-of-network</td><td style="padding:10px 12px;font-size:13px;color:var(--red)">↑ 2.1%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="report-satisfaction" style="display:none;background:var(--white);border-radius:var(--r);border:1px solid var(--borderlt);box-shadow:var(--sh1);overflow:hidden;grid-column:2/4">
+        <div style="padding:14px 16px 12px;border-bottom:1px solid var(--borderlt);display:flex;align-items:center;justify-content:space-between">
+          <span style="font-size:13px;font-weight:700;color:var(--t1)">Patient Satisfaction - March 2026</span>
+          <div style="display:flex;gap:8px">
+            <button onclick="showToast('Exported to Excel')" style="padding:5px 12px;border:1px solid var(--border);border-radius:6px;background:var(--white);color:var(--t2);font-size:12px;font-weight:500;cursor:pointer;font-family:'Roboto',sans-serif">Export XLS</button>
+            <button onclick="showToast('PDF downloaded')" style="padding:5px 12px;border:1px solid var(--border);border-radius:6px;background:var(--white);color:var(--t2);font-size:12px;font-weight:500;cursor:pointer;font-family:'Roboto',sans-serif">Export PDF</button>
+          </div>
+        </div>
+        <div style="padding:18px">
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px">
+            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--green)">4.6</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Avg Overall Rating (5.0)</div></div>
+            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--green)">94%</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Likely to Recommend</div></div>
+            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--orange)">847</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Responses</div></div>
+            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--blue)">68%</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Response Rate</div></div>
+          </div>
+          <div style="overflow-x:auto">
+            <table style="width:100%;border-collapse:collapse">
+              <thead><tr style="background:var(--surface)">
+                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Provider</th>
+                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Rating</th>
+                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Responses</th>
+                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Recommend %</th>
+                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Top Feedback</th>
+                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Trend</th>
+              </tr></thead>
+              <tbody>
+                <tr style="border-bottom:1px solid var(--borderlt)"><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#08979D;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Dr. Reyes</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)"><span style="font-weight:600;color:var(--green)">4.8 ⭐</span></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">324</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:96%;height:100%;background:var(--green);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--green)">96%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">Friendly staff</td><td style="padding:10px 12px;font-size:13px;color:var(--green)">↑ 2.1%</td></tr>
+                <tr style="border-bottom:1px solid var(--borderlt)"><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#8474A1;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Dr. Nguyen</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)"><span style="font-weight:600;color:var(--green)">4.4 ⭐</span></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">281</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:91%;height:100%;background:var(--green);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--green)">91%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">Quick service</td><td style="padding:10px 12px;font-size:13px;color:var(--green)">↑ 1.3%</td></tr>
+                <tr><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#6EC6CA;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Dr. Patel</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)"><span style="font-weight:600;color:var(--orange)">4.2 ⭐</span></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">242</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:88%;height:100%;background:var(--green);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--green)">88%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">Good listening</td><td style="padding:10px 12px;font-size:13px;color:var(--amber)">→ 0%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div style="background:var(--white);border-radius:var(--r);border:1px solid var(--borderlt);box-shadow:var(--sh1);overflow:hidden">
@@ -849,9 +912,8 @@
         <div style="display:flex;flex-direction:column;gap:5px"><label style="font-size:12px;font-weight:500;color:var(--t2)">Group By</label><select style="padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:'Roboto',sans-serif;color:var(--t1);background:var(--white);outline:none"><option>Provider</option><option>Location</option><option>Insurance</option><option>Visit Type</option><option>Day of Week</option></select></div>
         <div style="display:flex;flex-direction:column;gap:5px"><label style="font-size:12px;font-weight:500;color:var(--t2)">Export Format</label><select style="padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:'Roboto',sans-serif;color:var(--t1);background:var(--white);outline:none"><option>Excel (.xlsx)</option><option>PDF</option><option>CSV</option></select></div>
       </div>
-      <div style="padding:0 18px 18px;display:flex;gap:8px">
+      <div style="padding:0 18px 18px">
         <button onclick="showToast('Report generated')" style="padding:9px 20px;background:var(--brand);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter','Roboto',sans-serif">Generate Report</button>
-        <button onclick="showToast('Report scheduled - will run Monday 8 AM')" style="padding:9px 16px;background:var(--white);color:var(--t2);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;font-family:'Roboto',sans-serif">Schedule</button>
       </div>
     </div>
   </div>
@@ -1368,6 +1430,12 @@
         </div>
       </div>
       <div class="info-section">
+        <div class="sec-t">Prior Authorization</div>
+        <div id="sp-pa-content" style="display:flex;flex-direction:column;gap:7px">
+          <div style="padding:12px;background:var(--surface);border-radius:8px;font-size:13px;color:var(--t3);text-align:center">—</div>
+        </div>
+      </div>
+      <div class="info-section">
         <div class="sec-t">Pre-Registration Status</div>
         <div style="display:flex;flex-direction:column;gap:7px">
           <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--green-bg);border-radius:8px">
@@ -1421,6 +1489,12 @@
       <div class="info-section">
         <div class="sec-t">Secondary Insurance</div>
         <div style="padding:12px;background:var(--surface);border-radius:8px;font-size:13px;color:var(--t3);text-align:center">No secondary insurance on file</div>
+      </div>
+      <div class="info-section">
+        <div class="sec-t">Prior Authorization Status</div>
+        <div id="sp-pa-insurance" style="display:flex;flex-direction:column;gap:7px">
+          <div style="padding:12px;background:var(--surface);border-radius:8px;font-size:13px;color:var(--t3);text-align:center">—</div>
+        </div>
       </div>
     </div>
 
@@ -2472,35 +2546,40 @@
 ══════════════════════════════════ -->
 <div class="app-wrap" id="app-portal">
   <div class="p-sidebar">
-    <div class="p-logo-area">
-      <div style="display:flex;align-items:center;gap:8px">
-        <div style="width:28px;height:28px;background:var(--orange);border-radius:7px;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-        <div><div style="font-size:13px;font-weight:700;color:var(--t1)">Recall Health</div><div style="font-size:10px;color:var(--t3)">Patient Portal</div></div>
+    <div style="padding:24px 20px;border-bottom:1px solid var(--border);flex-shrink:0">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:24px">
+        <div style="width:28px;height:28px;background:var(--brand);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <div><div style="font-size:13px;font-weight:700;color:var(--t1)">Recall Health</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--surface);border-radius:12px;border:1px solid var(--borderlt)">
+        <div style="width:44px;height:44px;background:linear-gradient(135deg,var(--brand),var(--brand-dk));border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:700;flex-shrink:0">MT</div>
+        <div style="min-width:0">
+          <div style="font-size:13px;font-weight:700;color:var(--t1)">Marcus Thompson</div>
+          <div style="font-size:11px;color:var(--t3);margin-top:1px">Active</div>
+        </div>
       </div>
     </div>
-    <div class="p-user-card">
-      <div class="p-av">MT</div>
-      <div><div class="p-uname">Marcus Thompson</div><div class="p-umeta">MRN: UD-00421 · Active</div></div>
-    </div>
-    <div class="p-nav-sec">
-      <div class="p-nav-lbl">My Health</div>
-      <button class="pni active" onclick="showPV('home',this)"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/></svg>Home</button>
-      <button class="pni" onclick="showPV('appointments',this)"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg>Appointments</button>
-      <button class="pni" onclick="showPV('health',this)"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/></svg>Health Summary</button>
-      <button class="pni" onclick="showPV('documents',this)"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/></svg>Documents</button>
-    </div>
-    <div class="p-nav-sec">
-      <div class="p-nav-lbl">Account</div>
-      <button class="pni" onclick="showPV('billing',this)"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9z"/></svg>Billing &amp; Payments<span class="pni-badge">1</span></button>
-      <button class="pni" onclick="showPV('messages',this)"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/><path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"/></svg>Messages<span class="pni-badge">2</span></button>
-      <button class="pni" onclick="showPV('profile',this)"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg>Profile &amp; Settings</button>
-    </div>
-    <div class="p-foot">
-      <div style="padding:10px 12px;background:var(--orange-lt);border-radius:8px;border:1px solid rgba(232,101,45,.2)">
-        <div style="font-size:12px;font-weight:600;color:var(--orange);margin-bottom:3px">✦ AI Health Assistant</div>
-        <div style="font-size:11.5px;color:var(--t2);line-height:1.4">Ask anything about your care plan, medications, or upcoming visit.</div>
-        <button style="margin-top:8px;width:100%;padding:7px;background:var(--brand);color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Inter','Roboto',sans-serif" onclick="showToast('AI Health Assistant opened')">Chat with AI</button>
+
+    <div style="flex:1;overflow-y:auto;padding:12px 8px">
+      <div style="padding:12px 8px;margin-bottom:12px">
+        <div style="font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;padding:0 4px">My Health</div>
+        <button class="pni active" onclick="showPV('home',this)" style="display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border:none;background:transparent;color:var(--t1);font-size:14px;font-weight:500;cursor:pointer;border-radius:8px;transition:all .15s;font-family:'Inter','Roboto',sans-serif"><svg viewBox="0 0 20 20" fill="currentColor" style="width:18px;height:18px;flex-shrink:0"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/></svg><span>Home</span></button>
+        <button class="pni" onclick="showPV('appointments',this)" style="display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border:none;background:transparent;color:var(--t2);font-size:14px;font-weight:500;cursor:pointer;border-radius:8px;transition:all .15s;font-family:'Inter','Roboto',sans-serif"><svg viewBox="0 0 20 20" fill="currentColor" style="width:18px;height:18px;flex-shrink:0"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg><span>Appointments</span></button>
+        <button class="pni" onclick="showPV('health',this)" style="display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border:none;background:transparent;color:var(--t2);font-size:14px;font-weight:500;cursor:pointer;border-radius:8px;transition:all .15s;font-family:'Inter','Roboto',sans-serif"><svg viewBox="0 0 20 20" fill="currentColor" style="width:18px;height:18px;flex-shrink:0"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/></svg><span>Health Summary</span></button>
+        <button class="pni" onclick="showPV('documents',this)" style="display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border:none;background:transparent;color:var(--t2);font-size:14px;font-weight:500;cursor:pointer;border-radius:8px;transition:all .15s;font-family:'Inter','Roboto',sans-serif"><svg viewBox="0 0 20 20" fill="currentColor" style="width:18px;height:18px;flex-shrink:0"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/></svg><span>Documents</span></button>
+        <button class="pni" onclick="showPV('prescriptions',this)" style="display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border:none;background:transparent;color:var(--t2);font-size:14px;font-weight:500;cursor:pointer;border-radius:8px;transition:all .15s;font-family:'Inter','Roboto',sans-serif;position:relative"><svg viewBox="0 0 20 20" fill="currentColor" style="width:18px;height:18px;flex-shrink:0"><path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/><path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z"/></svg><span>Prescriptions</span><span style="margin-left:auto;font-size:11px;font-weight:700;background:var(--amber);color:#fff;padding:2px 6px;border-radius:6px;min-width:20px;text-align:center">2</span></button>
       </div>
+
+      <div style="padding:12px 8px">
+        <div style="font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;padding:0 4px">Account</div>
+        <button class="pni" onclick="showPV('billing',this)" style="display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border:none;background:transparent;color:var(--t2);font-size:14px;font-weight:500;cursor:pointer;border-radius:8px;transition:all .15s;font-family:'Inter','Roboto',sans-serif;position:relative"><svg viewBox="0 0 20 20" fill="currentColor" style="width:18px;height:18px;flex-shrink:0"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9z"/></svg><span>Billing</span><span style="margin-left:auto;font-size:11px;font-weight:700;background:var(--red);color:#fff;padding:2px 6px;border-radius:6px;min-width:20px;text-align:center">1</span></button>
+        <button class="pni" onclick="showPV('messages',this)" style="display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border:none;background:transparent;color:var(--t2);font-size:14px;font-weight:500;cursor:pointer;border-radius:8px;transition:all .15s;font-family:'Inter','Roboto',sans-serif;position:relative"><svg viewBox="0 0 20 20" fill="currentColor" style="width:18px;height:18px;flex-shrink:0"><path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/><path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"/></svg><span>Messages</span><span style="margin-left:auto;font-size:11px;font-weight:700;background:var(--red);color:#fff;padding:2px 6px;border-radius:6px;min-width:20px;text-align:center">2</span></button>
+        <button class="pni" onclick="showPV('profile',this)" style="display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border:none;background:transparent;color:var(--t2);font-size:14px;font-weight:500;cursor:pointer;border-radius:8px;transition:all .15s;font-family:'Inter','Roboto',sans-serif"><svg viewBox="0 0 20 20" fill="currentColor" style="width:18px;height:18px;flex-shrink:0"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg><span>Settings</span></button>
+      </div>
+    </div>
+
+    <div style="padding:14px;border-top:1px solid var(--border);flex-shrink:0;margin:auto 0 0">
+      <button style="width:100%;padding:12px 14px;background:var(--brand-lt);color:var(--brand);border:1px solid var(--brand-border);border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter','Roboto',sans-serif;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .15s" onclick="showToast('AI Health Assistant opened')"><svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.343a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM16.364 15.364a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM11 15a1 1 0 10-2 0v1a1 1 0 102 0v-1zM5.343 15.657a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1-1V8a1 1 0 112 0v1a1 1 0 01-1 1zM5.707 5.343a1 1 0 00-1.414 1.414l.707.707a1 1 0 001.414-1.414l-.707-.707z"/></svg>AI Assistant</button>
     </div>
   </div>
 
@@ -2508,19 +2587,42 @@
 
     <!-- HOME -->
     <div class="p-view active" id="pv-home">
-      <div class="portal-banner">
-        <div style="position:relative">
-          <div class="pb-title">Good morning, Marcus 👋</div>
-          <div class="pb-sub">You have an appointment today at 10:15 AM with Dr. Reyes.<br>Your pre-registration is complete - just show up!</div>
-          <div class="pb-badge"><svg width="13" height="13" viewBox="0 0 20 20" fill="#34D399"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>Pre-registration complete ✓</div>
+      <div style="background:linear-gradient(135deg,var(--brand),var(--brand-dk));border-radius:14px;padding:24px;color:#fff;margin-bottom:28px;box-shadow:0 4px 16px rgba(8,151,157,.15)">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between">
+          <div>
+            <div style="font-size:20px;font-weight:700;margin-bottom:8px">Good morning, Marcus</div>
+            <div style="font-size:14px;opacity:.95;line-height:1.5;margin-bottom:12px">You have an appointment today at<br><span style="font-weight:600">10:15 AM · Dr. Isabel Reyes</span></div>
+            <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.2);padding:6px 10px;border-radius:8px;font-size:12px;font-weight:600">✓ Pre-registration complete</div>
+          </div>
+          <button onclick="launchIntakeScreen(1)" style="padding:12px 20px;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter','Roboto',sans-serif;transition:all .15s;white-space:nowrap">Start Check-In</button>
         </div>
-        <button class="pb-btn" onclick="launchIntakeScreen(1)"><svg width="16" height="16" viewBox="0 0 20 20" fill="white"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>Start Check-In</button>
       </div>
-      <div class="qa-grid">
-        <div class="qa" onclick="showPV('appointments',document.querySelectorAll('.pni')[1])"><div class="qa-ic">📅</div><div class="qa-l">Book Appointment</div><div class="qa-s">Schedule a visit</div></div>
-        <div class="qa" onclick="showPV('messages',document.querySelectorAll('.pni')[6])"><div class="qa-ic">💬</div><div class="qa-l">Message Practice</div><div class="qa-s">Ask your care team</div></div>
-        <div class="qa" onclick="showPV('billing',document.querySelectorAll('.pni')[5])"><div class="qa-ic">💳</div><div class="qa-l">Pay Balance</div><div class="qa-s">$340 outstanding</div></div>
-        <div class="qa" onclick="showPV('documents',document.querySelectorAll('.pni')[3])"><div class="qa-ic">📋</div><div class="qa-l">My Documents</div><div class="qa-s">Consents & records</div></div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px">
+        <div onclick="showPV('appointments',document.querySelectorAll('.pni')[1])" style="background:var(--white);border:1px solid var(--borderlt);border-radius:12px;padding:16px;cursor:pointer;transition:all .15s;text-align:center" onmouseover="this.style.borderColor='var(--brand)';this.style.boxShadow='0 2px 8px rgba(8,151,157,.1)'" onmouseout="this.style.borderColor='var(--borderlt)';this.style.boxShadow=''">
+          <div style="font-size:24px;margin-bottom:8px">📅</div>
+          <div style="font-size:13px;font-weight:600;color:var(--t1);margin-bottom:4px">Appointments</div>
+          <div style="font-size:11px;color:var(--t3)">Schedule a visit</div>
+        </div>
+        <div onclick="showPV('messages',document.querySelectorAll('.pni')[6])" style="background:var(--white);border:1px solid var(--borderlt);border-radius:12px;padding:16px;cursor:pointer;transition:all .15s;text-align:center" onmouseover="this.style.borderColor='var(--brand)';this.style.boxShadow='0 2px 8px rgba(8,151,157,.1)'" onmouseout="this.style.borderColor='var(--borderlt)';this.style.boxShadow=''">
+          <div style="font-size:24px;margin-bottom:8px">💬</div>
+          <div style="font-size:13px;font-weight:600;color:var(--t1);margin-bottom:4px">Messages</div>
+          <div style="font-size:11px;color:var(--t3)">Ask your care team</div>
+        </div>
+        <div onclick="showPV('billing',document.querySelectorAll('.pni')[5])" style="background:var(--white);border:1px solid var(--borderlt);border-radius:12px;padding:16px;cursor:pointer;transition:all .15s;text-align:center" onmouseover="this.style.borderColor='var(--brand)';this.style.boxShadow='0 2px 8px rgba(8,151,157,.1)'" onmouseout="this.style.borderColor='var(--borderlt)';this.style.boxShadow=''">
+          <div style="font-size:24px;margin-bottom:8px">💳</div>
+          <div style="font-size:13px;font-weight:600;color:var(--t1);margin-bottom:4px">Billing</div>
+          <div style="font-size:11px;color:var(--t3)">$340 outstanding</div>
+        </div>
+        <div onclick="showPV('documents',document.querySelectorAll('.pni')[3])" style="background:var(--white);border:1px solid var(--borderlt);border-radius:12px;padding:16px;cursor:pointer;transition:all .15s;text-align:center" onmouseover="this.style.borderColor='var(--brand)';this.style.boxShadow='0 2px 8px rgba(8,151,157,.1)'" onmouseout="this.style.borderColor='var(--borderlt)';this.style.boxShadow=''">
+          <div style="font-size:24px;margin-bottom:8px">📋</div>
+          <div style="font-size:13px;font-weight:600;color:var(--t1);margin-bottom:4px">Documents</div>
+          <div style="font-size:11px;color:var(--t3)">Consents & records</div>
+        </div>
+        <div onclick="showPV('prescriptions',document.querySelectorAll('.pni')[4])" style="background:var(--white);border:1px solid var(--borderlt);border-radius:12px;padding:16px;cursor:pointer;transition:all .15s;text-align:center" onmouseover="this.style.borderColor='var(--brand)';this.style.boxShadow='0 2px 8px rgba(8,151,157,.1)'" onmouseout="this.style.borderColor='var(--borderlt)';this.style.boxShadow=''">
+          <div style="font-size:24px;margin-bottom:8px">💊</div>
+          <div style="font-size:13px;font-weight:600;color:var(--t1);margin-bottom:4px">Prescriptions</div>
+          <div style="font-size:11px;color:var(--t3)">Request renewals</div>
+        </div>
       </div>
       <div class="two-col">
         <div class="pc">
@@ -2596,6 +2698,43 @@
       <div><div class="pg-title">Documents & Records</div><div class="pg-sub">Your signed forms, visit summaries, and care documents</div></div>
       <div class="pc"><div class="pc-head"><span class="pc-title">Consents & Legal</span></div><div style="padding:0 18px"><div class="doc-row"><div class="doc-ic" style="background:var(--green-bg)">🔒</div><div><div class="doc-name">HIPAA Authorization</div><div class="doc-meta">Signed 01/08/2026 · Renewal due Jan 2027</div></div><span style="font-size:11.5px;font-weight:600;background:var(--green-bg);color:var(--green);padding:3px 9px;border-radius:10px;margin-right:8px">Valid</span><button class="sdl" onclick="showToast('Document downloaded')">⬇ Download</button></div><div class="doc-row"><div class="doc-ic" style="background:var(--amber-bg)">📋</div><div><div class="doc-name">Financial Policy Agreement</div><div class="doc-meta">Signed 01/08/2026</div></div><span style="font-size:11.5px;font-weight:600;background:var(--amber-bg);color:var(--amber);padding:3px 9px;border-radius:10px;margin-right:8px">Renewal Due</span><button class="sdl" onclick="showToast('Re-sign flow opened')">✍ Re-sign</button></div><div class="doc-row"><div class="doc-ic" style="background:var(--blue-bg)">🏥</div><div><div class="doc-name">Treatment Authorization</div><div class="doc-meta">Signed 01/08/2026</div></div><span style="font-size:11.5px;font-weight:600;background:var(--green-bg);color:var(--green);padding:3px 9px;border-radius:10px;margin-right:8px">Valid</span><button class="sdl" onclick="showToast('Document downloaded')">⬇ Download</button></div></div></div>
       <div class="pc"><div class="pc-head"><span class="pc-title">Visit Summaries</span></div><div style="padding:0 18px"><div class="doc-row"><div class="doc-ic" style="background:var(--orange-lt)">🩺</div><div><div class="doc-name">Acne Follow-up - Feb 14, 2026</div><div class="doc-meta">Dr. Isabel Reyes</div></div><button class="sdl" onclick="showToast('Summary opened')">⬇ View</button></div><div class="doc-row"><div class="doc-ic" style="background:var(--purple-bg)">📝</div><div><div class="doc-name">New Self Check-In - Jan 08, 2026</div><div class="doc-meta">Dr. Isabel Reyes</div></div><button class="sdl" onclick="showToast('Summary opened')">⬇ View</button></div></div></div>
+    </div>
+
+    <!-- PRESCRIPTIONS -->
+    <div class="p-view" id="pv-prescriptions">
+      <div><div class="pg-title">Prescriptions</div><div class="pg-sub">Request renewal for active prescriptions</div></div>
+
+      <div class="pc">
+        <div class="pc-head"><span class="pc-title">Active Prescriptions</span></div>
+        <div style="padding:0 18px">
+          <div class="doc-row">
+            <div class="doc-ic" style="background:var(--blue-bg)">💊</div>
+            <div><div class="doc-name">Tretinoin 0.05% Cream</div><div class="doc-meta">Dr. Isabel Reyes · Last refill: 01/20/2026</div></div>
+            <button class="sdl" onclick="requestRxRenewal('Tretinoin 0.05% Cream')" style="background:var(--brand);color:#fff;padding:6px 14px;border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Roboto',sans-serif">+ Request</button>
+          </div>
+          <div class="doc-row">
+            <div class="doc-ic" style="background:var(--green-bg)">💊</div>
+            <div><div class="doc-name">Clindamycin Gel 1%</div><div class="doc-meta">Dr. Isabel Reyes · Last refill: 02/10/2026</div></div>
+            <button class="sdl" onclick="requestRxRenewal('Clindamycin Gel 1%')" style="background:var(--brand);color:#fff;padding:6px 14px;border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Roboto',sans-serif">+ Request</button>
+          </div>
+          <div class="doc-row">
+            <div class="doc-ic" style="background:var(--amber-bg)">💊</div>
+            <div><div class="doc-name">Doxycycline 100mg</div><div class="doc-meta">Dr. Isabel Reyes · Expires: 04/15/2026</div></div>
+            <button class="sdl" onclick="requestRxRenewal('Doxycycline 100mg')" style="background:var(--brand);color:#fff;padding:6px 14px;border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Roboto',sans-serif">+ Request</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pc-head"><span class="pc-title">Renewal Requests</span></div>
+        <div style="padding:0 18px">
+          <div class="doc-row">
+            <div class="doc-ic" style="background:var(--green-bg)">✓</div>
+            <div><div class="doc-name">Adapalene 0.1%</div><div class="doc-meta">Requested 3 days ago · Sent to pharmacy</div></div>
+            <span style="font-size:11.5px;font-weight:600;background:var(--green-bg);color:var(--green);padding:3px 9px;border-radius:10px">Ready for pickup</span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- BILLING -->

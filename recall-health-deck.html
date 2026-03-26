@@ -47,22 +47,30 @@
           <div class="prob-ic">📋</div>
           <div class="prob-title">Paper-based intake</div>
           <div class="prob-desc">Staff manually re-key patient data, introducing errors and burning 10+ minutes per patient at check-in.</div>
-          <div class="prob-stat">10 min</div>
-          <div style="font-size:12px;color:var(--t3);margin-top:2px">wasted per patient</div>
         </div>
         <div class="prob-card a">
           <div class="prob-ic">🧾</div>
           <div class="prob-title">Missed collections</div>
           <div class="prob-desc">Co-pays and balances not collected at time of service are 3× harder to recover - and most practices never do.</div>
-          <div class="prob-stat">30%</div>
-          <div style="font-size:12px;color:var(--t3);margin-top:2px">of balances go uncollected</div>
         </div>
         <div class="prob-card b">
           <div class="prob-ic">📅</div>
           <div class="prob-title">Empty slots</div>
           <div class="prob-desc">Last-minute cancellations leave revenue on the table. No system exists to automatically backfill from a waitlist.</div>
-          <div class="prob-stat">$800+</div>
-          <div style="font-size:12px;color:var(--t3);margin-top:2px">lost per empty slot</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:32px;align-items:flex-start">
+        <div style="display:flex;flex-direction:column;align-items:center;text-align:center">
+          <div style="font-size:32px;font-weight:800;color:#E84C3D">10 min</div>
+          <div style="font-size:12px;color:var(--t3);margin-top:6px">wasted per patient</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;text-align:center">
+          <div style="font-size:32px;font-weight:800;color:#FF8555">30%</div>
+          <div style="font-size:12px;color:var(--t3);margin-top:6px">of balances go uncollected</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;text-align:center">
+          <div style="font-size:32px;font-weight:800;color:var(--blue)">$800+</div>
+          <div style="font-size:12px;color:var(--t3);margin-top:6px">lost per empty slot</div>
         </div>
       </div>
     </div>
@@ -80,6 +88,11 @@
         <div class="jstep">
           <div class="jstep-ic" style="background:rgba(139,92,246,.15)">📱</div>
           <div class="jstep-label" style="color:var(--t2)">Self-<br>Registration</div>
+        </div>
+        <div class="jarrow">→</div>
+        <div class="jstep">
+          <div class="jstep-ic" style="background:rgba(14,165,233,.15)">📅</div>
+          <div class="jstep-label" style="color:var(--t2)">Self<br>Scheduling</div>
         </div>
         <div class="jarrow">→</div>
         <div class="jstep">
@@ -117,7 +130,7 @@
     <div class="s-inner split">
       <div class="left">
         <div class="s-tag" style="color:#6366F1">Staff Dashboard</div>
-        <div class="s-h2">Everything your front desk needs. In one view.</div>
+        <div class="s-h2">Everything your front<br>desk needs. In one view.</div>
         <div class="feat-list">
           <div class="feat">
             <div class="feat-ic" style="background:#EEF2FF">📋</div>
@@ -126,6 +139,10 @@
           <div class="feat">
             <div class="feat-ic" style="background:var(--green-bg)">🛡️</div>
             <div><div class="feat-title">Insurance E&B</div><div class="feat-desc">Live eligibility with deductible progress and co-pay</div></div>
+          </div>
+          <div class="feat">
+            <div class="feat-ic" style="background:#FEF3C7">📋</div>
+            <div><div class="feat-title">Prior Authorization</div><div class="feat-desc">Track authorization status for procedures - no surprises at visit time</div></div>
           </div>
           <div class="feat">
             <div class="feat-ic" style="background:var(--brand-lt)">⚡</div>
@@ -248,9 +265,9 @@
           <div class="pg-desc">Conditions, medications, allergies on file</div>
         </div>
         <div class="pg-card">
-          <div class="pg-ic">🔔</div>
-          <div class="pg-title">Reminders</div>
-          <div class="pg-desc">AI-personalized care nudges and follow-ups</div>
+          <div class="pg-ic">💊</div>
+          <div class="pg-title">Prescriptions</div>
+          <div class="pg-desc">Request renewals for active medications</div>
         </div>
         <div class="pg-card">
           <div class="pg-ic">👤</div>
