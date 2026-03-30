@@ -58,7 +58,7 @@
     <!-- HEADER WITH LOGO -->
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:28px;padding-bottom:14px;">
       <div>
-        <div style="font-size:16px;font-weight:700;color:var(--t1)">Recall Health - Patient Intake Journey</div>
+        <div style="font-size:16px;font-weight:700;color:var(--t1)">Recall Health - Self Check-in</div>
       </div>
     </div>
 
@@ -220,18 +220,10 @@
       <svg viewBox="0 0 20 20" fill="currentColor"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
       Analytics
     </button>
-    <button class="ni" onclick="showView('reports',this)">
-      <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/></svg>
-      Reports
-    </button>
   </div>
 
   <div class="sb-section">
     <div class="sb-lbl">Admin</div>
-    <button class="ni" onclick="showView('forms',this)">
-      <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg>
-      Form Builder
-    </button>
     <button class="ni" onclick="showView('settings',this)">
       <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/></svg>
       Settings
@@ -360,7 +352,7 @@
     <div class="krow">
       <div class="kc"><div class="kl">Intake Completion</div><div class="kv">76<small>%</small></div><div class="kf"><span class="kt-up">↑ 8%</span> vs last month</div></div>
       <div class="kc"><div class="kl">Avg. Intake Time</div><div class="kv">4.2<small>min</small></div><div class="kf"><span class="kt-up">↓ 1.8min</span> faster</div></div>
-      <div class="kc"><div class="kl">Time-of-Service</div><div class="kv">$52K</div><div class="kf"><span class="kt-up">↑ 23%</span> this month</div></div>
+      <div class="kc"><div class="kl">Revenue Collected</div><div class="kv">$52K</div><div class="kf"><span class="kt-up">↑ 23%</span> this month</div></div>
       <div class="kc"><div class="kl">No-Show Rate</div><div class="kv">6.2<small>%</small></div><div class="kf"><span class="kt-up">↓ 2.1%</span> reduction</div></div>
       <div class="kc"><div class="kl">E&B Accuracy</div><div class="kv">98<small>%</small></div><div class="kf"><span class="kt-up">↑ 3%</span> claim success</div></div>
     </div>
@@ -370,8 +362,8 @@
         <div class="an-title">Weekly Intake Completions <span>Last 7 days</span></div>
         <div class="ch-wrap" id="bar-chart"></div>
         <div style="display:flex;gap:14px;margin-top:18px">
-          <div style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--t2)"><span style="width:10px;height:10px;border-radius:2px;background:var(--orange);display:inline-block"></span>Completed</div>
           <div style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--t2)"><span style="width:10px;height:10px;border-radius:2px;background:var(--borderlt);border:1px solid var(--border);display:inline-block"></span>Scheduled</div>
+          <div style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--t2)"><span style="width:10px;height:10px;border-radius:2px;background:var(--brand);display:inline-block"></span>Completed</div>
         </div>
       </div>
       <div class="an-card">
@@ -379,7 +371,7 @@
         <div class="donut">
           <svg width="110" height="110" viewBox="0 0 110 110">
             <circle cx="55" cy="55" r="40" fill="none" stroke="#F3F4F6" stroke-width="14"/>
-            <circle cx="55" cy="55" r="40" fill="none" stroke="#F97316" stroke-width="14" stroke-dasharray="189 252" stroke-dashoffset="0"/>
+            <circle cx="55" cy="55" r="40" fill="none" stroke="#8474A1" stroke-width="14" stroke-dasharray="189 252" stroke-dashoffset="0"/>
             <circle cx="55" cy="55" r="40" fill="none" stroke="#F59E0B" stroke-width="14" stroke-dasharray="50 252" stroke-dashoffset="-189"/>
             <circle cx="55" cy="55" r="40" fill="none" stroke="#EF4444" stroke-width="14" stroke-dasharray="31 252" stroke-dashoffset="-239"/>
           </svg>
@@ -398,7 +390,7 @@
         <div class="an-title">Revenue by Channel <span>March 2026</span></div>
         <div class="metric-list">
           <div class="ml-item"><span class="ml-label">Pre-Visit Online</span><div class="ml-bar"><div class="ml-fill" style="width:72%"></div></div><span class="ml-val">$38K</span></div>
-          <div class="ml-item"><span class="ml-label">Time-of-Service</span><div class="ml-bar"><div class="ml-fill" style="width:58%;background:var(--blue)"></div></div><span class="ml-val">$29K</span></div>
+          <div class="ml-item"><span class="ml-label">Time of Service</span><div class="ml-bar"><div class="ml-fill" style="width:58%;background:var(--blue)"></div></div><span class="ml-val">$29K</span></div>
           <div class="ml-item"><span class="ml-label">Post-Visit SMS</span><div class="ml-bar"><div class="ml-fill" style="width:34%;background:var(--green)"></div></div><span class="ml-val">$18K</span></div>
           <div class="ml-item"><span class="ml-label">Payment Plans</span><div class="ml-bar"><div class="ml-fill" style="width:18%;background:var(--purple)"></div></div><span class="ml-val">$9K</span></div>
           <div class="ml-item"><span class="ml-label">Card on File</span><div class="ml-bar"><div class="ml-fill" style="width:25%;background:var(--amber)"></div></div><span class="ml-val">$12K</span></div>
@@ -537,7 +529,13 @@
     <div style="background:var(--white);border:1px solid var(--border);border-radius:12px;padding:0;overflow:hidden;box-shadow:var(--sh1);flex:1;display:flex;flex-direction:column">
       <div style="padding:18px 22px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0">
         <div style="font-size:15px;font-weight:700;color:var(--t1);margin-bottom:3px">Outreach Pipeline</div>
-        <div style="font-size:12px;color:var(--t3)">Track appointment confirmations across all touchpoints</div>
+        <div style="font-size:12px;color:var(--t3);margin-bottom:8px">Track appointment confirmations across all touchpoints</div>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:11px;color:var(--t3)">
+          <div style="display:flex;align-items:center;gap:4px"><span style="background:#ECFDF5;color:#10B981;padding:2px 6px;border-radius:3px;font-size:11px;font-weight:600">✓</span>Sent</div>
+          <div style="display:flex;align-items:center;gap:4px"><span style="background:#FFFBEB;color:#D97706;padding:2px 6px;border-radius:3px;font-size:11px;font-weight:600">⏳</span>Pending</div>
+          <div style="display:flex;align-items:center;gap:4px"><span style="background:#FEF2F2;color:#DC2626;padding:2px 6px;border-radius:3px;font-size:11px;font-weight:600">✗</span>Failed</div>
+          <div style="display:flex;align-items:center;gap:4px"><span style="background:#F3F4F6;color:var(--t3);padding:2px 6px;border-radius:3px;font-size:11px;font-weight:600">—</span>Not Sent</div>
+        </div>
       </div>
       <div style="overflow-x:auto;flex:1">
         <table style="width:100%;border-collapse:collapse;font-size:12.5px">
@@ -686,237 +684,6 @@
     </div>
   </div>
 
-  <div class="view" id="view-reports">
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
-      <div>
-        <div style="font-size:18px;font-weight:700;color:var(--t1)">Custom Reports</div>
-        <div style="font-size:13px;color:var(--t2);margin-top:3px">Build, schedule and export reports across all practice data</div>
-      </div>
-      <div style="display:flex;gap:8px">
-        <button onclick="showToast('New report builder opened')" style="padding:9px 16px;background:var(--brand);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter','Roboto',sans-serif;display:flex;align-items:center;gap:6px">
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="white"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"/></svg>
-          New Report
-        </button>
-      </div>
-    </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;flex-shrink:0">
-      <div style="background:var(--white);border-radius:var(--r);border:1px solid var(--borderlt);box-shadow:var(--sh1);overflow:hidden">
-        <div style="padding:14px 16px 12px;border-bottom:1px solid var(--borderlt);font-size:13px;font-weight:700;color:var(--t1)">Saved Reports</div>
-        <div style="display:flex;flex-direction:column">
-          <div data-report="intake" onclick="switchReport('intake')" style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--borderlt);cursor:pointer;transition:all .15s;border-left:3px solid transparent" onmouseover="if(!this.classList.contains('active-report'))this.style.background='var(--surface)'" onmouseout="if(!this.classList.contains('active-report'))this.style.background=''">
-            <div style="width:32px;height:32px;border-radius:8px;background:var(--orange-lt);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px">📊</div>
-            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--t1)">Intake Completion Rate</div><div style="font-size:11.5px;color:var(--t3)">Daily · Last run: today</div></div>
-          </div>
-          <div data-report="revenue" onclick="switchReport('revenue')" style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--borderlt);cursor:pointer;transition:all .15s;border-left:3px solid transparent" onmouseover="if(!this.classList.contains('active-report'))this.style.background='var(--surface)'" onmouseout="if(!this.classList.contains('active-report'))this.style.background=''">
-            <div style="width:32px;height:32px;border-radius:8px;background:var(--green-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px">💰</div>
-            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--t1)">Revenue by Channel</div><div style="font-size:11.5px;color:var(--t3)">Monthly · Last run: Mar 1</div></div>
-          </div>
-          <div data-report="noshow" onclick="switchReport('noshow')" style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--borderlt);cursor:pointer;transition:all .15s;border-left:3px solid transparent" onmouseover="if(!this.classList.contains('active-report'))this.style.background='var(--surface)'" onmouseout="if(!this.classList.contains('active-report'))this.style.background=''">
-            <div style="width:32px;height:32px;border-radius:8px;background:var(--red-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px">📉</div>
-            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--t1)">No-Show Analysis</div><div style="font-size:11.5px;color:var(--t3)">Weekly · Last run: Mon</div></div>
-          </div>
-          <div data-report="insurance" onclick="switchReport('insurance')" style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--borderlt);cursor:pointer;transition:all .15s;border-left:3px solid transparent" onmouseover="if(!this.classList.contains('active-report'))this.style.background='var(--surface)'" onmouseout="if(!this.classList.contains('active-report'))this.style.background=''">
-            <div style="width:32px;height:32px;border-radius:8px;background:var(--amber-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px">🏥</div>
-            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--t1)">Insurance Denial Rate</div><div style="font-size:11.5px;color:var(--t3)">Monthly · Last run: Mar 1</div></div>
-          </div>
-          <div data-report="satisfaction" onclick="switchReport('satisfaction')" style="display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;transition:all .15s;border-left:3px solid transparent" onmouseover="if(!this.classList.contains('active-report'))this.style.background='var(--surface)'" onmouseout="if(!this.classList.contains('active-report'))this.style.background=''">
-            <div style="width:32px;height:32px;border-radius:8px;background:var(--blue-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px">⭐</div>
-            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--t1)">Patient Satisfaction</div><div style="font-size:11.5px;color:var(--t3)">On-demand · Last run: yesterday</div></div>
-          </div>
-        </div>
-      </div>
-
-      <div id="report-intake" style="background:var(--white);border-radius:var(--r);border:1px solid var(--borderlt);box-shadow:var(--sh1);overflow:hidden;grid-column:2/4">
-        <div style="padding:14px 16px 12px;border-bottom:1px solid var(--borderlt);display:flex;align-items:center;justify-content:space-between">
-          <span style="font-size:13px;font-weight:700;color:var(--t1)">Intake Completion Rate - March 2026</span>
-          <div style="display:flex;gap:8px">
-            <button onclick="showToast('Exported to Excel')" style="padding:5px 12px;border:1px solid var(--border);border-radius:6px;background:var(--white);color:var(--t2);font-size:12px;font-weight:500;cursor:pointer;font-family:'Roboto',sans-serif">Export XLS</button>
-            <button onclick="showToast('PDF downloaded')" style="padding:5px 12px;border:1px solid var(--border);border-radius:6px;background:var(--white);color:var(--t2);font-size:12px;font-weight:500;cursor:pointer;font-family:'Roboto',sans-serif">Export PDF</button>
-          </div>
-        </div>
-        <div style="padding:18px">
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px">
-            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--orange)">76%</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Pre-Registration Rate</div></div>
-            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--green)">4.2<span style="font-size:13px">min</span></div><div style="font-size:11px;color:var(--t3);margin-top:3px">Avg Intake Time</div></div>
-            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--blue)">98%</div><div style="font-size:11px;color:var(--t3);margin-top:3px">E&amp;B Accuracy</div></div>
-            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--amber)">6.2%</div><div style="font-size:11px;color:var(--t3);margin-top:3px">No-Show Rate</div></div>
-          </div>
-          <div style="overflow-x:auto">
-            <table style="width:100%;border-collapse:collapse">
-              <thead><tr style="background:var(--surface)">
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Provider</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Scheduled</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Pre-Reg</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Rate</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Avg Time</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Revenue</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">No-Shows</th>
-              </tr></thead>
-              <tbody>
-                <tr style="border-bottom:1px solid var(--borderlt)"><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#08979D;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Dr. Reyes</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">284</td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">224</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:79%;height:100%;background:var(--green);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--green)">79%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">3.8 min</td><td style="padding:10px 12px;font-size:13px;font-weight:600;color:var(--t1)">$21,840</td><td style="padding:10px 12px;font-size:13px;color:var(--red)">4.2%</td></tr>
-                <tr style="border-bottom:1px solid var(--borderlt)"><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#8474A1;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Dr. Nguyen</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">261</td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">194</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:74%;height:100%;background:var(--amber);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--amber)">74%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">4.5 min</td><td style="padding:10px 12px;font-size:13px;font-weight:600;color:var(--t1)">$18,920</td><td style="padding:10px 12px;font-size:13px;color:var(--amber)">6.9%</td></tr>
-                <tr><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#6EC6CA;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Dr. Patel</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">238</td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">186</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:78%;height:100%;background:var(--green);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--green)">78%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">4.1 min</td><td style="padding:10px 12px;font-size:13px;font-weight:600;color:var(--t1)">$17,260</td><td style="padding:10px 12px;font-size:13px;color:var(--green)">4.6%</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <div id="report-revenue" style="display:none;background:var(--white);border-radius:var(--r);border:1px solid var(--borderlt);box-shadow:var(--sh1);overflow:hidden;grid-column:2/4">
-        <div style="padding:14px 16px 12px;border-bottom:1px solid var(--borderlt);display:flex;align-items:center;justify-content:space-between">
-          <span style="font-size:13px;font-weight:700;color:var(--t1)">Revenue by Channel - March 2026</span>
-          <div style="display:flex;gap:8px">
-            <button onclick="showToast('Exported to Excel')" style="padding:5px 12px;border:1px solid var(--border);border-radius:6px;background:var(--white);color:var(--t2);font-size:12px;font-weight:500;cursor:pointer;font-family:'Roboto',sans-serif">Export XLS</button>
-            <button onclick="showToast('PDF downloaded')" style="padding:5px 12px;border:1px solid var(--border);border-radius:6px;background:var(--white);color:var(--t2);font-size:12px;font-weight:500;cursor:pointer;font-family:'Roboto',sans-serif">Export PDF</button>
-          </div>
-        </div>
-        <div style="padding:18px">
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px">
-            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--blue)">$184,820</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Total Revenue</div></div>
-            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--green)">$98,240</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Self-Pay Revenue</div></div>
-            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--orange)">$76,580</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Insurance Revenue</div></div>
-            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--amber)">42.5%</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Insurance Mix</div></div>
-          </div>
-          <div style="overflow-x:auto">
-            <table style="width:100%;border-collapse:collapse">
-              <thead><tr style="background:var(--surface)">
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Channel</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Visits</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Avg Charge</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Total Revenue</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">% of Total</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Trend</th>
-              </tr></thead>
-              <tbody>
-                <tr style="border-bottom:1px solid var(--borderlt)"><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#08979D;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Self-Pay</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">542</td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">$181</td><td style="padding:10px 12px;font-size:13px;font-weight:600;color:var(--t1)">$98,240</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:53%;height:100%;background:var(--green);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--green)">53.2%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--green)">↑ 8.2%</td></tr>
-                <tr style="border-bottom:1px solid var(--borderlt)"><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#8474A1;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Insurance</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">428</td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">$179</td><td style="padding:10px 12px;font-size:13px;font-weight:600;color:var(--t1)">$76,580</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:42%;height:100%;background:var(--orange);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--orange)">41.5%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--amber)">↑ 4.1%</td></tr>
-                <tr><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#6EC6CA;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Other</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">115</td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">$165</td><td style="padding:10px 12px;font-size:13px;font-weight:600;color:var(--t1)">$10,000</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:5%;height:100%;background:var(--blue);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--blue)">5.4%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--red)">↓ 2.3%</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <div id="report-noshow" style="display:none;background:var(--white);border-radius:var(--r);border:1px solid var(--borderlt);box-shadow:var(--sh1);overflow:hidden;grid-column:2/4">
-        <div style="padding:14px 16px 12px;border-bottom:1px solid var(--borderlt);display:flex;align-items:center;justify-content:space-between">
-          <span style="font-size:13px;font-weight:700;color:var(--t1)">No-Show Analysis - Last 30 Days</span>
-          <div style="display:flex;gap:8px">
-            <button onclick="showToast('Exported to Excel')" style="padding:5px 12px;border:1px solid var(--border);border-radius:6px;background:var(--white);color:var(--t2);font-size:12px;font-weight:500;cursor:pointer;font-family:'Roboto',sans-serif">Export XLS</button>
-            <button onclick="showToast('PDF downloaded')" style="padding:5px 12px;border:1px solid var(--border);border-radius:6px;background:var(--white);color:var(--t2);font-size:12px;font-weight:500;cursor:pointer;font-family:'Roboto',sans-serif">Export PDF</button>
-          </div>
-        </div>
-        <div style="padding:18px">
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px">
-            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--red)">142</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Total No-Shows</div></div>
-            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--amber)">5.8%</div><div style="font-size:11px;color:var(--t3);margin-top:3px">No-Show Rate</div></div>
-            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--orange)">$24,380</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Est. Lost Revenue</div></div>
-            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--blue)">Wed</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Highest No-Show Day</div></div>
-          </div>
-          <div style="overflow-x:auto">
-            <table style="width:100%;border-collapse:collapse">
-              <thead><tr style="background:var(--surface)">
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Provider</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Scheduled</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">No-Shows</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Rate</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Top Reason</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Trend</th>
-              </tr></thead>
-              <tbody>
-                <tr style="border-bottom:1px solid var(--borderlt)"><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#08979D;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Dr. Reyes</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">284</td><td style="padding:10px 12px;font-size:13px;color:var(--red)">12</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:42%;height:100%;background:var(--red);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--red)">4.2%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">Forgot appt</td><td style="padding:10px 12px;font-size:13px;color:var(--green)">↓ 1.2%</td></tr>
-                <tr style="border-bottom:1px solid var(--borderlt)"><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#8474A1;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Dr. Nguyen</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">261</td><td style="padding:10px 12px;font-size:13px;color:var(--red)">18</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:69%;height:100%;background:var(--red);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--red)">6.9%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">Weather</td><td style="padding:10px 12px;font-size:13px;color:var(--red)">↑ 2.1%</td></tr>
-                <tr><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#6EC6CA;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Dr. Patel</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">238</td><td style="padding:10px 12px;font-size:13px;color:var(--red)">8</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:34%;height:100%;background:var(--red);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--red)">3.4%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">Work conflict</td><td style="padding:10px 12px;font-size:13px;color:var(--green)">↓ 0.8%</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <div id="report-insurance" style="display:none;background:var(--white);border-radius:var(--r);border:1px solid var(--borderlt);box-shadow:var(--sh1);overflow:hidden;grid-column:2/4">
-        <div style="padding:14px 16px 12px;border-bottom:1px solid var(--borderlt);display:flex;align-items:center;justify-content:space-between">
-          <span style="font-size:13px;font-weight:700;color:var(--t1)">Insurance Denial Rate - Q1 2026</span>
-          <div style="display:flex;gap:8px">
-            <button onclick="showToast('Exported to Excel')" style="padding:5px 12px;border:1px solid var(--border);border-radius:6px;background:var(--white);color:var(--t2);font-size:12px;font-weight:500;cursor:pointer;font-family:'Roboto',sans-serif">Export XLS</button>
-            <button onclick="showToast('PDF downloaded')" style="padding:5px 12px;border:1px solid var(--border);border-radius:6px;background:var(--white);color:var(--t2);font-size:12px;font-weight:500;cursor:pointer;font-family:'Roboto',sans-serif">Export PDF</button>
-          </div>
-        </div>
-        <div style="padding:18px">
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px">
-            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--red)">3.2%</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Overall Denial Rate</div></div>
-            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--orange)">47</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Claims Denied</div></div>
-            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--amber)">$38,960</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Est. Denial Value</div></div>
-            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--green)">72%</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Appeals Success</div></div>
-          </div>
-          <div style="overflow-x:auto">
-            <table style="width:100%;border-collapse:collapse">
-              <thead><tr style="background:var(--surface)">
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Payer</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Claims</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Denied</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Rate</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Top Reason</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Trend</th>
-              </tr></thead>
-              <tbody>
-                <tr style="border-bottom:1px solid var(--borderlt)"><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#08979D;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Aetna</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">284</td><td style="padding:10px 12px;font-size:13px;color:var(--red)">8</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:28%;height:100%;background:var(--amber);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--amber)">2.8%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">Non-covered proc</td><td style="padding:10px 12px;font-size:13px;color:var(--green)">↓ 0.9%</td></tr>
-                <tr style="border-bottom:1px solid var(--borderlt)"><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#8474A1;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Blue Cross</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">261</td><td style="padding:10px 12px;font-size:13px;color:var(--red)">12</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:46%;height:100%;background:var(--red);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--red)">4.6%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">Prior auth</td><td style="padding:10px 12px;font-size:13px;color:var(--red)">↑ 1.2%</td></tr>
-                <tr><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#6EC6CA;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">United Health</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">238</td><td style="padding:10px 12px;font-size:13px;color:var(--red)">15</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:63%;height:100%;background:var(--red);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--red)">6.3%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">Out-of-network</td><td style="padding:10px 12px;font-size:13px;color:var(--red)">↑ 2.1%</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <div id="report-satisfaction" style="display:none;background:var(--white);border-radius:var(--r);border:1px solid var(--borderlt);box-shadow:var(--sh1);overflow:hidden;grid-column:2/4">
-        <div style="padding:14px 16px 12px;border-bottom:1px solid var(--borderlt);display:flex;align-items:center;justify-content:space-between">
-          <span style="font-size:13px;font-weight:700;color:var(--t1)">Patient Satisfaction - March 2026</span>
-          <div style="display:flex;gap:8px">
-            <button onclick="showToast('Exported to Excel')" style="padding:5px 12px;border:1px solid var(--border);border-radius:6px;background:var(--white);color:var(--t2);font-size:12px;font-weight:500;cursor:pointer;font-family:'Roboto',sans-serif">Export XLS</button>
-            <button onclick="showToast('PDF downloaded')" style="padding:5px 12px;border:1px solid var(--border);border-radius:6px;background:var(--white);color:var(--t2);font-size:12px;font-weight:500;cursor:pointer;font-family:'Roboto',sans-serif">Export PDF</button>
-          </div>
-        </div>
-        <div style="padding:18px">
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px">
-            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--green)">4.6</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Avg Overall Rating (5.0)</div></div>
-            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--green)">94%</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Likely to Recommend</div></div>
-            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--orange)">847</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Responses</div></div>
-            <div style="background:var(--surface);border-radius:8px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:700;color:var(--blue)">68%</div><div style="font-size:11px;color:var(--t3);margin-top:3px">Response Rate</div></div>
-          </div>
-          <div style="overflow-x:auto">
-            <table style="width:100%;border-collapse:collapse">
-              <thead><tr style="background:var(--surface)">
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Provider</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Rating</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Responses</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Recommend %</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Top Feedback</th>
-                <th style="text-align:left;padding:9px 12px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Trend</th>
-              </tr></thead>
-              <tbody>
-                <tr style="border-bottom:1px solid var(--borderlt)"><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#08979D;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Dr. Reyes</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)"><span style="font-weight:600;color:var(--green)">4.8 ⭐</span></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">324</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:96%;height:100%;background:var(--green);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--green)">96%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">Friendly staff</td><td style="padding:10px 12px;font-size:13px;color:var(--green)">↑ 2.1%</td></tr>
-                <tr style="border-bottom:1px solid var(--borderlt)"><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#8474A1;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Dr. Nguyen</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)"><span style="font-weight:600;color:var(--green)">4.4 ⭐</span></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">281</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:91%;height:100%;background:var(--green);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--green)">91%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">Quick service</td><td style="padding:10px 12px;font-size:13px;color:var(--green)">↑ 1.3%</td></tr>
-                <tr><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:50%;background:#6EC6CA;flex-shrink:0"></div><span style="font-size:13px;font-weight:600;color:var(--t1)">Dr. Patel</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)"><span style="font-weight:600;color:var(--orange)">4.2 ⭐</span></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">242</td><td style="padding:10px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:88%;height:100%;background:var(--green);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--green)">88%</span></div></td><td style="padding:10px 12px;font-size:13px;color:var(--t2)">Good listening</td><td style="padding:10px 12px;font-size:13px;color:var(--amber)">→ 0%</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div style="background:var(--white);border-radius:var(--r);border:1px solid var(--borderlt);box-shadow:var(--sh1);overflow:hidden">
-      <div style="padding:14px 18px;border-bottom:1px solid var(--border);font-size:14px;font-weight:700;color:var(--t1)">Report Builder</div>
-      <div style="padding:18px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px">
-        <div style="display:flex;flex-direction:column;gap:5px"><label style="font-size:12px;font-weight:500;color:var(--t2)">Report Type</label><select style="padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:'Roboto',sans-serif;color:var(--t1);background:var(--white);outline:none"><option>Intake Completion</option><option>Revenue &amp; Collections</option><option>No-Show Analysis</option><option>Insurance Eligibility</option><option>Patient Satisfaction</option><option>Appointment Volume</option></select></div>
-        <div style="display:flex;flex-direction:column;gap:5px"><label style="font-size:12px;font-weight:500;color:var(--t2)">Date Range</label><select style="padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:'Roboto',sans-serif;color:var(--t1);background:var(--white);outline:none"><option>This Month</option><option>Last Month</option><option>Last 90 Days</option><option>This Year</option><option>Custom Range</option></select></div>
-        <div style="display:flex;flex-direction:column;gap:5px"><label style="font-size:12px;font-weight:500;color:var(--t2)">Group By</label><select style="padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:'Roboto',sans-serif;color:var(--t1);background:var(--white);outline:none"><option>Provider</option><option>Location</option><option>Insurance</option><option>Visit Type</option><option>Day of Week</option></select></div>
-        <div style="display:flex;flex-direction:column;gap:5px"><label style="font-size:12px;font-weight:500;color:var(--t2)">Export Format</label><select style="padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:'Roboto',sans-serif;color:var(--t1);background:var(--white);outline:none"><option>Excel (.xlsx)</option><option>PDF</option><option>CSV</option></select></div>
-      </div>
-      <div style="padding:0 18px 18px">
-        <button onclick="showToast('Report generated')" style="padding:9px 20px;background:var(--brand);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter','Roboto',sans-serif">Generate Report</button>
-      </div>
-    </div>
-  </div>
   <div class="view" id="view-forms">
     <div style="display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
       <div>
@@ -1126,47 +893,51 @@
   </div>
 
   <!-- ═══════════════ ACCELERATOR VIEW ═══════════════ -->
-  <div class="view" id="view-accelerator">
+  <div class="view" id="view-accelerator" style="gap:14px;padding:24px 32px;overflow-y:auto">
     <div style="display:flex;align-items:flex-start;justify-content:space-between">
       <div>
         <div style="font-size:18px;font-weight:700;color:var(--t1)">Appointment Accelerator</div>
-        <div style="font-size:13px;color:var(--t2);margin-top:3px">Auto-fill open slots from cancellations, no-shows, and waitlisted patients</div>
+        <div style="font-size:13px;color:var(--t2);margin-top:3px">AI-powered matching of waitlisted patients to cancellations, no-shows, and open slots</div>
       </div>
       <div style="display:flex;gap:8px">
         <button onclick="runAccelerator()" style="padding:9px 18px;background:var(--brand);color:#fff;border:none;border-radius:8px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:'Inter','Roboto',sans-serif;display:flex;align-items:center;gap:7px">
           <svg width="15" height="15" viewBox="0 0 20 20" fill="white"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg>
           Run Accelerator
         </button>
-        <button onclick="showToast('Settings for Accelerator opened')" style="padding:9px 14px;background:var(--white);color:var(--t2);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;font-family:'Roboto',sans-serif">Configure</button>
+        <button onclick="showAcceleratorConfig()" style="padding:9px 14px;background:var(--white);color:var(--t2);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;font-family:'Roboto',sans-serif">Configure</button>
       </div>
+    </div>
+    <div style="margin-top:14px;padding:12px 14px;background:rgba(168,85,247,.08);border:1px solid rgba(168,85,247,.15);border-radius:9px;display:flex;align-items:center;gap:10px">
+      <div style="font-size:16px;flex-shrink:0;margin-top:2px">✦</div>
+      <div style="font-size:12px;color:var(--t2);line-height:1.5"><strong style="color:var(--t1)">AI-Powered Matching</strong> — Analyzes patient preferences, provider compatibility, appointment type, and schedule flexibility to find optimal matches. Currently showing 4 high-confidence matches (89-98% fit scores).</div>
     </div>
 
     <!-- Stats -->
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
-      <div style="background:var(--white);border-radius:var(--r);padding:16px;border:1px solid var(--borderlt);box-shadow:var(--sh1)">
-        <div style="font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px">Open Slots Today</div>
-        <div style="font-size:30px;font-weight:700;color:var(--red);margin:4px 0">4</div>
-        <div style="font-size:11.5px;color:var(--t2)">From cancellations & no-shows</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+      <div style="background:var(--white);border-radius:var(--r);padding:12px 14px;border:1px solid var(--borderlt);box-shadow:var(--sh1)">
+        <div style="font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px">Open Slots Today</div>
+        <div style="font-size:28px;font-weight:700;color:var(--red);margin:2px 0">4</div>
+        <div style="font-size:11px;color:var(--t2)">From cancellations & no-shows</div>
       </div>
-      <div style="background:var(--white);border-radius:var(--r);padding:16px;border:1px solid var(--borderlt);box-shadow:var(--sh1)">
-        <div style="font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px">Waitlisted</div>
-        <div style="font-size:30px;font-weight:700;color:var(--amber);margin:4px 0">11</div>
-        <div style="font-size:11.5px;color:var(--t2)">Patients requesting earlier slots</div>
+      <div style="background:var(--white);border-radius:var(--r);padding:12px 14px;border:1px solid var(--borderlt);box-shadow:var(--sh1)">
+        <div style="font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px">Waitlisted</div>
+        <div style="font-size:28px;font-weight:700;color:var(--amber);margin:2px 0">11</div>
+        <div style="font-size:11px;color:var(--t2)">Patients requesting earlier slots</div>
       </div>
-      <div style="background:var(--white);border-radius:var(--r);padding:16px;border:1px solid var(--borderlt);box-shadow:var(--sh1)">
-        <div style="font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px">AI Matched</div>
-        <div style="font-size:30px;font-weight:700;color:var(--orange);margin:4px 0" id="acc-matched">0</div>
-        <div style="font-size:11.5px;color:var(--t2)">Best-fit patients identified</div>
+      <div style="background:var(--white);border-radius:var(--r);padding:12px 14px;border:1px solid var(--borderlt);box-shadow:var(--sh1)">
+        <div style="font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px">AI Matched</div>
+        <div style="font-size:28px;font-weight:700;color:var(--orange);margin:2px 0" id="acc-matched">4</div>
+        <div style="font-size:11px;color:var(--t2)">Best-fit patients identified</div>
       </div>
-      <div style="background:var(--white);border-radius:var(--r);padding:16px;border:1px solid var(--borderlt);box-shadow:var(--sh1)">
-        <div style="font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px">Revenue Saved</div>
-        <div style="font-size:30px;font-weight:700;color:var(--green);margin:4px 0" id="acc-revenue">$0</div>
-        <div style="font-size:11.5px;color:var(--t2)">Recovered from filled slots</div>
+      <div style="background:var(--white);border-radius:var(--r);padding:12px 14px;border:1px solid var(--borderlt);box-shadow:var(--sh1)">
+        <div style="font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px">Revenue Saved</div>
+        <div style="font-size:28px;font-weight:700;color:var(--green);margin:2px 0" id="acc-revenue">$680</div>
+        <div style="font-size:11px;color:var(--t2)">Recovered from filled slots</div>
       </div>
     </div>
 
     <!-- Open Slots -->
-    <div style="background:var(--white);border-radius:var(--r);border:1px solid var(--borderlt);box-shadow:var(--sh1);overflow:hidden">
+    <div style="background:var(--white);border-radius:var(--r);border:1px solid var(--borderlt);box-shadow:var(--sh1);overflow:visible">
       <div style="padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
         <div style="font-size:14px;font-weight:700;color:var(--t1);display:flex;align-items:center;gap:8px">
           Open Slots
@@ -1180,27 +951,29 @@
     </div>
 
     <!-- Waitlist -->
-    <div style="background:var(--white);border-radius:var(--r);border:1px solid var(--borderlt);box-shadow:var(--sh1);overflow:hidden">
-      <div style="padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
-        <div style="font-size:14px;font-weight:700;color:var(--t1);display:flex;align-items:center;gap:8px">
+    <div style="background:var(--white);border-radius:var(--r);border:1px solid var(--borderlt);box-shadow:var(--sh1)">
+      <div style="padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+        <div style="font-size:13px;font-weight:700;color:var(--t1);display:flex;align-items:center;gap:8px">
           Waitlist
-          <span style="background:var(--amber-bg);color:var(--amber);font-size:11px;font-weight:700;padding:2px 7px;border-radius:10px">11 patients</span>
+          <span style="background:var(--amber-bg);color:var(--amber);font-size:10px;font-weight:700;padding:2px 6px;border-radius:8px">11 patients</span>
         </div>
-        <button onclick="showToast('Waitlist settings opened')" style="padding:6px 14px;background:var(--white);color:var(--t2);border:1px solid var(--border);border-radius:7px;font-size:12.5px;font-weight:500;cursor:pointer;font-family:'Roboto',sans-serif">Manage Rules</button>
+        <button onclick="showToast('Waitlist settings opened')" style="padding:5px 12px;background:var(--white);color:var(--t2);border:1px solid var(--border);border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;font-family:'Roboto',sans-serif">Manage Rules</button>
       </div>
-      <table style="width:100%;border-collapse:collapse">
+      <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
         <thead>
           <tr style="background:var(--surface)">
-            <th style="text-align:left;padding:9px 14px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Patient</th>
-            <th style="text-align:left;padding:9px 14px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Requested</th>
-            <th style="text-align:left;padding:9px 14px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Provider</th>
-            <th style="text-align:left;padding:9px 14px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Flexibility</th>
-            <th style="text-align:left;padding:9px 14px;font-size:10.5px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">AI Match</th>
-            <th style="padding:9px 14px;border-bottom:1px solid var(--border)"></th>
+            <th style="text-align:left;padding:7px 12px;font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Patient</th>
+            <th style="text-align:left;padding:7px 12px;font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Requested</th>
+            <th style="text-align:left;padding:7px 12px;font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Provider</th>
+            <th style="text-align:left;padding:7px 12px;font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">Flexibility</th>
+            <th style="text-align:left;padding:7px 12px;font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">AI Match</th>
+            <th style="padding:7px 12px;border-bottom:1px solid var(--border)"></th>
           </tr>
         </thead>
         <tbody id="waitlist-body"></tbody>
       </table>
+      </div>
     </div>
   </div>
 
@@ -1774,7 +1547,15 @@
     <div style="background:var(--white);border:1px solid var(--border);border-radius:14px;padding:0;overflow:hidden;box-shadow:var(--sh1)">
       <div style="padding:28px 32px;background:var(--surface);border-bottom:1px solid var(--border)">
         <div style="font-size:18px;font-weight:700;color:var(--t1)">Outreach Pipeline</div>
-        <div style="font-size:14px;color:var(--t3);margin-top:4px">Track appointment confirmations across all touchpoints</div>
+        <div style="font-size:14px;color:var(--t3);margin-top:4px;margin-bottom:12px">Track appointment confirmations across all touchpoints</div>
+        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:var(--t3)">
+          <div style="display:flex;align-items:center;gap:5px"><span style="font-size:16px">📧</span>Email</div>
+          <div style="display:flex;align-items:center;gap:5px"><span style="font-size:16px">💬</span>SMS</div>
+          <div style="display:flex;align-items:center;gap:5px"><span style="font-size:16px">📞</span>Call</div>
+          <div style="display:flex;align-items:center;gap:5px"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#10B981"></span>Confirmed</div>
+          <div style="display:flex;align-items:center;gap:5px"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#D97706"></span>Pending</div>
+          <div style="display:flex;align-items:center;gap:5px"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#DC2626"></span>Failed</div>
+        </div>
       </div>
       <div style="overflow-x:auto">
         <table style="width:100%;border-collapse:collapse;font-size:14px">
@@ -3196,13 +2977,13 @@
         </div>
       </div>
       <div class="sc">
-        <div class="sc-head"><div class="sc-ic g"><svg width="16" height="16" viewBox="0 0 20 20" fill="#10B981"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg></div><div><div class="sc-title">At-Home Care Checklist</div><div class="sc-sub">Follow these daily for best results</div></div></div>
+        <div class="sc-head"><div class="sc-ic g"><svg width="16" height="16" viewBox="0 0 20 20" fill="#10B981"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg></div><div><div class="sc-title">At-Home Care Instructions</div><div class="sc-sub">Follow these daily for best results</div></div></div>
         <div class="sc-body" style="display:flex;flex-direction:column;gap:8px">
-          <label style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--surface);border-radius:9px;cursor:pointer;font-weight:400"><input type="checkbox" style="margin-top:2px;accent-color:var(--orange);flex-shrink:0"><div><div style="font-size:13.5px;font-weight:500;color:var(--t1)">☀️ Apply SPF 30+ sunscreen every morning</div><div style="font-size:12px;color:var(--t3)">Tretinoin increases photosensitivity</div></div></label>
-          <label style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--surface);border-radius:9px;cursor:pointer;font-weight:400"><input type="checkbox" style="margin-top:2px;accent-color:var(--orange);flex-shrink:0"><div><div style="font-size:13.5px;font-weight:500;color:var(--t1)">🌙 Apply Tretinoin at night only</div><div style="font-size:12px;color:var(--t3)">On clean, dry skin - pea-sized amount</div></div></label>
-          <label style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--surface);border-radius:9px;cursor:pointer;font-weight:400"><input type="checkbox" style="margin-top:2px;accent-color:var(--orange);flex-shrink:0"><div><div style="font-size:13.5px;font-weight:500;color:var(--t1)">🧴 Clindamycin 1% every morning</div><div style="font-size:12px;color:var(--t3)">New prescription - apply before moisturizer</div></div></label>
-          <label style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--surface);border-radius:9px;cursor:pointer;font-weight:400"><input type="checkbox" style="margin-top:2px;accent-color:var(--orange);flex-shrink:0"><div><div style="font-size:13.5px;font-weight:500;color:var(--t1)">💊 Doxycycline 100mg twice daily with food</div><div style="font-size:12px;color:var(--t3)">Do not skip doses - complete the course</div></div></label>
-          <label style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--surface);border-radius:9px;cursor:pointer;font-weight:400"><input type="checkbox" style="margin-top:2px;accent-color:var(--orange);flex-shrink:0"><div><div style="font-size:13.5px;font-weight:500;color:var(--t1)">💧 Moisturize AM and PM</div><div style="font-size:12px;color:var(--t3)">Fragrance-free only - CeraVe or Vanicream recommended</div></div></label>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--surface);border-radius:9px"><div><div style="font-size:13.5px;font-weight:500;color:var(--t1)">☀️ Apply SPF 30+ sunscreen every morning</div><div style="font-size:12px;color:var(--t3)">Tretinoin increases photosensitivity</div></div></div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--surface);border-radius:9px"><div><div style="font-size:13.5px;font-weight:500;color:var(--t1)">🌙 Apply Tretinoin at night only</div><div style="font-size:12px;color:var(--t3)">On clean, dry skin - pea-sized amount</div></div></div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--surface);border-radius:9px"><div><div style="font-size:13.5px;font-weight:500;color:var(--t1)">🧴 Clindamycin 1% every morning</div><div style="font-size:12px;color:var(--t3)">New prescription - apply before moisturizer</div></div></div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--surface);border-radius:9px"><div><div style="font-size:13.5px;font-weight:500;color:var(--t1)">💊 Doxycycline 100mg twice daily with food</div><div style="font-size:12px;color:var(--t3)">Do not skip doses - complete the course</div></div></div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--surface);border-radius:9px"><div><div style="font-size:13.5px;font-weight:500;color:var(--t1)">💧 Moisturize AM and PM</div><div style="font-size:12px;color:var(--t3)">Fragrance-free only - CeraVe or Vanicream recommended</div></div></div>
         </div>
       </div>
       <div class="sc">
@@ -3670,6 +3451,64 @@
 
 <!-- SHARED TOAST -->
 <div class="g-toast" id="g-toast"></div>
+
+<!-- ACCELERATOR CONFIGURATION MODAL -->
+<div id="acc-config-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:1000;align-items:center;justify-content:center">
+  <div style="background:var(--white);border-radius:16px;width:90%;max-width:600px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3)">
+    <div style="padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <div style="font-size:18px;font-weight:700;color:var(--t1)">Appointment Accelerator Settings</div>
+        <div style="font-size:13px;color:var(--t2);margin-top:2px">Configure AI matching algorithm and notifications</div>
+      </div>
+      <button onclick="closeAcceleratorConfig()" style="background:none;border:none;font-size:24px;cursor:pointer;color:var(--t3)">&times;</button>
+    </div>
+    <div style="padding:24px;display:flex;flex-direction:column;gap:18px">
+      <!-- AI Matching Threshold -->
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--t1);margin-bottom:10px">AI Match Threshold</div>
+        <div style="display:flex;align-items:center;gap:16px">
+          <input type="range" min="50" max="100" value="85" style="flex:1;height:6px;border-radius:3px;background:var(--border);outline:none" onchange="updateAccThreshold(this.value)">
+          <span style="font-size:14px;font-weight:700;color:var(--brand);min-width:40px" id="acc-threshold-val">85%</span>
+        </div>
+        <div style="font-size:11.5px;color:var(--t3);margin-top:8px">Only suggest matches above this confidence score. Current setting shows 85%+ matches (4 patients identified).</div>
+      </div>
+
+      <!-- Auto-SMS -->
+      <div style="padding:12px 14px;background:var(--surface);border-radius:9px;display:flex;align-items:center;justify-content:space-between">
+        <div><div style="font-size:13px;font-weight:600;color:var(--t1)">Auto-send SMS when matched</div><div style="font-size:11.5px;color:var(--t3);margin-top:2px">Automatically text matched patients with available slot</div></div>
+        <div style="width:44px;height:24px;background:var(--green);border-radius:12px;cursor:pointer;position:relative;flex-shrink:0" onclick="toggleAccSetting(this)"><div style="width:18px;height:18px;background:#fff;border-radius:50%;position:absolute;top:3px;right:3px"></div></div>
+      </div>
+
+      <!-- Schedule Flexibility -->
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--t1);margin-bottom:10px">Consider Schedule Preferences</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+            <input type="checkbox" checked style="width:16px;height:16px;accent-color:var(--brand)">
+            <span style="font-size:13px;color:var(--t1)">Provider preference (primary weighting)</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+            <input type="checkbox" checked style="width:16px;height:16px;accent-color:var(--brand)">
+            <span style="font-size:13px;color:var(--t1)">Time/day of week flexibility</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+            <input type="checkbox" checked style="width:16px;height:16px;accent-color:var(--brand)">
+            <span style="font-size:13px;color:var(--t1)">Appointment type compatibility</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Info Box -->
+      <div style="padding:12px 14px;background:rgba(168,85,247,.08);border:1px solid rgba(168,85,247,.15);border-radius:9px">
+        <div style="font-size:12px;color:var(--t2);line-height:1.6"><strong style="color:var(--t1)">How our AI works:</strong> Analyzes patient intake data, waitlist preferences, and provider schedules to identify optimal matches. Uses natural language processing to understand nuanced preferences and real-time schedule availability.</div>
+      </div>
+    </div>
+    <div style="padding:16px 24px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end">
+      <button onclick="closeAcceleratorConfig()" style="padding:10px 18px;background:var(--white);color:var(--t2);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter','Roboto',sans-serif">Cancel</button>
+      <button onclick="saveAcceleratorConfig()" style="padding:10px 20px;background:var(--brand);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter','Roboto',sans-serif">Save Settings</button>
+    </div>
+  </div>
+</div>
 
 <!-- ══════════════════════════════════
      ALL JAVASCRIPT - ONE BLOCK

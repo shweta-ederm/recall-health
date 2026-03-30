@@ -24,7 +24,7 @@ function switchApp(id) {
   // Show/hide global nav
   var nav = document.getElementById('global-nav');
   var nameEl = document.getElementById('global-nav-app-name');
-  var appNames = {staff:'Staff Dashboard',intake:'Patient Intake',portal:'Patient Portal',register:'Self-Registration',followup:'Post-Visit Follow-Up',kiosk:'Kiosk Check-In'};
+  var appNames = {staff:'Staff Dashboard',intake:'Self Check-In',portal:'Patient Portal',register:'Self-Registration',followup:'Post-Visit Follow-Up',kiosk:'Kiosk Check-In'};
   nav.classList.add('visible');
   var backBtn = nav.querySelector('.global-nav-back');
   var dividers = nav.querySelectorAll('.global-nav-divider');
@@ -704,10 +704,10 @@ function sendBroadcast() {
 // APPOINTMENT ACCELERATOR
 // ══════════════════════════════════════
 const openSlots = [
-  {time:'10:00 AM',provider:'Dr. Reyes',type:'Acne Follow-up (30 min)',reason:'No-show - Kevin M.',room:'Room 2A',match:null,filled:false},
-  {time:'11:30 AM',provider:'Dr. Nguyen',type:'Skin Check (20 min)',reason:'Cancellation - Patricia L.',room:'Room 1B',match:null,filled:false},
-  {time:'1:45 PM',provider:'Dr. Patel',type:'New Patient (45 min)',reason:'Rescheduled - Thomas W.',room:'Room 3C',match:null,filled:false},
-  {time:'3:00 PM',provider:'Dr. Reyes',type:'Cosmetic Consult (30 min)',reason:'No-show - Brian K.',room:'Room 2A',match:null,filled:false},
+  {time:'10:00 AM',provider:'Dr. Reyes',type:'Acne Follow-up (30 min)',reason:'No-show - Kevin M.',room:'Room 2A',match:{name:'Elena Vasquez',init:'EV',score:98},filled:false},
+  {time:'11:30 AM',provider:'Dr. Nguyen',type:'Skin Check (20 min)',reason:'Cancellation - Patricia L.',room:'Room 1B',match:{name:'Omar Patel',init:'OP',score:89},filled:false},
+  {time:'1:45 PM',provider:'Dr. Patel',type:'New Patient (45 min)',reason:'Rescheduled - Thomas W.',room:'Room 3C',match:{name:'Claire Bennett',init:'CB',score:95},filled:false},
+  {time:'3:00 PM',provider:'Dr. Reyes',type:'Cosmetic Consult (30 min)',reason:'No-show - Brian K.',room:'Room 2A',match:{name:'Tanya Moore',init:'TM',score:91},filled:false},
 ];
 const waitlistData = [
   {name:'Elena Vasquez',init:'EV',color:'pc2',requested:'Any this week',provider:'Dr. Reyes',flex:'High',score:98},
@@ -716,6 +716,11 @@ const waitlistData = [
   {name:'Raj Krishnan',init:'RK',color:'pc3',requested:'Morning only',provider:'Dr. Patel',flex:'Low',score:72},
   {name:'Tanya Moore',init:'TM',color:'pc4',requested:'This week',provider:'Dr. Reyes',flex:'High',score:91},
   {name:'Samuel Park',init:'SP',color:'pc8',requested:'Any',provider:'Dr. Nguyen',flex:'High',score:87},
+  {name:'Marcus Johnson',init:'MJ',color:'pc1',requested:'Next 2 weeks',provider:'Dr. Reyes',flex:'Medium',score:85},
+  {name:'Jennifer Lee',init:'JL',color:'pc6',requested:'Any',provider:'Any',flex:'High',score:93},
+  {name:'David Chen',init:'DC',color:'pc9',requested:'Weekends only',provider:'Dr. Patel',flex:'Low',score:68},
+  {name:'Sarah Martinez',init:'SM',color:'pc10',requested:'This week',provider:'Dr. Nguyen',flex:'High',score:90},
+  {name:'Robert Williams',init:'RW',color:'pc11',requested:'Any this week',provider:'Any',flex:'Medium',score:82},
 ];
 
 function renderAccelerator() {
@@ -748,27 +753,21 @@ function renderAccelerator() {
   // Waitlist
   const tbody = document.getElementById('waitlist-body');
   if(!tbody) return;
-  tbody.innerHTML = waitlistData.map((w,i) => `
-    <tr style="border-bottom:1px solid var(--borderlt)">
-      <td style="padding:11px 14px">
-        <div style="display:flex;align-items:center;gap:8px">
-          <div style="width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;background:var(--navy);flex-shrink:0">${w.init}</div>
-          <span style="font-size:13px;font-weight:600;color:var(--t1)">${w.name}</span>
-        </div>
-      </td>
-      <td style="padding:11px 14px;font-size:13px;color:var(--t2)">${w.requested}</td>
-      <td style="padding:11px 14px;font-size:13px;color:var(--t2)">${w.provider}</td>
-      <td style="padding:11px 14px"><span style="font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:10px;background:${w.flex==='High'?'var(--green-bg)':w.flex==='Medium'?'var(--amber-bg)':'var(--red-bg)'};color:${w.flex==='High'?'var(--green)':w.flex==='Medium'?'var(--amber)':'var(--red)'}">${w.flex}</span></td>
-      <td style="padding:11px 14px">
-        <div style="display:flex;align-items:center;gap:6px">
-          <div style="width:50px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:${w.score}%;height:100%;background:var(--brand);border-radius:3px"></div></div>
-          <span style="font-size:12px;font-weight:700;color:var(--brand)">${w.score}%</span>
-        </div>
-      </td>
-      <td style="padding:11px 14px">
-        <button onclick="showToast('SMS sent to ${w.name}')" style="padding:5px 11px;background:var(--brand);color:#fff;border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Inter','Roboto',sans-serif">Notify</button>
-      </td>
-    </tr>`).join('');
+  let rows = '';
+  for(let i=0; i<waitlistData.length; i++) {
+    const w = waitlistData[i];
+    const bgColor = w.flex==='High'?'var(--green-bg)':w.flex==='Medium'?'var(--amber-bg)':'var(--red-bg)';
+    const textColor = w.flex==='High'?'var(--green)':w.flex==='Medium'?'var(--amber)':'var(--red)';
+    rows += `<tr style="border-bottom:1px solid var(--borderlt)">
+      <td style="padding:8px 12px"><div style="display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;background:var(--navy);flex-shrink:0">${w.init}</div><span style="font-size:12.5px;font-weight:600;color:var(--t1)">${w.name}</span></div></td>
+      <td style="padding:8px 12px;font-size:12px;color:var(--t2)">${w.requested}</td>
+      <td style="padding:8px 12px;font-size:12px;color:var(--t2)">${w.provider}</td>
+      <td style="padding:8px 12px"><span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:8px;background:${bgColor};color:${textColor}">${w.flex}</span></td>
+      <td style="padding:8px 12px"><div style="display:flex;align-items:center;gap:6px"><div style="width:45px;height:4px;background:var(--border);border-radius:2px;overflow:hidden"><div style="width:${w.score}%;height:100%;background:var(--brand);border-radius:2px"></div></div><span style="font-size:11px;font-weight:700;color:var(--brand)">${w.score}%</span></div></td>
+      <td style="padding:8px 12px"><button onclick="showToast('SMS sent to ${w.name}')" style="padding:4px 10px;background:var(--brand);color:#fff;border:none;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Inter','Roboto',sans-serif">Notify</button></td>
+    </tr>`;
+  }
+  tbody.innerHTML = rows;
 }
 
 function runAccelerator() {
@@ -801,6 +800,30 @@ function fillAllSlots() {
   openSlots.forEach((s,i) => { if(s.match && !s.filled) s.filled = true; });
   showToast('All matched patients notified and booked ✓');
   renderAccelerator();
+}
+
+function showAcceleratorConfig() {
+  document.getElementById('acc-config-modal').style.display = 'flex';
+}
+
+function closeAcceleratorConfig() {
+  document.getElementById('acc-config-modal').style.display = 'none';
+}
+
+function updateAccThreshold(val) {
+  document.getElementById('acc-threshold-val').textContent = val + '%';
+}
+
+function toggleAccSetting(el) {
+  const isOn = el.style.background === 'var(--green)';
+  el.style.background = isOn ? 'var(--border)' : 'var(--green)';
+  el.querySelector('div').style.left = isOn ? '3px' : 'auto';
+  el.querySelector('div').style.right = isOn ? 'auto' : '3px';
+}
+
+function saveAcceleratorConfig() {
+  closeAcceleratorConfig();
+  showToast('Accelerator settings saved ✓');
 }
 
 // ══════════════════════════════════════
@@ -1007,6 +1030,15 @@ function filterPatients(val) {
   renderPatientsTable(filtered);
 }
 
+const formData = {
+  'New Self Check-In': {desc:'24 fields · Shown to: New patients only · Trigger: First appointment',sections:[{title:'Personal Information',color:'brand',fields:[{num:1,name:'First Name',type:'Text',req:'Required'},{num:2,name:'Last Name',type:'Text',req:'Required'},{num:3,name:'Date of Birth',type:'Date',req:'Required'},{num:4,name:'Preferred Language',type:'Select',req:'Optional'}]},{title:'Insurance & Coverage',color:'navy',ai:true,cond:'Show only when: eligibility check fails OR first visit',fields:[{num:5,name:'Insurance Card (Front)',type:'Upload',req:'Conditional'},{num:6,name:'Insurance Card (Back)',type:'Upload',req:'Conditional'}]}]},
+  'Return Visit': {desc:'12 fields · Shown to: Returning patients · Trigger: Follow-up appointment',sections:[{title:'Current Status',color:'brand',fields:[{num:1,name:'How are you feeling?',type:'Text',req:'Optional'},{num:2,name:'Any changes since last visit?',type:'Text',req:'Optional'}]},{title:'Update Insurance',color:'navy',fields:[{num:3,name:'Insurance still valid?',type:'Choice',req:'Optional'}]}]},
+  'HIPAA Consent': {desc:'Consent doc · Standard template',sections:[{title:'Acknowledgment',color:'brand',fields:[{num:1,name:'Patient name',type:'Text',req:'Required'},{num:2,name:'I acknowledge HIPAA notice',type:'Choice',req:'Required'}]},{title:'Signature',color:'navy',fields:[{num:3,name:'Patient signature',type:'Signature',req:'Required'},{num:4,name:'Date',type:'Date',req:'Required'}]}]},
+  'Financial Policy': {desc:'Consent doc · Payment terms',sections:[{title:'Payment Terms',color:'brand',fields:[{num:1,name:'Agree to copay at visit?',type:'Choice',req:'Required'},{num:2,name:'Payment method',type:'Select',req:'Required'}]},{title:'Insurance',color:'navy',fields:[{num:3,name:'Insurance claim approval',type:'Choice',req:'Optional'}]}]},
+  'Derm History': {desc:'18 fields · Medical history questionnaire',sections:[{title:'Medical History',color:'brand',fields:[{num:1,name:'Current skin conditions',type:'Text',req:'Required'},{num:2,name:'Previous treatments',type:'Text',req:'Optional'},{num:3,name:'Medications',type:'Text',req:'Optional'}]},{title:'Allergies',color:'navy',ai:true,field:[{num:4,name:'Known allergies',type:'Text',req:'Required'}]}]},
+  'Post-Visit Survey': {desc:'6 fields · Satisfaction survey',sections:[{title:'Experience',color:'brand',fields:[{num:1,name:'How satisfied are you?',type:'Choice',req:'Required'},{num:2,name:'Would recommend?',type:'Choice',req:'Required'},{num:3,name:'Additional feedback',type:'Text',req:'Optional'}]}]}
+};
+
 function selectForm(el, name) {
   document.querySelectorAll('.form-item').forEach(f => {
     f.style.borderLeftColor = 'transparent';
@@ -1015,7 +1047,28 @@ function selectForm(el, name) {
   el.style.borderLeftColor = 'var(--brand)';
   el.style.background = 'var(--brand-lt)';
   const titleEl = document.getElementById('form-editor-title');
+  const descEl = titleEl?.parentElement.querySelector('div:nth-child(2)');
+  const contentEl = titleEl?.parentElement.parentElement.parentElement.querySelector('[style*="flex:1"]');
+
   if(titleEl) titleEl.textContent = name;
+  if(descEl && formData[name]) descEl.textContent = formData[name].desc;
+
+  if(contentEl && formData[name]) {
+    let html = '<div style="padding:10px 14px;background:var(--orange-lt);border-radius:8px;border:1px solid rgba(232,101,45,.2);font-size:12.5px;color:var(--t2);display:flex;align-items:center;gap:7px;margin-bottom:10px"><svg width="14" height="14" viewBox="0 0 20 20" fill="var(--brand)"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg><span><strong style="color:var(--brand)">AI Logic Active:</strong> Questions adapt based on patient data. Drag to reorder.</span></div>';
+
+    formData[name].sections.forEach((sec,si) => {
+      const colorMap = {brand:'var(--brand)',navy:'var(--navy)',green:'var(--green)',purple:'var(--purple)'};
+      html += `<div style="border:1.5px solid ${sec.color==='brand'?'var(--brand-border)':'var(--border)'};border-radius:10px;padding:14px;margin-bottom:10px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><div style="display:flex;align-items:center;gap:7px"><span style="font-size:11px;font-weight:700;background:${colorMap[sec.color]||'var(--navy)'};color:#fff;padding:2px 7px;border-radius:6px">SECTION</span><span style="font-size:13.5px;font-weight:700;color:var(--t1)">${sec.title}</span></div><div style="display:flex;align-items:center;gap:6px"><${sec.ai?'span style="font-size:11px;font-weight:600;background:var(--brand-lt);color:var(--brand);padding:2px 7px;border-radius:6px">✦ AI Logic</span':''}><button onclick="showToast('Section settings opened')" style="padding:3px 8px;border:1px solid var(--border);border-radius:5px;background:var(--white);font-size:11.5px;color:var(--t2);cursor:pointer;font-family:'Roboto',sans-serif">Edit</button></div></div>${sec.cond?`<div style="font-size:11.5px;color:var(--t3);padding:8px 10px;background:var(--surface);border-radius:6px;margin-bottom:8px">${sec.cond}</div>`:''}`;
+
+      html += '<div style="display:flex;flex-direction:column;gap:7px">';
+      (sec.fields || sec.field || []).forEach(f => {
+        html += `<div style="display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--white);border-radius:8px;border:1px solid var(--borderlt)"><div style="width:16px;height:16px;border-radius:50%;background:${colorMap[sec.color]||'var(--navy)'};display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:700;flex-shrink:0">${f.num}</div><span style="font-size:12.5px;font-weight:500;color:var(--t1);flex:1">${f.name}</span><span style="font-size:11px;background:var(--surface);color:var(--t3);padding:2px 7px;border-radius:5px">${f.type}</span><span style="font-size:11px;background:${f.req==='Required'?'var(--red-bg)':f.req==='Conditional'?'var(--amber-bg)':'var(--surface)'};color:${f.req==='Required'?'var(--red)':f.req==='Conditional'?'var(--amber)':'var(--t3)'};padding:2px 7px;border-radius:5px">${f.req}</span><button onclick="showToast('Field settings opened')" style="padding:3px 7px;border:1px solid var(--border);border-radius:5px;background:var(--white);font-size:11px;color:var(--t2);cursor:pointer;font-family:'Roboto',sans-serif">✎</button></div>`;
+      });
+      html += '</div></div>';
+    });
+    html += '<button onclick="showToast(\'New section added\')" style="width:100%;padding:11px;border:2px dashed var(--border);border-radius:10px;background:transparent;color:var(--t3);font-size:13px;font-weight:500;cursor:pointer;font-family:\'Roboto\',sans-serif;transition:all .15s" onmouseover="this.style.borderColor=\'var(--orange)\';this.style.color=\'var(--orange)\'" onmouseout="this.style.borderColor=\'var(--border)\';this.style.color=\'var(--t3)\'">' + '+ Add Section' + '</button>';
+    contentEl.innerHTML = html;
+  }
 }
 
 
@@ -1413,4 +1466,7 @@ regBuildProgress();
 
 // Init reports selection
 switchReport('intake');
+
+// Init accelerator
+renderAccelerator();
 
