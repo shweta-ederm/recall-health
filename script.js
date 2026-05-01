@@ -54,11 +54,141 @@ function launchApp(id, callback) {
 function launchIntakeScreen(screenNum) {
   cur = screenNum || 0;
   const screens = document.querySelectorAll('#app-intake .screen');
-  screens.forEach((s, i) => s.classList.remove('active'));
-  if (screens[cur]) screens[cur].classList.add('active');
+  screens.forEach(s => s.classList.remove('active'));
+  // Use ID-based selection so pre-flow screens don't shift indices
+  const target = document.getElementById('s' + cur);
+  if (target) target.classList.add('active');
+  document.getElementById('prog-wrap').style.display = '';
   buildProgress();
   switchApp('intake');
   window.scrollTo(0, 0);
+}
+
+function lookupPatient() {
+  const first = document.getElementById('lookup-first').value.trim().toLowerCase();
+  const last  = document.getElementById('lookup-last').value.trim().toLowerCase();
+  const dob   = document.getElementById('lookup-dob').value;
+  const fb    = document.getElementById('lookup-feedback');
+
+  if (!first || !last || !dob) {
+    fb.style.display = 'block';
+    fb.style.background = 'var(--red-bg)';
+    fb.style.color = 'var(--red)';
+    fb.textContent = 'Please enter your first name, last name, and date of birth.';
+    document.getElementById('lookup-not-found').style.display = 'none';
+    return;
+  }
+
+  const found = patients.find(p => {
+    const parts = p.dob.split('/');
+    const patDob = parts[2] + '-' + parts[0].padStart(2,'0') + '-' + parts[1].padStart(2,'0');
+    const nameParts = p.name.toLowerCase().split(' ');
+    return patDob === dob && nameParts[0] === first && nameParts[nameParts.length - 1] === last;
+  });
+
+  if (!found) {
+    fb.style.display = 'block';
+    fb.style.background = 'var(--red-bg)';
+    fb.style.color = 'var(--red)';
+    fb.textContent = "We couldn't find a matching record. Here's what you can do:";
+    document.getElementById('lookup-not-found').style.display = 'flex';
+    return;
+  }
+
+  fb.style.display = 'none';
+
+  // Populate s0 appointment screen from found patient
+  document.getElementById('s0-av').textContent       = found.init;
+  document.getElementById('s0-name').textContent     = found.name;
+  document.getElementById('s0-type-prov').textContent = found.type + ' · ' + found.provider;
+  document.getElementById('s0-time').textContent     = 'Today at ' + found.time;
+  document.getElementById('s0-provider').textContent = found.provider;
+  document.getElementById('s0-type').textContent     = found.type;
+
+  const lookupEl = document.getElementById('s-lookup');
+  lookupEl.style.animation = 'so .2s ease forwards';
+  setTimeout(() => {
+    lookupEl.classList.remove('active');
+    document.getElementById('prog-wrap').style.display = '';
+    buildProgress();
+    const s0 = document.getElementById('s0');
+    s0.style.animation = '';
+    s0.classList.add('active');
+    s0.offsetHeight;
+    s0.style.animation = 'si .3s ease';
+    window.scrollTo(0, 0);
+  }, 180);
+}
+
+function startIntakeDirectly() {
+  const screens = document.querySelectorAll('#app-intake .screen');
+  screens.forEach(s => s.classList.remove('active'));
+  cur = 0;
+  document.getElementById('prog-wrap').style.display = '';
+  buildProgress();
+  const s0 = document.getElementById('s0');
+  s0.classList.add('active');
+  switchApp('intake');
+  window.scrollTo(0, 0);
+}
+
+function regLookupPatient() {
+  const first = document.getElementById('reg-lookup-first').value.trim().toLowerCase();
+  const last  = document.getElementById('reg-lookup-last').value.trim().toLowerCase();
+  const dob   = document.getElementById('reg-lookup-dob').value;
+  const fb    = document.getElementById('reg-lookup-feedback');
+
+  if (!first || !last || !dob) {
+    fb.style.display = 'block';
+    fb.style.background = 'var(--red-bg)';
+    fb.style.color = 'var(--red)';
+    fb.textContent = 'Please enter your first name, last name, and date of birth.';
+    return;
+  }
+
+  const found = patients.find(p => {
+    const parts = p.dob.split('/');
+    const patDob = parts[2] + '-' + parts[0].padStart(2,'0') + '-' + parts[1].padStart(2,'0');
+    const nameParts = p.name.toLowerCase().split(' ');
+    return patDob === dob && nameParts[0] === first && nameParts[nameParts.length - 1] === last;
+  });
+
+  fb.style.display = 'none';
+  const lookupEl = document.getElementById('rs-lookup');
+
+  function transitionTo(targetId) {
+    lookupEl.style.animation = 'so .2s ease forwards';
+    setTimeout(() => {
+      lookupEl.classList.remove('active');
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.style.animation = '';
+        target.classList.add('active');
+        target.offsetHeight;
+        target.style.animation = 'si .3s ease';
+      }
+      window.scrollTo(0, 0);
+    }, 180);
+  }
+
+  if (found) {
+    document.getElementById('rs-found-title').textContent = 'Welcome back, ' + found.name + '!';
+    document.getElementById('rs-found-type').textContent = found.type;
+    document.getElementById('rs-found-provider').textContent = found.provider;
+    document.getElementById('rs-found-time').textContent = found.time;
+    transitionTo('rs-found');
+  } else {
+    const first = document.getElementById('reg-lookup-first').value.trim();
+    const last  = document.getElementById('reg-lookup-last').value.trim();
+    const dob   = document.getElementById('reg-lookup-dob').value;
+    const firstEl = document.getElementById('reg-first');
+    const lastEl  = document.getElementById('reg-last');
+    const dobEl   = document.getElementById('reg-dob');
+    if (firstEl) firstEl.value = first;
+    if (lastEl)  lastEl.value  = last;
+    if (dobEl)   dobEl.value   = dob;
+    transitionTo('rs0');
+  }
 }
 
 // Launch portal app starting at view (home, appointments, health, documents, billing, messages, profile)
@@ -87,20 +217,11 @@ function showPV(id, btn) {
 
 // ───── DATA ─────
 const patients = [
-  {id:0,name:"Marcus Thompson",init:"MT",color:"pc1",dob:"04/12/1989",mrn:"UD-00421",time:"9:00 AM",type:"Acne Follow-up",provider:"Dr. Reyes",provColor:"pv1",status:"partial",ebStatus:"g",ebLabel:"Active",deductAmt:"$320",deductPct:79,copay:"$40",flags:["Pay"],phone:"(561) 400-2291",email:"m.thompson@email.com",addr:"142 Palmetto Way, Miami FL",priorAuth:{status:"none"}},
-  {id:1,name:"Sandra Okafor",init:"SO",color:"pc3",dob:"07/22/1975",mrn:"UD-00187",time:"9:15 AM",type:"Skin Check / Biopsy",provider:"Dr. Nguyen",provColor:"pv2",status:"complete",ebStatus:"g",ebLabel:"Active",deductAmt:"$0",deductPct:100,copay:"$55",flags:["OK"],phone:"(561) 312-0988",email:"sokafor@gmail.com",addr:"88 Glades Blvd, Miami FL",priorAuth:{status:"approved",procedure:"Skin Biopsy",payer:"United Healthcare",submittedDate:"03/20/2026"}},
-  {id:2,name:"James Whitfield",init:"JW",color:"pc7",dob:"11/05/1982",mrn:"UD-00309",time:"9:30 AM",type:"Psoriasis Consult",provider:"Dr. Patel",provColor:"pv3",status:"pending",ebStatus:"r",ebLabel:"Inactive",deductAmt:"$1,500",deductPct:0,copay:"-",flags:["Ins","Consent"],phone:"(561) 778-2200",email:"jwhit@email.com",addr:"250 Town Center Dr, Miami FL",priorAuth:{status:"pending",procedure:"Biologic Treatment (Dupilumab)",payer:"Aetna",submittedDate:"03/18/2026"}},
-  {id:3,name:"Priya Mehta",init:"PM",color:"pc5",dob:"03/14/1991",mrn:"UD-00556",time:"9:45 AM",type:"Cosmetic Consult",provider:"Dr. Reyes",provColor:"pv1",status:"checkedin",ebStatus:"g",ebLabel:"Active",deductAmt:"$800",deductPct:47,copay:"$40",flags:["OK"],phone:"(561) 900-1234",email:"priya.m@email.com",addr:"14 Mizner Park, Miami FL",priorAuth:{status:"none"}},
-  {id:4,name:"David Chen",init:"DC",color:"pc8",dob:"09/30/1968",mrn:"UD-00098",time:"10:00 AM",type:"Eczema Review",provider:"Dr. Nguyen",provColor:"pv2",status:"complete",ebStatus:"g",ebLabel:"Active",deductAmt:"$200",deductPct:87,copay:"$55",flags:["OK"],phone:"(561) 444-7890",email:"dchen@work.com",addr:"600 N Federal Hwy, Miami FL",priorAuth:{status:"none"}},
-  {id:5,name:"Linda Russo",init:"LR",color:"pc2",dob:"06/18/1958",mrn:"UD-00712",time:"10:15 AM",type:"Annual Skin Exam",provider:"Dr. Patel",provColor:"pv3",status:"pending",ebStatus:"a",ebLabel:"Check Req.",deductAmt:"$650",deductPct:57,copay:"$35",flags:["Ins"],phone:"(561) 211-5566",email:"lrusso@aol.com",addr:"3300 S Ocean Blvd, Palm Beach FL",priorAuth:{status:"none"}},
-  {id:6,name:"Kevin O'Brien",init:"KO",color:"pc6",dob:"02/27/1979",mrn:"UD-00433",time:"10:30 AM",type:"Acne Treatment",provider:"Dr. Reyes",provColor:"pv1",status:"complete",ebStatus:"g",ebLabel:"Active",deductAmt:"$0",deductPct:100,copay:"$40",flags:["OK"],phone:"(561) 600-3344",email:"kobrien@email.com",addr:"7 Palmetto Park Rd, Miami FL",priorAuth:{status:"denied",procedure:"Laser Treatment (IPL)",payer:"Blue Cross",submittedDate:"03/19/2026",reason:"Not deemed medically necessary"}},
-  {id:7,name:"Aisha Williams",init:"AW",color:"pc4",dob:"12/04/1995",mrn:"UD-00821",time:"10:45 AM",type:"New Patient",provider:"Dr. Nguyen",provColor:"pv2",status:"partial",ebStatus:"g",ebLabel:"Active",deductAmt:"$1,200",deductPct:20,copay:"$55",flags:["New","Consent"],phone:"(561) 730-8899",email:"aisha.w@email.com",addr:"1000 NW 15th St, Miami FL",priorAuth:{status:"none"}},
-  {id:8,name:"Robert Harmon",init:"RH",color:"pc1",dob:"08/16/1952",mrn:"UD-00044",time:"11:00 AM",type:"Mohs Surgery Consult",provider:"Dr. Patel",provColor:"pv3",status:"checkedin",ebStatus:"g",ebLabel:"Medicare",deductAmt:"$185",deductPct:91,copay:"$20",flags:["OK"],phone:"(561) 277-1122",email:"rharmon@email.com",addr:"22 Spanish River Rd, Miami FL",priorAuth:{status:"approved",procedure:"Mohs Micrographic Surgery",payer:"Medicare",submittedDate:"03/17/2026"}},
-  {id:9,name:"Jessica Torres",init:"JT",color:"pc5",dob:"05/09/1987",mrn:"UD-00615",time:"11:15 AM",type:"Rosacea Follow-up",provider:"Dr. Reyes",provColor:"pv1",status:"pending",ebStatus:"r",ebLabel:"Self-Pay",deductAmt:"-",deductPct:0,copay:"$150",flags:["Pay","Ins"],phone:"(561) 988-0021",email:"jtorres@gmail.com",addr:"450 W Camino Real, Miami FL",priorAuth:{status:"none"}},
+  {id:0,name:"Shweta Singh",init:"SS",color:"pc4",dob:"11/11/2000",mrn:"UD-00850",time:"11:30 AM",type:"Acne Consult",provider:"Dr. Reyes",provColor:"pv1",status:"partial",ebStatus:"g",ebLabel:"Active",deductAmt:"$500",deductPct:60,copay:"$40",flags:["New"],phone:"(561) 555-0199",email:"ssingh@email.com",addr:"123 Brickell Ave, Miami FL",priorAuth:{status:"none"}},
 ];
 
 let currentPatient = 0;
-let checkedInIds = new Set([3,8]);
+let checkedInIds = new Set();
 
 // ───── RENDER TABLE ─────
 function renderTable(filter='all', search='') {
@@ -1134,6 +1255,11 @@ function regAutoOtp() {
       if(i === 3) regOtpDone();
     }, i * 120);
   });
+}
+
+function toggleRegSelfPay(chk) {
+  const sections = document.getElementById('reg-ins-sections');
+  if (sections) sections.style.display = chk.checked ? 'none' : '';
 }
 
 function selectRegIns(el, type) {

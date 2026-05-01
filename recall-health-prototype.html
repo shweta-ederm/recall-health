@@ -1431,7 +1431,6 @@
           <div style="display:flex;gap:8px">
             <div onclick="this.style.borderColor='var(--orange)';this.style.background='var(--orange-lt)';document.querySelectorAll('.ins-opt').forEach(e=>e!==this&&(e.style.borderColor='var(--border)',e.style.background='var(--white)'))" class="ins-opt" style="flex:1;padding:10px;border:1.5px solid var(--border);border-radius:9px;text-align:center;cursor:pointer;font-size:13px;font-weight:500;color:var(--t1);transition:all .15s">Has Insurance</div>
             <div onclick="this.style.borderColor='var(--orange)';this.style.background='var(--orange-lt)';document.querySelectorAll('.ins-opt').forEach(e=>e!==this&&(e.style.borderColor='var(--border)',e.style.background='var(--white)'))" class="ins-opt" style="flex:1;padding:10px;border:1.5px solid var(--border);border-radius:9px;text-align:center;cursor:pointer;font-size:13px;font-weight:500;color:var(--t1);transition:all .15s">Self-Pay</div>
-            <div onclick="this.style.borderColor='var(--orange)';this.style.background='var(--orange-lt)';document.querySelectorAll('.ins-opt').forEach(e=>e!==this&&(e.style.borderColor='var(--border)',e.style.background='var(--white)'))" class="ins-opt" style="flex:1;padding:10px;border:1.5px solid var(--border);border-radius:9px;text-align:center;cursor:pointer;font-size:13px;font-weight:500;color:var(--t1);transition:all .15s">Medicare</div>
           </div>
         </div>
         <div style="padding:10px 14px;background:var(--orange-lt);border-radius:9px;border:1px solid rgba(232,101,45,.2);display:flex;align-items:center;gap:8px">
@@ -1631,7 +1630,7 @@
 <div class="app-wrap" id="app-intake">
 <div class="shell">
   <!-- ═══ PROGRESS ═══ -->
-  <div class="prog-wrap" id="prog-wrap">
+  <div class="prog-wrap" id="prog-wrap" style="display:none">
     <div class="prog-steps" id="prog-steps"></div>
     <div class="prog-meta">
       <span class="prog-count" id="prog-count">Step 1 of 8</span>
@@ -1639,9 +1638,69 @@
   </div>
 
   <!-- ═══════════════════════════════════
+       SCREEN 0 - PATIENT LOOKUP
+  ═══════════════════════════════════ -->
+  <div class="screen active" id="s-lookup">
+    <div class="hdr" style="padding-bottom:24px">
+      <div class="hdr-title">Welcome to Universal Dermatology</div>
+      <div class="hdr-desc">To begin your self check-in, please enter your name and date of birth.</div>
+    </div>
+    <div class="body">
+      <div class="sc">
+        <div class="sc-head">
+          <div class="sc-ic o"><svg width="16" height="16" viewBox="0 0 20 20" fill="var(--orange)"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg></div>
+          <div><div class="sc-title">Find My Appointment</div><div class="sc-sub">Enter your information to locate your record</div></div>
+        </div>
+        <div class="sc-body">
+          <div class="frow-2">
+            <div class="frow"><label>First Name *</label><input class="fi" placeholder="First name" id="lookup-first"></div>
+            <div class="frow"><label>Last Name *</label><input class="fi" placeholder="Last name" id="lookup-last"></div>
+          </div>
+          <div class="frow">
+            <label>Date of Birth *</label>
+            <input class="fi" type="date" id="lookup-dob">
+            <div class="fi-note">Enter the date of birth on file with this practice</div>
+          </div>
+          <div id="lookup-feedback" style="display:none;padding:10px 14px;border-radius:8px;font-size:13px;font-weight:500;margin-top:4px"></div>
+        </div>
+      </div>
+      <div id="lookup-not-found" style="display:none;display:flex;flex-direction:column;gap:10px">
+        <div class="sc" onclick="switchApp('register')" style="cursor:pointer">
+          <div class="sc-body" style="display:flex;align-items:center;gap:14px">
+            <div style="width:38px;height:38px;border-radius:10px;background:var(--orange-lt);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="var(--orange)"><path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"/></svg>
+            </div>
+            <div>
+              <div style="font-size:14px;font-weight:700;color:var(--t1)">Register as a New Patient</div>
+              <div style="font-size:12.5px;color:var(--t3);margin-top:2px">Create your record and book your first appointment</div>
+            </div>
+            <svg style="margin-left:auto;color:var(--t3)" width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          </div>
+        </div>
+        <div class="sc" onclick="showToast('Redirecting to online booking...')" style="cursor:pointer">
+          <div class="sc-body" style="display:flex;align-items:center;gap:14px">
+            <div style="width:38px;height:38px;border-radius:10px;background:var(--brand-lt);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="var(--brand)"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg>
+            </div>
+            <div>
+              <div style="font-size:14px;font-weight:700;color:var(--t1)">Book an Appointment</div>
+              <div style="font-size:12.5px;color:var(--t3);margin-top:2px">Schedule a visit online as a new or existing patient</div>
+            </div>
+            <svg style="margin-left:auto;color:var(--t3)" width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          </div>
+        </div>
+        <div style="text-align:center;font-size:12.5px;color:var(--t3)">Think there's a mistake? <span style="color:var(--orange);font-weight:600;cursor:pointer" onclick="showToast('Please see the front desk for assistance')">See the front desk</span></div>
+      </div>
+    </div>
+    <div class="bot">
+      <button class="btn-p" onclick="lookupPatient()">Find My Appointment <svg width="16" height="16" viewBox="0 0 20 20" fill="white"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
        SCREEN 1 - APPOINTMENT REMINDER
   ═══════════════════════════════════ -->
-  <div class="screen active" id="s0">
+  <div class="screen" id="s0">
     <div class="hdr" style="padding-bottom:24px">
       <div class="hdr-title">You have an upcoming appointment</div>
       <div class="hdr-desc">Please take 3–5 minutes to complete your check-in before arriving. No app download required.</div>
@@ -1654,21 +1713,21 @@
       <div class="sc">
         <div class="sc-body">
           <div style="display:flex;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--borderlt)">
-            <div style="width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#08979D,#8B5CF6);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;flex-shrink:0">MT</div>
-            <div><div style="font-size:15px;font-weight:700;color:var(--t1)">Marcus Thompson</div><div style="font-size:12.5px;color:var(--t3);margin-top:2px">Acne Follow-up · Dr. Isabel Reyes</div></div>
+            <div id="s0-av" style="width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#08979D,#8B5CF6);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;flex-shrink:0">SS</div>
+            <div><div style="font-size:15px;font-weight:700;color:var(--t1)" id="s0-name">Shweta Singh</div><div style="font-size:12.5px;color:var(--t3);margin-top:2px" id="s0-type-prov">Acne Consult · Dr. Reyes</div></div>
           </div>
           <div style="display:flex;flex-direction:column;gap:10px;padding-top:14px">
             <div class="rv" style="padding:8px 0">
-              <div><div class="rvl">Date & Time</div><div class="rvv">Friday, Mar 21 at 10:15 AM</div></div>
+              <div><div class="rvl">Date & Time</div><div class="rvv" id="s0-time">Today at 11:30 AM</div></div>
             </div>
             <div class="rv" style="padding:8px 0">
-              <div><div class="rvl">Provider</div><div class="rvv">Dr. Isabel Reyes, MD</div></div>
+              <div><div class="rvl">Provider</div><div class="rvv" id="s0-provider">Dr. Reyes</div></div>
             </div>
             <div class="rv" style="padding:8px 0">
               <div><div class="rvl">Location</div><div class="rvv">2200 N Congress Ave, Miami FL</div></div>
             </div>
             <div class="rv" style="padding:8px 0;border-bottom:none">
-              <div><div class="rvl">Visit Type</div><div class="rvv">Acne Follow-up (30 min)</div></div>
+              <div><div class="rvl">Visit Type</div><div class="rvv" id="s0-type">Acne Consult</div></div>
             </div>
           </div>
         </div>
@@ -1695,23 +1754,9 @@
   <div class="screen" id="s1">
     <div class="hdr" style="padding-bottom:22px">
       <div class="hdr-title">Verify your identity</div>
-      <div class="hdr-desc">To protect your health information, please confirm your date of birth.</div>
+      <div class="hdr-desc">We'll send a quick verification code to your phone on file.</div>
     </div>
     <div class="body">
-      <div class="sc">
-        <div class="sc-head">
-          <div class="sc-ic n"><svg width="16" height="16" viewBox="0 0 20 20" fill="#1A1F2E"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd"/></svg></div>
-          <div><div class="sc-title">Date of Birth</div><div class="sc-sub">Must match records on file</div></div>
-        </div>
-        <div class="sc-body">
-          <div class="frow">
-            <label>Date of Birth</label>
-            <input class="fi" type="date" id="dob-input" value="1989-04-12" oninput="checkDOB()">
-            <div class="fi-note">Enter the date of birth on file with this practice</div>
-          </div>
-          <div id="dob-feedback" style="display:none;padding:10px 14px;border-radius:8px;font-size:13px;font-weight:500;margin-top:4px"></div>
-        </div>
-      </div>
       <div class="sc">
         <div class="sc-head">
           <div class="sc-ic o"><svg width="16" height="16" viewBox="0 0 20 20" fill="var(--orange)"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg></div>
@@ -1764,12 +1809,12 @@
         </div>
         <div class="sc-body">
           <div class="frow-2">
-            <div class="frow"><label>First Name</label><input class="fi filled" value="Marcus"></div>
-            <div class="frow"><label>Last Name</label><input class="fi filled" value="Thompson"></div>
+            <div class="frow"><label>First Name</label><input class="fi filled" value="Shweta"></div>
+            <div class="frow"><label>Last Name</label><input class="fi filled" value="Singh"></div>
           </div>
-          <div class="frow"><label>Date of Birth</label><input class="fi filled" type="date" value="1989-04-12"></div>
-          <div class="frow"><label>Sex at Birth</label><div class="opt-group" id="sex-group"><label class="opt-btn selected"><input type="radio" name="sex" value="male" checked onchange="selectOption(this,'sex-group')">Male</label><label class="opt-btn"><input type="radio" name="sex" value="female" onchange="selectOption(this,'sex-group')">Female</label><label class="opt-btn"><input type="radio" name="sex" value="other" onchange="selectOption(this,'sex-group')">Other</label></div></div>
-          <div class="frow"><label>Preferred Pronouns</label><div class="opt-group" id="pronouns-group"><label class="opt-btn selected"><input type="radio" name="pronouns" value="he-him" checked onchange="selectOption(this,'pronouns-group')">He / Him</label><label class="opt-btn"><input type="radio" name="pronouns" value="she-her" onchange="selectOption(this,'pronouns-group')">She / Her</label><label class="opt-btn"><input type="radio" name="pronouns" value="they-them" onchange="selectOption(this,'pronouns-group')">They / Them</label></div></div>
+          <div class="frow"><label>Date of Birth</label><input class="fi filled" type="date" value="2000-11-11"></div>
+          <div class="frow"><label>Sex at Birth</label><div class="opt-group" id="sex-group"><label class="opt-btn"><input type="radio" name="sex" value="male" onchange="selectOption(this,'sex-group')">Male</label><label class="opt-btn selected"><input type="radio" name="sex" value="female" checked onchange="selectOption(this,'sex-group')">Female</label><label class="opt-btn"><input type="radio" name="sex" value="other" onchange="selectOption(this,'sex-group')">Other</label></div></div>
+          <div class="frow"><label>Preferred Pronouns</label><div class="opt-group" id="pronouns-group"><label class="opt-btn"><input type="radio" name="pronouns" value="he-him" onchange="selectOption(this,'pronouns-group')">He / Him</label><label class="opt-btn selected"><input type="radio" name="pronouns" value="she-her" checked onchange="selectOption(this,'pronouns-group')">She / Her</label><label class="opt-btn"><input type="radio" name="pronouns" value="they-them" onchange="selectOption(this,'pronouns-group')">They / Them</label></div></div>
           <div class="frow"><label>Preferred Language</label><select class="fi filled"><option>English</option><option>Spanish</option><option>Portuguese</option></select></div>
         </div>
       </div>
@@ -1779,12 +1824,12 @@
           <div><div class="sc-title">Contact Information</div></div>
         </div>
         <div class="sc-body">
-          <div class="frow"><label>Mobile Phone</label><input class="fi filled" value="(561) 400-2291"></div>
-          <div class="frow"><label>Email Address</label><input class="fi filled" value="m.thompson@email.com"></div>
-          <div class="frow"><label>Address</label><input class="fi filled" value="142 Palmetto Way"></div>
+          <div class="frow"><label>Mobile Phone</label><input class="fi filled" value="(561) 555-0199"></div>
+          <div class="frow"><label>Email Address</label><input class="fi filled" value="ssingh@email.com"></div>
+          <div class="frow"><label>Address</label><input class="fi filled" value="123 Brickell Ave"></div>
           <div class="frow-2">
             <div class="frow"><label>City</label><input class="fi filled" value="Miami"></div>
-            <div class="frow"><label>State / ZIP</label><input class="fi filled" value="FL 33432"></div>
+            <div class="frow"><label>State / ZIP</label><input class="fi filled" value="FL 33101"></div>
           </div>
         </div>
       </div>
@@ -1794,10 +1839,10 @@
           <div><div class="sc-title">Emergency Contact</div></div>
         </div>
         <div class="sc-body">
-          <div class="frow"><label>Name</label><input class="fi filled" value="Jennifer Thompson"></div>
+          <div class="frow"><label>Name</label><input class="fi filled" value="Raj Singh"></div>
           <div class="frow-2">
-            <div class="frow"><label>Relationship</label><select class="fi filled"><option>Spouse</option><option>Parent</option><option>Child</option><option>Friend</option></select></div>
-            <div class="frow"><label>Phone</label><input class="fi filled" value="(561) 400-3300"></div>
+            <div class="frow"><label>Relationship</label><select class="fi filled"><option>Spouse</option><option selected>Parent</option><option>Child</option><option>Friend</option></select></div>
+            <div class="frow"><label>Phone</label><input class="fi filled" value="(561) 555-0188"></div>
           </div>
         </div>
       </div>
@@ -1821,7 +1866,7 @@
     <div class="body">
       <div class="ins-card">
         <div class="ins-card-payer">BlueCross BlueShield Florida</div>
-        <div class="ins-card-name">Marcus Thompson</div>
+        <div class="ins-card-name">Shweta Singh</div>
         <div class="ins-card-row">
           <div class="ins-card-field"><div class="ins-card-lbl">Member ID</div><div class="ins-card-val">BCB-8812-4403</div></div>
           <div class="ins-card-field"><div class="ins-card-lbl">Group</div><div class="ins-card-val">GRP-00221</div></div>
@@ -2088,57 +2133,10 @@
         </div>
       </div>
 
-      <!-- EXISTING PAYMENT PLAN (if applicable) -->
-      <div id="existing-plan-card" style="display:none;margin-bottom:12px">
-        <div style="padding:14px 16px;background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(16,185,129,.04));border:1.5px solid rgba(16,185,129,.2);border-radius:12px;cursor:pointer" onclick="selectExistingPlan(this)">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
-            <div style="display:flex;align-items:center;gap:8px">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="#10B981"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 1 1 0 000 2h10a1 1 0 100-2 2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 1a1 1 0 000 2h6a1 1 0 000-2H7z" clip-rule="evenodd"/></svg>
-              <div style="font-weight:700;color:var(--t1)">Active Payment Plan</div>
-            </div>
-            <span style="font-size:11px;font-weight:700;color:#10B981;background:#ECFDF5;padding:4px 10px;border-radius:20px">ACTIVE</span>
-          </div>
-          <div style="font-size:13px;color:var(--t2);margin-bottom:6px">6 months at $63.33/month</div>
-          <div style="font-size:12px;color:var(--t3)">Started Jan 15 · 5 payments remaining</div>
-        </div>
-      </div>
-
-      <div style="font-size:12px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px">Choose Payment Method</div>
-      <div class="pay-methods">
-        <div class="pm" onclick="selectPay(this)">
-          <span class="pm-ic">🍎</span>
-          <div class="pm-l">Apple Pay</div>
-          <div class="pm-sub">Touch ID</div>
-        </div>
-        <div class="pm" onclick="selectPay(this)">
-          <span class="pm-ic">🔵</span>
-          <div class="pm-l">Google Pay</div>
-          <div class="pm-sub">One tap</div>
-        </div>
-        <div class="pm" onclick="selectPay(this)">
-          <span class="pm-ic">💳</span>
-          <div class="pm-l">Credit Card</div>
-          <div class="pm-sub">Visa ending 4421</div>
-        </div>
-        <div class="pm" onclick="selectPay(this)">
-          <span class="pm-ic">🏦</span>
-          <div class="pm-l">HSA / FSA</div>
-          <div class="pm-sub">Tax-free</div>
-        </div>
-        <div class="pm pm-plan" onclick="goToPayPlanSetup()">
-          <span class="pm-ic">📋</span>
-          <div class="pm-l">Set Up New Payment Plan</div>
-          <div class="pm-sub">Split $340 over 3–12 months · No interest</div>
-        </div>
-      </div>
-      <div style="display:flex;align-items:center;gap:6px;padding:10px 14px;background:var(--surface);border-radius:8px;font-size:12px;color:var(--t3)">
-        <svg width="14" height="14" viewBox="0 0 20 20" fill="#10B981"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg>
-        PCI DSS compliant · SOC 2 Type II certified · No card data stored without consent
-      </div>
     </div>
     <div class="bot">
-      <button class="btn-p" id="pay-btn" onclick="processPayment()">Pay $380.00 →</button>
-      <button class="btn-s" onclick="skipPayment()">Pay at Front Desk</button>
+      <button class="btn-p" onclick="window.location.href='https://shweta-ederm.github.io/paymydoc2026/patient-app-v1.html'">Pay Now →</button>
+      <button class="btn-s" onclick="next()">Pay at Front Desk</button>
     </div>
   </div>
 
@@ -2639,15 +2637,103 @@
 ═══════════════════════════════════════ -->
 <div class="app-wrap" id="app-register">
 <div class="shell">
-  <div class="prog-wrap" id="reg-prog-wrap">
+  <div class="prog-wrap" id="reg-prog-wrap" style="display:none">
     <div class="prog-steps" id="reg-prog-steps"></div>
     <div class="prog-meta">
       <span class="prog-count" id="reg-prog-count">Step 1 of 6</span>
     </div>
   </div>
 
+  <!-- REG LOOKUP SCREEN -->
+  <div class="screen active" id="rs-lookup">
+    <div class="hdr" style="padding-bottom:24px">
+      <div class="hdr-title">New Patient Registration</div>
+      <div class="hdr-desc">First, let's check if you already have a record with us to avoid duplicates.</div>
+    </div>
+    <div class="body">
+      <div class="sc">
+        <div class="sc-head">
+          <div class="sc-ic o"><svg width="16" height="16" viewBox="0 0 20 20" fill="var(--orange)"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg></div>
+          <div><div class="sc-title">Patient Lookup</div><div class="sc-sub">Helps us keep your records accurate</div></div>
+        </div>
+        <div class="sc-body">
+          <div class="frow-2">
+            <div class="frow"><label>First Name *</label><input class="fi" placeholder="First name" id="reg-lookup-first"></div>
+            <div class="frow"><label>Last Name *</label><input class="fi" placeholder="Last name" id="reg-lookup-last"></div>
+          </div>
+          <div class="frow">
+            <label>Date of Birth *</label>
+            <input class="fi" type="date" id="reg-lookup-dob">
+          </div>
+          <div id="reg-lookup-feedback" style="display:none;padding:10px 14px;border-radius:8px;font-size:13px;font-weight:500;margin-top:4px"></div>
+        </div>
+      </div>
+    </div>
+    <div class="bot">
+      <button class="btn-p" onclick="regLookupPatient()">Continue <svg width="16" height="16" viewBox="0 0 20 20" fill="white"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></button>
+    </div>
+  </div>
+
+  <!-- REG FOUND SCREEN - PATIENT ALREADY EXISTS -->
+  <div class="screen" id="rs-found">
+    <div class="hdr" style="padding-bottom:24px">
+      <div class="hdr-title" id="rs-found-title">Welcome back!</div>
+      <div class="hdr-desc" style="font-weight:600;color:var(--t2)">Universal Dermatology</div>
+      <div class="hdr-desc" style="margin-top:4px">Your information is already in our system.</div>
+      <div class="hdr-desc" style="margin-top:2px;color:var(--t3)">Choose an option below to continue.</div>
+    </div>
+    <div class="body" style="gap:12px">
+      <div class="sc" onclick="startIntakeDirectly()" style="cursor:pointer;border:1.5px solid var(--brand)">
+        <div class="sc-body">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+            <div style="width:34px;height:34px;border-radius:9px;background:var(--brand-lt);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="var(--brand)"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg>
+            </div>
+            <div style="font-size:13.5px;font-weight:700;color:var(--brand)">Today's Appointment</div>
+            <svg style="margin-left:auto;color:var(--brand)" width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;justify-content:space-between">
+              <span style="font-size:12px;color:var(--t3)">Visit Type</span>
+              <span style="font-size:13px;font-weight:600;color:var(--t1)" id="rs-found-type">—</span>
+            </div>
+            <div style="display:flex;justify-content:space-between">
+              <span style="font-size:12px;color:var(--t3)">Provider</span>
+              <span style="font-size:13px;font-weight:600;color:var(--t1)" id="rs-found-provider">—</span>
+            </div>
+            <div style="display:flex;justify-content:space-between">
+              <span style="font-size:12px;color:var(--t3)">Time</span>
+              <span style="font-size:13px;font-weight:600;color:var(--t1)" id="rs-found-time">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sc" onclick="showToast('Redirecting to online booking...')" style="cursor:pointer">
+        <div class="sc-body">
+          <div style="display:flex;align-items:center;gap:7px;margin-bottom:3px">
+            <svg width="15" height="15" viewBox="0 0 20 20" fill="var(--brand)"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"/></svg>
+            <div style="font-size:14px;font-weight:700;color:var(--t1)">Book a New Appointment</div>
+            <svg style="margin-left:auto;color:var(--t3)" width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          </div>
+          <div style="font-size:12.5px;color:var(--t3);padding-left:22px">Schedule a new visit with one of our providers</div>
+        </div>
+      </div>
+      <div class="sc" onclick="launchPortalView('home')" style="cursor:pointer">
+        <div class="sc-body">
+          <div style="display:flex;align-items:center;gap:7px;margin-bottom:3px">
+            <svg width="15" height="15" viewBox="0 0 20 20" fill="var(--t2)"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg>
+            <div style="font-size:14px;font-weight:700;color:var(--t1)">Go to Patient Portal</div>
+            <svg style="margin-left:auto;color:var(--t3)" width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          </div>
+          <div style="font-size:12.5px;color:var(--t3);padding-left:22px">View your health records, messages &amp; billing</div>
+        </div>
+      </div>
+      <div style="text-align:center;font-size:12.5px;color:var(--t3)">Not you? <span style="color:var(--orange);font-weight:600;cursor:pointer" onclick="showToast('Please see the front desk for assistance')">Contact us</span></div>
+    </div>
+  </div>
+
   <!-- REG SCREEN 0 - WELCOME -->
-  <div class="screen active" id="rs0">
+  <div class="screen" id="rs0">
     <div class="hdr" style="padding-bottom:24px">
       <div class="hdr-title">Welcome to Universal Dermatology</div>
       <div class="hdr-desc">Register as a new patient in just a few minutes. No app download required - everything happens right here in your browser.</div>
@@ -2780,23 +2866,26 @@
       <div class="hdr-desc">We'll verify your coverage before your first visit so there are no surprises.</div>
     </div>
     <div class="body">
-      <div style="display:flex;gap:10px;margin-bottom:4px">
-        <div onclick="selectRegIns(this,'private')" class="reg-ins-opt" style="flex:1;padding:12px;border:2px solid var(--brand);border-radius:10px;text-align:center;cursor:pointer;background:var(--brand-lt)"><div style="font-size:20px;margin-bottom:4px">🏥</div><div style="font-size:13px;font-weight:600;color:var(--t1)">Private Insurance</div></div>
-        <div onclick="selectRegIns(this,'medicare')" class="reg-ins-opt" style="flex:1;padding:12px;border:2px solid var(--border);border-radius:10px;text-align:center;cursor:pointer;background:var(--white)"><div style="font-size:20px;margin-bottom:4px">🇺🇸</div><div style="font-size:13px;font-weight:600;color:var(--t1)">Medicare / Medicaid</div></div>
-        <div onclick="selectRegIns(this,'self')" class="reg-ins-opt" style="flex:1;padding:12px;border:2px solid var(--border);border-radius:10px;text-align:center;cursor:pointer;background:var(--white)"><div style="font-size:20px;margin-bottom:4px">💵</div><div style="font-size:13px;font-weight:600;color:var(--t1)">Self-Pay</div></div>
-      </div>
-      <div class="sc" id="reg-ins-form">
-        <div class="sc-head"><div class="sc-ic b"><svg width="16" height="16" viewBox="0 0 20 20" fill="#3B82F6"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9z"/></svg></div><div><div class="sc-title">Primary Insurance</div><div class="sc-sub">Enter details from your insurance card</div></div></div>
-        <div class="sc-body">
-          <div class="frow"><label>Insurance Provider</label><select class="fi"><option>-- Select carrier --</option><option>BlueCross BlueShield</option><option>UnitedHealthcare</option><option>Aetna</option><option>Cigna</option><option>Humana</option><option>Medicare</option><option>Medicaid / Florida Blue</option><option>Other</option></select></div>
-          <div class="frow-2">
-            <div class="frow"><label>Member ID</label><input class="fi" placeholder="e.g. BCB-0001-1234"></div>
-            <div class="frow"><label>Group Number</label><input class="fi" placeholder="e.g. GRP-00221"></div>
-          </div>
-          <div class="frow"><label>Policyholder Name</label><input class="fi" placeholder="If different from patient"></div>
-          <div class="frow"><label>Policyholder DOB</label><input class="fi" type="date"></div>
+      <label style="display:flex;align-items:center;gap:10px;padding:13px 16px;background:var(--surface);border-radius:10px;border:1.5px solid var(--border);cursor:pointer;margin-bottom:4px">
+        <input type="checkbox" id="reg-selfpay-chk" onchange="toggleRegSelfPay(this)" style="width:17px;height:17px;accent-color:var(--brand);cursor:pointer;flex-shrink:0">
+        <div>
+          <div style="font-size:13.5px;font-weight:600;color:var(--t1)">I'm paying out of pocket (Self-Pay)</div>
+          <div style="font-size:12px;color:var(--t3);margin-top:1px">Check this to skip insurance entry</div>
         </div>
-      </div>
+      </label>
+      <div id="reg-ins-sections">
+        <div class="sc" id="reg-ins-form">
+          <div class="sc-head"><div class="sc-ic b"><svg width="16" height="16" viewBox="0 0 20 20" fill="#3B82F6"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9z"/></svg></div><div><div class="sc-title">Private Insurance</div><div class="sc-sub">Enter details from your insurance card</div></div></div>
+          <div class="sc-body">
+            <div class="frow"><label>Insurance Provider</label><select class="fi"><option>-- Select carrier --</option><option>BlueCross BlueShield</option><option>UnitedHealthcare</option><option>Aetna</option><option>Cigna</option><option>Humana</option><option>Other</option></select></div>
+            <div class="frow-2">
+              <div class="frow"><label>Member ID</label><input class="fi" placeholder="e.g. BCB-0001-1234"></div>
+              <div class="frow"><label>Group Number</label><input class="fi" placeholder="e.g. GRP-00221"></div>
+            </div>
+            <div class="frow"><label>Policyholder Name</label><input class="fi" placeholder="If different from patient"></div>
+            <div class="frow"><label>Policyholder DOB</label><input class="fi" type="date"></div>
+          </div>
+        </div>
       <div class="sc">
         <div class="sc-head"><div class="sc-ic o"><svg width="16" height="16" viewBox="0 0 20 20" fill="var(--orange)"><path fill-rule="evenodd" d="M4 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V5z" clip-rule="evenodd"/></svg></div><div><div class="sc-title">Upload Insurance Card</div><div class="sc-sub">Optional - speeds up verification</div></div></div>
         <div class="sc-body" style="display:flex;gap:10px">
@@ -2804,6 +2893,7 @@
           <div class="ins-upload" style="flex:1" id="reg-back" onclick="regUpload('reg-back','Back')"><div class="ins-upload-ic">📷</div><div class="ins-upload-title">Back</div><div class="ins-upload-sub">Tap to upload</div></div>
         </div>
       </div>
+      </div><!-- /reg-ins-sections -->
     </div>
     <div class="bot"><button class="btn-p" onclick="regNext()">Continue →</button></div>
   </div>
