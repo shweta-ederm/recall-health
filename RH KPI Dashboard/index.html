@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RH KPI Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="logo">
+        <span class="logo-text">Recall <strong>Health</strong></span>
+      </div>
+
+      <nav class="nav">
+        <div class="nav-item active" onclick="navigateTo('dashboard')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3 13h2v8H3zm4-8h2v16H7zm4-2h2v18h-2zm4-2h2v20h-2zm4 4h2v16h-2z"/>
+          </svg>
+          <span>DASHBOARD</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('campaigns')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+          </svg>
+          <span>CAMPAIGNS</span>
+        </div>
+        <div class="nav-section">ANALYTICS</div>
+        <div class="nav-item sub" onclick="navigateTo('schedule')">
+          <span>Schedule Utilization</span>
+        </div>
+        <div class="nav-section">REPORTS</div>
+        <div class="nav-item sub" onclick="navigateTo('reactivation')">
+          <span>Reactivation Summary</span>
+        </div>
+        <div class="nav-item sub" onclick="navigateTo('activity')">
+          <span>Activity</span>
+        </div>
+        <div class="nav-item sub" onclick="navigateTo('financials')">
+          <span>Financials</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('patients')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+          </svg>
+          <span>PATIENTS</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('billing')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20 8H4V6h16m0 10H4v-4h16m0-6H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+          </svg>
+          <span>BILLING</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('settings')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.62l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.48.1.62l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.62l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.48-.1-.62l-2.03-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+          </svg>
+          <span>SETTINGS</span>
+        </div>
+        <div class="nav-item sub" onclick="navigateTo('practice')">
+          <span>Practice Settings</span>
+        </div>
+        <div class="nav-item sub" onclick="navigateTo('users')">
+          <span>User Management</span>
+        </div>
+        <div class="nav-item logout" onclick="logout()">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+          </svg>
+          <span>LOGOUT</span>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+      <!-- TOPBAR -->
+      <div class="topbar">
+        <div class="topbar-left">
+          <h1 class="page-title">DASHBOARD</h1>
+        </div>
+        <div class="topbar-right">
+          <button class="btn-create">+ Create Campaign</button>
+          <div class="user-profile">
+            <div class="user-info">
+              <div class="user-name">Shweta Singh</div>
+              <div class="user-role">Global Admin</div>
+            </div>
+            <div class="user-avatar">SS</div>
+          </div>
+          <button class="btn-print" title="Print">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/>
+            </svg>
+            Print
+          </button>
+        </div>
+      </div>
+
+      <!-- DASHBOARD CONTENT -->
+      <div class="dashboard">
+        <!-- TOP KPI CARDS -->
+        <div class="kpi-grid">
+          <div class="kpi-card orange-border">
+            <div class="kpi-header">
+              <div class="kpi-title">Patients Ready for Contact</div>
+              <svg class="kpi-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+              </svg>
+            </div>
+            <div class="kpi-value">8,438</div>
+            <div class="kpi-info">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="kpi-card blue-border">
+            <div class="kpi-header">
+              <div class="kpi-title">Average Revenue Per Visit</div>
+              <svg class="kpi-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+              </svg>
+            </div>
+            <div class="kpi-value">$225</div>
+            <div class="kpi-slider">
+              <input type="range" min="0" max="500" value="225" disabled>
+            </div>
+            <div class="kpi-info">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="kpi-card green-border">
+            <div class="kpi-header">
+              <div class="kpi-title">Total Potential Revenue</div>
+              <svg class="kpi-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+              </svg>
+            </div>
+            <div class="kpi-value">$1,898,550</div>
+            <div class="kpi-info">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- FILTERS -->
+        <div class="filters">
+          <label>Period</label>
+          <select class="filter-select">
+            <option>February 2026</option>
+          </select>
+
+          <label>Practice</label>
+          <div class="filter-tags">
+            <span class="tag">Dermatology of Boca <span class="tag-close">×</span></span>
+          </div>
+
+          <label>Locations</label>
+          <div class="filter-tags">
+            <span class="tag">Dermatology of Boca <span class="tag-close">×</span></span>
+            <span class="tag">Boca Raton Regional Hospital <span class="tag-inactive">Inactive</span> <span class="tag-close">×</span></span>
+            <span class="tag">West Boca Medical Center <span class="tag-inactive">Inactive</span> <span class="tag-close">×</span></span>
+          </div>
+
+          <label>Providers</label>
+          <div class="filter-tags">
+            <span class="tag">Dr. Jeffrey Fromowitz, MD <span class="tag-close">×</span></span>
+            <span class="tag">Stefanie Gold, PA-C <span class="tag-close">×</span></span>
+            <span class="tag">Michele Margolis-Patterson, PA-C <span class="tag-close">×</span></span>
+          </div>
+
+          <a href="#" class="clear-filters">Clear Filters</a>
+        </div>
+
+        <!-- METRICS GRID -->
+        <div class="metrics-grid">
+          <div class="metric-card orange-left">
+            <div class="metric-title">Total Appointments Created</div>
+            <div class="metric-value">160</div>
+            <div class="metric-sub">for 112 patients</div>
+            <div class="metric-info">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="metric-card teal-left">
+            <div class="metric-title">Total Appointments Completed</div>
+            <div class="metric-value">114</div>
+            <div class="metric-sub">for 92 patients</div>
+            <div class="metric-info">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="metric-card green-left">
+            <div class="metric-title">Total Collections From Patients Seen</div>
+            <div class="metric-value">$21,343</div>
+            <div class="metric-info">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="metric-card blue-left">
+            <div class="metric-title">Total Estimated Revenue</div>
+            <div class="metric-value">$36,000</div>
+            <div class="metric-info">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="metric-card purple-left">
+            <div class="metric-title">Total Billed Charges From Patients Seen</div>
+            <div class="metric-value">$31,995</div>
+            <div class="metric-info">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="metric-card navy-left">
+            <div class="metric-title">Current Return on Investment (ROI)</div>
+            <div class="metric-value">19.3x</div>
+            <div class="metric-info">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- CHARTS -->
+        <div class="charts-grid">
+          <div class="chart-container">
+            <h3>Billed and Estimated Revenue</h3>
+            <canvas id="revenueChart"></canvas>
+          </div>
+
+          <div class="chart-container">
+            <h3>Appointments Created</h3>
+            <canvas id="appointmentsChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

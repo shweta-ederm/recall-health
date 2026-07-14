@@ -28,7 +28,7 @@ This is what the front desk sees every morning.
 
 38 patients today. 29 have already pre-registered — 76% completion. 14 are checked in. $2,840 collected so far this morning.
 
-And that last card — 5 insurance flags. Staff now know about insurance issues at 7am, not when the patient is standing at the desk.
+And that last card — 5 insurance flags. That's AI running eligibility checks overnight for every patient scheduled for today. Staff know about insurance issues at 7am, not when the patient is standing at the desk.
 
 `[gesture to the queue]`
 
@@ -44,7 +44,7 @@ The system automatically sends appointment reminders at three points before ever
 
 `[gesture to the pipeline table]`
 
-And staff can see exactly where each patient stands. Marcus is confirmed. Sarah hasn't responded yet. James hasn't responded to anything — that's a likely no-show, and they know that today. When practices cut no-shows by even 2-3%, that's real money recovered.
+And staff can see exactly where each patient stands. Marcus is confirmed. Sarah hasn't responded yet. James hasn't responded to anything — the system flags him as a likely no-show. That's AI-powered — it looks at response patterns across all three outreach touchpoints and surfaces patients who are at risk of not showing up, so staff can make a targeted call today instead of finding out tomorrow. When practices cut no-shows by even 2-3%, that's real money recovered.
 
 ---
 
@@ -100,7 +100,7 @@ We're in prototype stage and working toward pilot practices. Happy to go deeper 
 
 This is what a brand new patient sees — before they've ever been to the practice.
 
-They enter their basic info, date of birth, contact details. The system asks for their insurance card — they can take a photo or type it in. It verifies eligibility in real time.
+They enter their basic info, date of birth, contact details. The system asks for their insurance card — they can take a photo or type it in. AI reads the card automatically — it extracts the member ID, group number, and payer details without the patient having to type anything. Then it verifies eligibility in real time against the payer.
 
 Then they book their first appointment, sign a HIPAA consent, and they're done. The practice has everything they need before that patient ever walks in.
 
@@ -138,7 +138,7 @@ It takes under 2 minutes and the staff doesn't have to do anything. The patient 
 
 This goes out after the visit — automatically, via SMS.
 
-The patient gets a short survey. How was the visit, how do they feel, any questions about their care plan. If they rate the experience highly, they're prompted to leave a Google review. If they flag a concern, it routes to staff to follow up.
+The patient gets a short survey. How was the visit, how do they feel, any questions about their care plan. AI reads the open-ended responses and routes them automatically — if someone rates highly, they're prompted to leave a Google review. If they flag a concern or mention a side effect, it gets routed to staff to follow up. No one has to manually triage survey responses.
 
 It also includes care instructions and any prescription reminders. Everything in one link, no app download needed.
 
