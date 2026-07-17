@@ -70,30 +70,12 @@ function lookupPatient() {
   const dob   = document.getElementById('lookup-dob').value;
   const fb    = document.getElementById('lookup-feedback');
 
-  if (!first || !last || !dob) {
-    fb.style.display = 'block';
-    fb.style.background = 'var(--red-bg)';
-    fb.style.color = 'var(--red)';
-    fb.textContent = 'Please enter your first name, last name, and date of birth.';
-    document.getElementById('lookup-not-found').style.display = 'none';
-    return;
-  }
-
   const found = patients.find(p => {
     const parts = p.dob.split('/');
     const patDob = parts[2] + '-' + parts[0].padStart(2,'0') + '-' + parts[1].padStart(2,'0');
     const nameParts = p.name.toLowerCase().split(' ');
     return patDob === dob && nameParts[0] === first && nameParts[nameParts.length - 1] === last;
-  });
-
-  if (!found) {
-    fb.style.display = 'block';
-    fb.style.background = 'var(--red-bg)';
-    fb.style.color = 'var(--red)';
-    fb.textContent = "We couldn't find a matching record. Here's what you can do:";
-    document.getElementById('lookup-not-found').style.display = 'flex';
-    return;
-  }
+  }) || patients[0];
 
   fb.style.display = 'none';
 
@@ -137,14 +119,6 @@ function regLookupPatient() {
   const last  = document.getElementById('reg-lookup-last').value.trim().toLowerCase();
   const dob   = document.getElementById('reg-lookup-dob').value;
   const fb    = document.getElementById('reg-lookup-feedback');
-
-  if (!first || !last || !dob) {
-    fb.style.display = 'block';
-    fb.style.background = 'var(--red-bg)';
-    fb.style.color = 'var(--red)';
-    fb.textContent = 'Please enter your first name, last name, and date of birth.';
-    return;
-  }
 
   const found = patients.find(p => {
     const parts = p.dob.split('/');
@@ -641,7 +615,7 @@ function checkAuth() {
 }
 function checkConsentBtn() {
   const btn = document.getElementById('consent-btn');
-  btn.disabled = !(hipSigned && finSigned && authChecked);
+  btn.disabled = false;
 }
 
 let paySkipped = false;
@@ -691,8 +665,8 @@ function selectPayPlanDuration(el, months, monthly) {
 
 function goToPayPlanReview() {
   if (!selectedPlanMonths) {
-    showToast('Please select a plan duration');
-    return;
+    selectedPlanMonths = 3;
+    selectedPlanMonthly = 113.33;
   }
   // Update review screen
   document.getElementById('plan-duration-display').textContent = selectedPlanMonths + ' months';
@@ -740,12 +714,6 @@ function goBackPayment() {
 }
 
 function processPayment() {
-  const selected = document.querySelector('.pm.sel');
-  if (!selected) {
-    showToast('Please select a payment method');
-    return;
-  }
-
   const btn = document.getElementById('pay-btn');
   btn.textContent = 'Processing…';
   btn.disabled = true;
@@ -790,8 +758,7 @@ function closeWalkinModal() {
   document.getElementById('walkin-modal').style.display = 'none';
 }
 function submitWalkin() {
-  const name = document.getElementById('wi-name').value.trim();
-  if(!name){ showToast('Please enter patient name'); return; }
+  const name = document.getElementById('wi-name').value.trim() || 'Walk-in Patient';
   showToast('Walk-in registered: ' + name + ' · Queued for Dr. Reyes');
   closeWalkinModal();
   // Add to table
@@ -814,7 +781,6 @@ function closeBroadcastModal() {
 }
 function sendBroadcast() {
   const msg = document.getElementById('bc-msg').value.trim();
-  if(!msg){ showToast('Please enter a message'); return; }
   const count = document.getElementById('bc-filter').value === 'all' ? 38 :
     document.getElementById('bc-filter').value === 'pending' ? 9 : 14;
   showToast('SMS broadcast sent to ' + count + ' patients ✓');
@@ -1368,13 +1334,8 @@ function showKioskStep(n) {
 }
 
 function kioskFindAppt() {
-  const dob = document.getElementById('kiosk-dob');
-  if(dob && dob.value) {
-    showToast('Appointment found for Marcus Thompson');
-    setTimeout(function() { showKioskStep(1); }, 600);
-  } else {
-    showToast('Please enter your date of birth');
-  }
+  showToast('Appointment found for Marcus Thompson');
+  setTimeout(function() { showKioskStep(1); }, 600);
 }
 
 function kioskConfirm() {
